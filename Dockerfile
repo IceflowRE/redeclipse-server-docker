@@ -1,11 +1,11 @@
+# Set the base image
+FROM debian
+
 LABEL author="Iceflower S"
 LABEL maintainer="Iceflower S"
 LABEL email="iceflower@gmx.de"
 LABEL version="1.0"
 LABEL description="Red Eclipse Development Server"
-
-# Set the base image
-FROM debian
 
 ENV DEBIAN_FRONTEND noninteractive
 
