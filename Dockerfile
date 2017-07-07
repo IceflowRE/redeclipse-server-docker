@@ -41,7 +41,7 @@ RUN apt-get -qq update \
 RUN apt-get install --no-install-recommends -y git ca-certificates \
     && git clone -b master https://github.com/red-eclipse/maps.git /redeclipse/data/maps \
     && mkdir -p /home/redeclipse/server-config/ \
-    && apt-get remove --purge -y git ca-certificates
+    && apt-get remove --purge -y git ca-certificates \
     && apt-get -qq update \
     && apt-get autoremove -y
 
