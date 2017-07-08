@@ -50,4 +50,4 @@ USER redeclipse
 # This ports have to be used by the server config
 EXPOSE 28804 28805
 
-CMD /redeclipse/bin/amd64 -h/home/redeclipse/server-config/
+CMD /redeclipse/bin/amd64/redeclipse_server_linux -h/home/redeclipse/server-config/
