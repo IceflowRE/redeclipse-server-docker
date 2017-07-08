@@ -27,7 +27,7 @@ RUN apt-get -qq update \
     && make clean install -j4 \
     \
     && mkdir -p /redeclipse/config \
-    && mv /temp/config/ /redeclipse/config/ \
+    && mv /temp/config/ /redeclipse/ \
     && mkdir -p /redeclipse/bin/amd64 \
     && mv /temp/bin/amd64/redeclipse_server_linux /redeclipse/bin/amd64/redeclipse_server_linux \
     \
@@ -50,4 +50,4 @@ USER redeclipse
 # This ports have to be used by the server config
 EXPOSE 28804 28805
 
-CMD /redeclipse/bin/amd64/redeclipse_server_linux -h/home/redeclipse/server-config/
+CMD cd /redeclipse && ./bin/amd64/redeclipse_server_linux -h/home/redeclipse/server-config/
