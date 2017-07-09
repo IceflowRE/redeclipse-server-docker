@@ -12,7 +12,7 @@ LABEL description="Red Eclipse Development Server"
 ENV DEBIAN_FRONTEND noninteractive
 
 # Add server user and set permissions
-RUN useradd --create-home --shell /bin/bash redeclipse \
+RUN adduser -S -D redeclipse \
     && mkdir /redeclipse \
     && chown redeclipse: -R /redeclipse
 
