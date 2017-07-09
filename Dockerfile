@@ -18,7 +18,7 @@ RUN useradd --create-home --shell /bin/bash redeclipse \
 
 # Update application repository list, create build dir, build server, move server files, create other permanent files and clean up
 RUN apk update \
-    && apk add --no-cache gcc g++ zlib-dev git ca-certificates coreutils cmake make && \
+    && apk add --no-cache gcc g++ zlib-dev git ca-certificates coreutils cmake make \
     && git clone -b master https://github.com/red-eclipse/base /temp \
     \
     && mkdir /temp/build \
