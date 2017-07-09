@@ -1,5 +1,5 @@
 # Set the base image
-FROM debian
+FROM alpine
 
 # informations
 LABEL author="Iceflower S"
@@ -18,7 +18,7 @@ RUN useradd --create-home --shell /bin/bash redeclipse \
 
 # Update application repository list, create build dir, build server, move server files, create other permanent files and clean up
 RUN apk update \
-    && apk add --no-cache gcc g++ zlib-dev git ca-certificates coreutils cmake make \
+    && apk add --no-cache --virtual build-deps gcc g++ zlib-dev git ca-certificates coreutils cmake make \
     && git clone -b master https://github.com/red-eclipse/base /temp \
     \
     && mkdir /temp/build \
@@ -32,15 +32,15 @@ RUN apk update \
     && mv /temp/bin/amd64/redeclipse_server_linux /redeclipse/bin/amd64/redeclipse_server_linux \
     \
     && apk update \
-    && apk remove gcc g++ zlib-dev git ca-certificates coreutils cmake make \
+    && apk del build-deps \
     && rm -rf /temp
 
 # Add defaults maps and server config folder
-RUN apk add --no-cache git ca-certificates \
+RUN apk add --no-cache --virtual deps git ca-certificates \
     && git clone -b master https://github.com/red-eclipse/maps.git /redeclipse/data/maps \
     && mkdir -p /home/redeclipse/server-config/ \
     && apk update \
-    && apk remove git ca-certificates \
+    && apk del deps
 
 USER redeclipse
 
