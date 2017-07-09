@@ -17,8 +17,8 @@ RUN useradd --create-home --shell /bin/bash redeclipse \
     && chown redeclipse: -R /redeclipse
 
 # Update application repository list, create build dir, build server, move server files, create other permanent files and clean up
-RUN apt-get -qq update \
-    && apt-get install --no-install-recommends -y build-essential zlib1g-dev git ca-certificates cmake pkg-config \
+RUN apk update \
+    && apk add --no-cache gcc g++ zlib-dev git ca-certificates coreutils cmake make && \
     && git clone -b master https://github.com/red-eclipse/base /temp \
     \
     && mkdir /temp/build \
@@ -31,23 +31,20 @@ RUN apt-get -qq update \
     && mkdir -p /redeclipse/bin/amd64 \
     && mv /temp/bin/amd64/redeclipse_server_linux /redeclipse/bin/amd64/redeclipse_server_linux \
     \
-    && apt-get -qq update \
-    && apt-get remove --purge -y build-essential zlib1g-dev git ca-certificates cmake pkg-config \
-    && apt-get -qq update \
-    && apt-get autoremove -y \
+    && apk update \
+    && apk remove gcc g++ zlib-dev git ca-certificates coreutils cmake make \
     && rm -rf /temp
 
 # Add defaults maps and server config folder
-RUN apt-get install --no-install-recommends -y git ca-certificates \
+RUN apk add --no-cache git ca-certificates \
     && git clone -b master https://github.com/red-eclipse/maps.git /redeclipse/data/maps \
     && mkdir -p /home/redeclipse/server-config/ \
-    && apt-get remove --purge -y git ca-certificates \
-    && apt-get -qq update \
-    && apt-get autoremove -y
+    && apk update \
+    && apk remove git ca-certificates \
 
 USER redeclipse
 
 # This ports have to be used by the server config
-EXPOSE 28804 28805
+EXPOSE 28800/udp 28801/udp
 
 CMD cd /redeclipse && ./bin/amd64/redeclipse_server_linux -h/home/redeclipse/server-config/
