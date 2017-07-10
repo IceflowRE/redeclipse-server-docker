@@ -8,9 +8,6 @@ LABEL email="iceflower@gmx.de"
 LABEL version="1.0"
 LABEL description="Red Eclipse Development Server"
 
-# we are noninteractive
-ENV DEBIAN_FRONTEND noninteractive
-
 # Add server user and set permissions
 RUN adduser -S -D redeclipse \
     && mkdir /redeclipse \
