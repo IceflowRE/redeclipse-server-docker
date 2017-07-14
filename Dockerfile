@@ -36,7 +36,7 @@ RUN apk update \
 # Add defaults maps and server config folder
 RUN apk add --no-cache --virtual deps git ca-certificates \
     && git clone -b master https://github.com/red-eclipse/maps.git /redeclipse/data/maps \
-    && mkdir -p /home/redeclipse/server-config/ \
+    && mkdir -p /re-server-config/ \
     && apk update \
     && apk del deps
 
@@ -45,4 +45,4 @@ USER redeclipse
 # This ports have to be used by the server config
 EXPOSE 28800/udp 28801/udp
 
-CMD cd /redeclipse && ./bin/amd64/redeclipse_server_linux -h/home/redeclipse/server-config/
+CMD cd /redeclipse && ./bin/amd64/redeclipse_server_linux -h/re-server-config/
