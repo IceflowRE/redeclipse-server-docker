@@ -45,7 +45,4 @@ RUN apk add --no-cache --virtual deps git ca-certificates \
 
 USER redeclipse
 
-# This ports have to be used by the server config
-EXPOSE 28800/udp 28801/udp
-
 CMD cd /redeclipse && ./bin/amd64/redeclipse_server_linux -h/re-server-config/home -p/re-server-config/package -o/re-server-config/sauer -g/home/redeclipse/re-log
