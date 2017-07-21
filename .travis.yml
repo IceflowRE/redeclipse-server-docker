@@ -15,7 +15,7 @@ script:
   - docker build -t $REPO ./amd64/
   - docker tag $REPO $TAG
 # build arm64v8 docker
-  - docker run -rm --privileged multiarch/qemu-user-static:register --reset
+  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
   - export REPOARM=iceflower/arm64v8-re-server_docker_test
   - docker build -t $REPOARM ./arm64v8/
   - docker tag $REPOARM $TAG
