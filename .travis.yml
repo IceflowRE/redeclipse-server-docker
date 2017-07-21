@@ -9,9 +9,11 @@ install:
 
 script:
 #  - export TAG=`if [ "$TRAVIS_BRANCH" != "" ]; then echo "latest"; else echo $TRAVIS_TAG ; fi`
-  - export TAG="latest"
-  - docker build -t $TAG ./amd64/
+  - export TAG=latest
+  - export REPO=iceflower/red-eclipse_devel_server_test
+  - docker build -t $REPO ./amd64/
+  - docker tag $REPO $TAG
 
 after_success:
   - docker login -u=iceflower -p="$DOCKER_PASSWORD"
-  - docker push iceflower/red-eclipse_devel_server_test
+  - docker push $REPO
