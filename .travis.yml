@@ -10,7 +10,7 @@ before_install:
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 #  - export TAG=`if [ "$TRAVIS_BRANCH" != "" ]; then echo "latest"; else echo $TRAVIS_TAG ; fi`
   - export TAG="latest"
-  - docker build -t $TAG /amd64/
+  - docker build -t $TAG ./amd64/
 
 after_success:
   - docker login -u=iceflower -p="$DOCKER_PASSWORD"
