@@ -1,0 +1,17 @@
+sudo: required
+
+language: c++
+
+services:
+  - docker
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-engine
+#  - export TAG=`if [ "$TRAVIS_BRANCH" != "" ]; then echo "latest"; else echo $TRAVIS_TAG ; fi`
+  - export TAG="latest"
+  - docker build -t $TAG /amd64/
+
+after_success:
+  - docker login -u=iceflower -p="$DOCKER_PASSWORD"
+  - docker push iceflower/red-eclipse_devel_server_test
