@@ -36,6 +36,7 @@ RUN apk update \
 # Add defaults maps and server config folder
 RUN apk add --no-cache --virtual deps git ca-certificates \
     && git clone -b master https://github.com/red-eclipse/maps.git /redeclipse/data/maps \
+    && rm -rf /redeclipse/data/maps/.git \
     && mkdir -p /re-server-config/home \
     && mkdir -p /re-server-config/package \
     && mkdir -p /re-server-config/sauer \

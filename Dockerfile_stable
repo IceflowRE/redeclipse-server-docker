@@ -1,12 +1,12 @@
 # Set the base image
-FROM arm64v8/alpine
+FROM alpine
 
 # informations
 LABEL author="Iceflower S"
 LABEL maintainer="Iceflower S"
 LABEL email="iceflower@gmx.de"
 LABEL version="1.0"
-LABEL description="Red Eclipse Development Server"
+LABEL description="Red Eclipse Server"
 
 # Add server user and set permissions
 RUN adduser -S -D redeclipse \
@@ -17,7 +17,7 @@ RUN adduser -S -D redeclipse \
 RUN apk update \
     && apk add --no-cache --virtual build-deps gcc g++ zlib-dev git ca-certificates coreutils cmake make \
     && apk add --no-cache libstdc++ \
-    && git clone -b master https://github.com/red-eclipse/base /temp \
+    && git clone -b stable https://github.com/red-eclipse/base /temp \
     \
     && mkdir /temp/build \
     && cd /temp/build \
@@ -36,6 +36,7 @@ RUN apk update \
 # Add defaults maps and server config folder
 RUN apk add --no-cache --virtual deps git ca-certificates \
     && git clone -b master https://github.com/red-eclipse/maps.git /redeclipse/data/maps \
+    && rm -rf /redeclipse/data/maps/.git \
     && mkdir -p /re-server-config/home \
     && mkdir -p /re-server-config/package \
     && mkdir -p /re-server-config/sauer \

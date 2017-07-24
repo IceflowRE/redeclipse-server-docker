@@ -5,15 +5,12 @@ services:
 
 install:
   - sudo apt-get update
-  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+  - sudo apt-get -y install docker-ce
 
 script:
-# build amd64 docker
-#  - export TAG=`if [ "$TRAVIS_BRANCH" != "" ]; then echo "latest"; else echo $TRAVIS_TAG ; fi`
-  - export TAG=latest
+# build amd64 devel
   - export REPO=iceflower/red-eclipse_devel_server_test
-  - docker build -t $REPO ./amd64/
-  - docker tag $REPO $TAG
+  - docker build --squash -t "$REPO:latest" -f Dockerfile_devel .
 
 after_success:
   - docker login -u=iceflower -p="$DOCKER_PASSWORD"
