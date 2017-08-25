@@ -23,6 +23,3 @@ before_script:
 
 script:
   - bash scripts/update.sh
-
-before_cache:
-  - bash scripts/save-sha.sh
