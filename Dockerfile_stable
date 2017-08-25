@@ -6,7 +6,7 @@ LABEL author="Iceflower S"
 LABEL maintainer="Iceflower S"
 LABEL email="iceflower@gmx.de"
 LABEL version="1.0"
-LABEL description="Red Eclipse Server"
+LABEL description="Red Eclipse Server - $BRANCH"
 
 # Add server user and set permissions
 RUN adduser -S -D redeclipse \
@@ -17,12 +17,9 @@ RUN adduser -S -D redeclipse \
 RUN apk update \
     && apk add --no-cache --virtual build-deps gcc g++ zlib-dev git ca-certificates coreutils cmake make \
     && apk add --no-cache libstdc++ \
-    && git clone -b stable https://github.com/red-eclipse/base /temp \
+    && git clone -b "$BRANCH" https://github.com/red-eclipse/base /temp \
     \
-    && mkdir /temp/build \
-    && cd /temp/build \
-    && cmake ../src -DBUILD_CLIENT=0 \
-    && make clean install -j4 \
+    && make -C src -j"$(nproc)" redeclipse_server_linux install \
     \
     && mkdir -p /redeclipse/config \
     && mv /temp/config/ /redeclipse/ \
