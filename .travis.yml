@@ -1,5 +1,7 @@
 sudo: required
 
+language: cpp
+
 services:
   - docker
 
@@ -9,8 +11,8 @@ env:
 
 cache:
   directories:
-    - $HOME/devel.sha
-    - $HOME/stable.sha
+    - ./stable.sha
+    - ./master.sha
 
 install:
   - sudo apt-get update
