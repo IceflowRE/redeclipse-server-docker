@@ -3,15 +3,21 @@ sudo: required
 services:
   - docker
 
+env:
+  - BRANCH="stable"
+  - BRANCH="master"
+
+cache:
+  directories:
+    - $HOME/devel.sha
+    - $HOME/stable.sha
+
 install:
   - sudo apt-get update
   - sudo apt-get -y install docker-ce
 
-script:
-# build amd64 devel
-  - export REPO=iceflower/red-eclipse_devel_server_test
-  - docker build --squash -t "$REPO:latest" -f Dockerfile_devel .
-
-after_success:
+before_script:
   - docker login -u=iceflower -p="$DOCKER_PASSWORD"
-  - docker push $REPO
+
+script:
+  - bash scripts/update.sh
