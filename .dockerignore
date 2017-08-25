@@ -1,5 +1,5 @@
-.git
-scripts
+.git/
+scripts/
 .gitignore
 .travis.yml
 README.md

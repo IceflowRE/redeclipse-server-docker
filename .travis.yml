@@ -11,8 +11,7 @@ env:
 
 cache:
   directories:
-    - ./stable.sha
-    - ./master.sha
+    - ./sha
 
 install:
   - sudo apt-get update
@@ -20,6 +19,10 @@ install:
 
 before_script:
   - docker login -u=iceflower -p="$DOCKER_PASSWORD"
+  - mkdir ./sha
 
 script:
   - bash scripts/update.sh
+
+before_cache:
+  - bash scripts/save-sha.sh
