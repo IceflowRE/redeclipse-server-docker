@@ -19,7 +19,7 @@ install:
 
 before_script:
   - docker login -u=iceflower -p="$DOCKER_PASSWORD"
-  - mkdir ./sha
+  - mkdir -p ./sha
 
 script:
   - bash scripts/update.sh
