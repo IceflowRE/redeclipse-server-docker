@@ -29,7 +29,7 @@ Pull them with `docker pull iceflower/red-eclipse_devel_server_test:<tag>`.
 `docker run -p <serverport>:<serverport>/udp -p <serverport + 1>:<serverport + 1>/udp -v <re home dir>:/re-server-config/home -v <re package dir>:/re-server-config/package -v <sauerbraten maps dir>:/re-server-config/sauer -v <log dir>:/home/redeclipse/re-log iceflower/red-eclipse_devel_server_test:<tag>`
 
   - `<serverport>:` the serverport specified inside the `servinit.cfg` from your server
-  - `<serverport + 1>`: the serverport + 1
+  - `<serverport + 1>`: the serverport + 1  
   ***you can link host directories inside the docker container, if dont want to link a directory just leave off the specific `-v` parameter.***
   - `<re home dir>`: RE home directory on your host system, **must linked**
   - `<re package dir>`: package directory, mostly maps, on your host system
