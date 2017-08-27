@@ -6,11 +6,11 @@
 This provides a Dockerfile for an easy handling and maintaining of a [Red Eclipse](https://redeclipse.net/) Server.
 Currently the Docker images are build against the latest commits and will be checked for updates once a day.
 
-### Images
+## Images
 Latest images are available at [Docker Hub](https://hub.docker.com/r/iceflower/red-eclipse_devel_server_test/).
 Pull them with `docker pull iceflower/red-eclipse_devel_server_test:<tag>`.
 
-#### Tags
+### Tags
 |       Tag      | Server type | Architecture |
 |:--------------:|:-----------:|:------------:|
 |     master     | development |     amd64    |
@@ -20,7 +20,7 @@ Pull them with `docker pull iceflower/red-eclipse_devel_server_test:<tag>`.
 
 **Note: arm64v8 images are NOT available at the moment and will follow later!**
 
-### Usage
+## Usage
 - Pull latest docker image from Docker Hub.
 `docker pull iceflower/red-eclipse_devel_server_test:<tag>`
 
@@ -37,7 +37,7 @@ Pull them with `docker pull iceflower/red-eclipse_devel_server_test:<tag>`.
   - `<log dir>`: log directory on your host system
   - `<tag>`: an available image tag
 
-#### Example
+### Example
 `docker run -p 28803:28803/udp -p 28804:28804/udp -v /home/iceflower/redeclipse-config/devel_home:/re-server-config/home -v /home/iceflower/redeclipse-config/package:/re-server-config/package -v /home/iceflower/redeclipse-config/sauerbraten:/re-server-config/sauer -v /home/iceflower/redeclipse-config/logs/devel_log:/home/redeclipse/re-log iceflower/red-eclipse_devel_server_test`
 
 ---
