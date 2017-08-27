@@ -1,6 +1,7 @@
 # Red Eclipse Server Docker
 [![Build Status](https://travis-ci.org/IceflowRE/re-server_docker_test.svg?branch=master)](https://travis-ci.org/IceflowRE/re-server_docker_test)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 ---
 
 This provides a Dockerfile for an easy handling and maintaining of a [Red Eclipse](https://redeclipse.net/) Server.
