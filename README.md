@@ -11,7 +11,6 @@ Currently the Docker images are build against the latest commits and will be che
 Latest images are available at [Docker Hub][3].
 Pull them with `docker pull iceflower/red-eclipse_devel_server_test:<tag>`.
 
-### Tags
 |       Tag      | Server type | Architecture |        Build       |
 |:--------------:|:-----------:|:------------:|:------------------:|
 |     master     | development |     amd64    |  [![master][6]][1] |
@@ -58,7 +57,7 @@ https://github.com/IceflowRE/re-server_docker_test
 ## License
 ![Image of GPLv3](http://www.gnu.org/graphics/gplv3-127x51.png)
 
-Copyright 2017 - now ©  Iceflower S
+Copyright 2017 - now © Iceflower S
 
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
