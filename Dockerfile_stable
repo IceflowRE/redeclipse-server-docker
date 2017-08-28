@@ -1,6 +1,8 @@
 # Set the base image
 FROM alpine
 
+ARG BRANCH
+
 # informations
 LABEL author="Iceflower S"
 LABEL maintainer="Iceflower S"
