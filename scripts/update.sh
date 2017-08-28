@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # variable BRANCH is defined inside the travis.yml env.
-sha="$(git ls-remote --heads https://github.com/red-eclipse/base.git master | awk '{ print $1 }')"
+sha="$(git ls-remote --heads https://github.com/red-eclipse/base.git $BRANCH | awk '{ print $1 }')"
 
 if [ "$(cat ./sha/$BRANCH.sha)" != "$sha" ]; then
     echo "Build $BRANCH"
