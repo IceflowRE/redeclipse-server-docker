@@ -8,7 +8,7 @@ LABEL author="Iceflower S"
 LABEL maintainer="Iceflower S"
 LABEL email="iceflower@gmx.de"
 LABEL version="1.0"
-LABEL description="Red Eclipse Development Server - $BRANCH"
+LABEL description="Red Eclipse Server - $BRANCH"
 
 # Add server user and set permissions
 RUN adduser -S -D redeclipse \

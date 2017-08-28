@@ -21,6 +21,7 @@ RUN apk update \
     && apk add --no-cache libstdc++ \
     && git clone -b "$BRANCH" https://github.com/red-eclipse/base /temp \
     \
+    && cd /temp \
     && make -C src -j"$(nproc)" redeclipse_server_linux install \
     \
     && mkdir -p /redeclipse/config \
