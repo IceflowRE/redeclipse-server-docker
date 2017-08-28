@@ -1,6 +1,6 @@
 # Red Eclipse Server Docker
-[![Build Status](https://travis-ci.org/IceflowRE/re-server_docker_test.svg?branch=master)](https://travis-ci.org/IceflowRE/re-server_docker_test)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![DockerHub](https://img.shields.io/badge/Docker_Hub--FF69A4.svg?style=social)][3]
 
 ---
 
@@ -8,16 +8,16 @@ This provides a Dockerfile for an easy handling and maintaining of a [Red Eclips
 Currently the Docker images are build against the latest commits and will be checked for updates once a day.
 
 ## Images
-Latest images are available at [Docker Hub](https://hub.docker.com/r/iceflower/red-eclipse_devel_server_test/).
+Latest images are available at [Docker Hub][3].
 Pull them with `docker pull iceflower/red-eclipse_devel_server_test:<tag>`.
 
 ### Tags
-|       Tag      | Server type | Architecture |
-|:--------------:|:-----------:|:------------:|
-|     master     | development |     amd64    |
-| arm64v8-master | development |    arm64v8   |
-|     stable     |    stable   |     amd64    |
-| arm64v8-stable |    stable   |    arm64v8   |
+|       Tag      | Server type | Architecture |        Build       |
+|:--------------:|:-----------:|:------------:|:------------------:|
+|     master     | development |     amd64    |  [![master][6]][1] |
+| arm64v8-master | development |    arm64v8   | [![nobuild][4]][2] |
+|     stable     |    stable   |     amd64    |  [![stable][5]][1] |
+| arm64v8-stable |    stable   |    arm64v8   | [![nobuild][4]][2] |
 
 **Note: arm64v8 images are NOT available at the moment and will follow later!**
 
@@ -58,3 +58,10 @@ Copyright 2017 - now ©  Iceflower S
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/gpl.html>.
+
+[1]: https://travis-ci.org/IceflowRE/re-server_docker_test
+[2]: https://github.com/IceflowRE/re-server_docker_test
+[3]: https://hub.docker.com/r/iceflower/red-eclipse_devel_server_test
+[4]: https://img.shields.io/badge/build-inaccessible-lightgrey.svg
+[5]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/re-server_docker_test/branches/master/1
+[6]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/re-server_docker_test/branches/master/2
