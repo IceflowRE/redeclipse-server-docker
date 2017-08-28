@@ -50,6 +50,11 @@ https://github.com/IceflowRE/re-server_docker_test
 - Developer
   - Iceflower S
 
+### External Tools
+- Travis Matrix Build Badges *by* Brandon Fish ([bjfish](https://github.com/bjfish))
+    - https://github.com/bjfish/travis-matrix-badges
+    - MIT License
+
 ## License
 ![Image of GPLv3](http://www.gnu.org/graphics/gplv3-127x51.png)
 
