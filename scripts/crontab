@@ -1,0 +1,1 @@
+0 3 * * * cd <path to repo>; ./scripts/my-builder.sh

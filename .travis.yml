@@ -11,7 +11,7 @@ env:
 
 cache:
   directories:
-    - ./sha
+    - ~/.re-docker
 
 install:
   - sudo apt-get update
@@ -19,8 +19,8 @@ install:
 
 before_script:
   - docker login -u=iceflower -p="$DOCKER_PASSWORD"
-  - mkdir -p ./sha/re/
-  - mkdir -p ./sha/docker/
+  - mkdir -p ~/.re-docker/sha/re/
+  - mkdir -p ~/.re-docker/sha/docker/
 
 script:
   - bash scripts/update.sh

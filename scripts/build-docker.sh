@@ -1,6 +1,7 @@
 #!/bin/bash
-
-# variable $branch and $prefix will be passed
+# build a docker image for the given prefix and branch
+#
+# variable branch and prefix will be passed
 
 repo="iceflower/red-eclipse_devel_server_test"
 # later use one dockerfile, but stable has no cmake support atm
