@@ -35,7 +35,7 @@ Replace the variables with the respective values.
   - `<tag>` an available image tag
 
 ### Command line
-- Pull latest docker image from Docker Hub.
+- Pull latest docker image from Docker Hub.  
 `docker pull iceflower/red-eclipse_devel_server_test:<tag>`
 
 - Run them.  
