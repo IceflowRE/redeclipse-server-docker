@@ -1,19 +1,22 @@
-version: "3.3"
+version: '3.3'
 
-redeclipse-server:
-    image: iceflower/red-eclipse_devel_server_test:<tag>
-    ports:
-        - "<serverport>:<serverport>/udp"
-        - "<serverport + 1>:<serverport + 1>/udp"
-    restart: unless-stopped
-    volumes:
-        - home:/re-server-config/home
-        - package:/re-server-config/package
-        - sauer:/re-server-config/sauer
-        - log:/home/redeclipse/re-log
-
-volumes:
-    - home:<re home dir>
-    - package:<re package dir>
-    - sauer:<sauerbraten dir>
-    - log:<log dir>
+services:
+    redeclipse-server:
+        image: iceflower/red-eclipse_devel_server_test:<tag>
+        ports:
+            - "<serverport>:<serverport>/udp"
+            - "<serverport + 1>:<serverport + 1>/udp"
+        restart: unless-stopped
+        volumes:
+            - type: bind
+              source: <re home dir>
+              target: /re-server-config/home
+            - type: bind
+              source: <re package dir>
+              target: /re-server-config/package
+            - type: bind
+              source: <sauerbraten dir>
+              target: /re-server-config/sauer
+            - type: bind
+              source: <log dir>
+              target: /home/redeclipse/re-log

@@ -38,7 +38,7 @@ Replace the variables with the respective values.
 - Pull latest docker image from Docker Hub.  
 `docker pull iceflower/red-eclipse_devel_server_test:<tag>`
 
-- Run them.  
+- Run it.  
 `docker run -p <serverport>:<serverport>/udp -p <serverport + 1>:<serverport + 1>/udp -v <re home dir>:/re-server-config/home -v <re package dir>:/re-server-config/package -v <sauerbraten maps dir>:/re-server-config/sauer -v <log dir>:/home/redeclipse/re-log iceflower/red-eclipse_devel_server_test:<tag>`
 
 #### Example
@@ -58,6 +58,7 @@ https://github.com/IceflowRE/re-server_docker_test
 ## Credits
 - Developer
   - Iceflower S
+    - iceflower@gmx.de
 
 ### External Tools
 - Travis Matrix Build Badges *by* Brandon Fish ([bjfish](https://github.com/bjfish))
