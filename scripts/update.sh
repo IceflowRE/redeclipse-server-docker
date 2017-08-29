@@ -17,7 +17,7 @@ fi
 # get alpine docker image, since its only some mb its ok
 docker pull alpine
 # load saved base image sha and get latest image sha
-savedBaseImgSha="$(cat ~/.re-docker/sha/docker/alpine.sha)"
+savedBaseImgSha="$(cat ~/.re-docker/sha/docker/$prefix$BRANCH-alpine.sha)"
 baseImgSha="$(docker image ls --digests --format '{{.Digest}}' alpine)"
 if [ "$baseImgSha" == "" ]; then
     echo "Cant get latest docker sha."
@@ -36,9 +36,9 @@ if [ "$savedSha" != "$sha" ] || [ "$savedBaseImgSha" != "$baseImgSha" ]; then
     fi
     # save latest shas
     echo "Save sha $sha as $prefix$BRANCH"
-    echo "$sha" > "~/.re-docker/sha/re/$prefix$BRANCH.sha"
+    echo "$sha" > ~/.re-docker/sha/re/"$prefix$BRANCH".sha
     echo "Save base image sha $baseImgSha as alpine"
-    echo "$baseImgSha" > "~/.re-docker/sha/docker/alpine.sha"
+    echo "$baseImgSha" > ~/.re-docker/sha/docker/"$prefix$BRANCH"-alpine.sha
 else
     echo "Skip $prefix$BRANCH"
 fi
