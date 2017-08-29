@@ -23,24 +23,32 @@ Pull them with `docker pull iceflower/red-eclipse_devel_server_test:<tag>`.
 **Note: arm64v8 images are NOT available at the moment and will follow later!**
 
 ## Usage
+Replace the variables with the respective values.
+
+  - `<serverport>` the serverport specified inside the `servinit.cfg` from your server
+  - `<serverport + 1>` the serverport + 1  
+  ***you can link host directories inside the docker container, if dont want to link a directory just leave off the specific `-v` parameter.***
+  - `<re home dir>` RE home directory on your host system, **must linked**
+  - `<re package dir>` package directory, mostly maps, on your host system
+  - `<sauerbraten dir>` sauerbraten directory on your host system
+  - `<log dir>` log directory on your host system
+  - `<tag>` an available image tag
+
+### Command line
 - Pull latest docker image from Docker Hub.
 `docker pull iceflower/red-eclipse_devel_server_test:<tag>`
 
-  - `<tag>`: an available image tag
 - Run them.  
 `docker run -p <serverport>:<serverport>/udp -p <serverport + 1>:<serverport + 1>/udp -v <re home dir>:/re-server-config/home -v <re package dir>:/re-server-config/package -v <sauerbraten maps dir>:/re-server-config/sauer -v <log dir>:/home/redeclipse/re-log iceflower/red-eclipse_devel_server_test:<tag>`
 
-  - `<serverport>:` the serverport specified inside the `servinit.cfg` from your server
-  - `<serverport + 1>`: the serverport + 1  
-  ***you can link host directories inside the docker container, if dont want to link a directory just leave off the specific `-v` parameter.***
-  - `<re home dir>`: RE home directory on your host system, **must linked**
-  - `<re package dir>`: package directory, mostly maps, on your host system
-  - `<sauerbraten maps dir>`: sauerbraten map directory on your host system
-  - `<log dir>`: log directory on your host system
-  - `<tag>`: an available image tag
-
-### Example
+#### Example
 `docker run -p 28803:28803/udp -p 28804:28804/udp -v /home/iceflower/redeclipse-config/devel_home:/re-server-config/home -v /home/iceflower/redeclipse-config/package:/re-server-config/package -v /home/iceflower/redeclipse-config/sauerbraten:/re-server-config/sauer -v /home/iceflower/redeclipse-config/logs/devel_log:/home/redeclipse/re-log iceflower/red-eclipse_devel_server_test`
+
+### Docker Compose
+TODO.
+
+#### Example
+TODO.
 
 ---
 
