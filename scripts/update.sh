@@ -1,9 +1,7 @@
 #! /bin/bash
 
 # variable BRANCH is defined inside the travis.yml env or will be passed
-if [ $1 ]; then
-    BRANCH="$1"
-fi
+# variable prefix for e.g. architectures will be passed
 
 # load latest branch commit sha and get latest from remote
 savedSha="$(cat ./sha/re/$BRANCH.sha)"
@@ -29,7 +27,7 @@ echo "img: $savedBaseImgSha | $baseImgSha"
 # update only if a new commit exists or the base image was updated
 if [ "$savedSha" != "$sha" ] || [ "$savedBaseImgSha" != "$baseImgSha" ]; then
     echo "Build $BRANCH"
-    ./scripts/build-docker.sh "$BRANCH"
+    branch="$BRANCH" prefix=$prefix ./scripts/build-docker.sh
     if [ $? -ne 0 ]; then # dont save sha if something failed
         exit 1
     fi
