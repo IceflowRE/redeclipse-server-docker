@@ -2,11 +2,12 @@
 ![maintained](https://img.shields.io/badge/maintained-yes-brightgreen.svg)
 [![DockerHub](https://img.shields.io/badge/Docker_Hub--FF69A4.svg?style=social)][3]
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-
 ---
 
 This provides a Dockerfile for an easy handling and maintaining of a [Red Eclipse](https://redeclipse.net/) Server.
 Currently the Docker images are build against the latest commits and will be checked for updates once a day.
+
+---  
 
 ## Images
 Latest images are available at [Docker Hub][3].
