@@ -2,4 +2,6 @@
 scripts/
 .gitignore
 .travis.yml
+docker-compose.yml.template
+LICENSE.md
 README.md
