@@ -1,5 +1,5 @@
 # Red Eclipse Server Docker
-![maintained](https://img.shields.io/badge/maintained-yes-brightgreen.svg)
+[![maintained](https://img.shields.io/badge/maintained-yes-brightgreen.svg)][2]
 [![DockerHub](https://img.shields.io/badge/Docker_Hub--FF69A4.svg?style=social)][3]
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ---
