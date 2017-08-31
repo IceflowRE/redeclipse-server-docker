@@ -1,10 +1,10 @@
 # dynamical variable for other architectures, like arm64v8
 ARG PREIMAGE
+# Set the base image
+FROM "$PREIMAGE"alpine
+
 # redeclipse branch
 ARG BRANCH
-
-# Set the base image
-FROM $PREIMAGE\alpine
 
 # informations
 LABEL author="Iceflower S"
