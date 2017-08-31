@@ -15,7 +15,8 @@ if [ "$sha" == "" ]; then
 fi
 
 # get alpine docker image, since its only some mb its ok
-docker pull alpine
+docker pull "$preimage"alpine
+
 # load saved base image sha and get latest image sha
 savedBaseImgSha="$(cat ~/.re-docker/sha/docker/$prefix$BRANCH-alpine.sha)"
 baseImgSha="$(docker image ls --digests --format '{{.Digest}}' alpine)"
@@ -30,7 +31,7 @@ echo "img: $savedBaseImgSha | $baseImgSha"
 # update only if a new commit exists or the base image was updated
 if [ "$savedSha" != "$sha" ] || [ "$savedBaseImgSha" != "$baseImgSha" ]; then
     echo "Build $prefix$BRANCH"
-    branch="$BRANCH" prefix="$prefix" ./scripts/build-docker.sh
+    branch="$BRANCH" prefix="$prefix" preimage="$preimage" ./scripts/build-docker.sh
     if [ $? -ne 0 ]; then # dont save sha if something failed
         exit 1
     fi
