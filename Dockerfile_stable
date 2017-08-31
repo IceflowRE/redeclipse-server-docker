@@ -25,7 +25,7 @@ RUN apk update \
     && git clone -b "$BRANCH" https://github.com/red-eclipse/base /temp \
     \
     && cd /temp \
-    && make -C src -j"$(nproc)" redeclipse_server_linux install \
+    && make -C src -j"$(nproc)" redeclipse_server_linux install-server \
     \
     && mkdir -p /redeclipse/config \
     && mv /temp/config/ /redeclipse/ \
