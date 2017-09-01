@@ -36,6 +36,12 @@ Replace the variables with the respective values.
   - `<log dir>` log directory on your host system
   - `<tag>` an available image tag
 
+### Docker Compose (recommend)
+TODO.
+
+#### Example
+TODO.
+
 ### Command line
 - Pull latest docker image from Docker Hub  
 `docker pull iceflower/red-eclipse_devel_server_test:<tag>`
@@ -43,30 +49,30 @@ Replace the variables with the respective values.
 - Create container  
 `docker create -p <serverport>:<serverport>/udp -p <serverport + 1>:<serverport + 1>/udp -v <re home dir>:/re-server-config/home -v <re package dir>:/re-server-config/package -v <sauerbraten maps dir>:/re-server-config/sauer -v <log dir>:/home/redeclipse/re-log --name <name> iceflower/red-eclipse_devel_server_test:<tag>`
 
+- (Remove container)  
+(`docker rm <name>`)
+
 - Start container  
 `docker start <name>`
 
-- Shutdown  
-TODO.
+- Shutdown and wait a maximum of 10 seconds before forcing  
+`docker stop <name>`
 
 #### Example
 - Pull latest docker image from Docker Hub  
 `docker pull iceflower/red-eclipse_devel_server_test:master`
 
-- Create docker  
+- Create container  
 `docker create -p 28803:28803/udp -p 28804:28804/udp -v /home/iceflower/redeclipse-config/devel_home:/re-server-config/home -v /home/iceflower/redeclipse-config/package:/re-server-config/package -v /home/iceflower/redeclipse-config/sauerbraten:/re-server-config/sauer -v /home/iceflower/redeclipse-config/logs/devel_log:/home/redeclipse/re-log --name re-dev-server iceflower/red-eclipse_devel_server_test`
 
 - Start container  
 `docker start re-dev-server`
 
-- Shutdown  
-`TODO.`
+- (Remove container)  
+(`docker rm re-dev-server`)
 
-### Docker Compose
-TODO.
-
-#### Example
-TODO.
+- Shutdown and wait a maximum of 10 minutes before forcing  
+`docker stop --time=600 re-dev-server`
 
 ---
 
