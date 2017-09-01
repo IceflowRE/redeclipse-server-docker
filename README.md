@@ -63,7 +63,7 @@ TODO.
 `docker pull iceflower/red-eclipse_devel_server_test:master`
 
 - Create container  
-`docker create -p 28803:28803/udp -p 28804:28804/udp -v /home/iceflower/redeclipse-config/devel_home:/re-server-config/home -v /home/iceflower/redeclipse-config/package:/re-server-config/package -v /home/iceflower/redeclipse-config/sauerbraten:/re-server-config/sauer -v /home/iceflower/redeclipse-config/logs/devel_log:/home/redeclipse/re-log --name re-dev-server iceflower/red-eclipse_devel_server_test`
+`docker create -p 28801:28801/udp -p 28802:28802/udp -v /home/iceflower/redeclipse-config/devel_home:/re-server-config/home -v /home/iceflower/redeclipse-config/package:/re-server-config/package -v /home/iceflower/redeclipse-config/sauerbraten:/re-server-config/sauer -v /home/iceflower/redeclipse-config/logs/devel_log:/home/redeclipse/re-log --name re-dev-server iceflower/red-eclipse_devel_server_test`
 
 - Start container  
 `docker start re-dev-server`

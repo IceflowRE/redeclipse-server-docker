@@ -1,7 +1,7 @@
 version: '3.3'
 
 services:
-    redeclipse-server:
+    <name>:
         image: iceflower/red-eclipse_devel_server_test:<tag>
         ports:
             - "<serverport>:<serverport>/udp"
