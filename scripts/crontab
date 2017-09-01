@@ -1,1 +1,1 @@
-0 3 * * * cd /home/iceflower/re-docker; ./scripts/my-builder.sh > /home/iceflower/cron.log 2>&1
+0 3 * * * cd /home/iceflower/re-docker/ && ./scripts/my-builder.sh > /home/iceflower/cron.log 2>&1

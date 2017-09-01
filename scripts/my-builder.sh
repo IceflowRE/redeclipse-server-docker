@@ -2,6 +2,8 @@
 # own build script
 # load Docker password from ./dockerpassword.txt, which has no new line at the end
 
+echo $(date +%Y-%m-%d=%H:%M:%S)
+
 docker login -u=iceflower -p="$(cat ./dockerpassword.txt)"
 mkdir -p ~/.re-docker/sha/re/
 mkdir -p ~/.re-docker/sha/docker/
