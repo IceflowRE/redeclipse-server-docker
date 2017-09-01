@@ -22,8 +22,6 @@ Pull them with `docker pull iceflower/red-eclipse_devel_server_test:<tag>`.
 |     master     | development |     amd64    |  [![master][6]][1] |
 | arm64v8-master | development |    arm64v8   | [![nobuild][4]][2] |
 
-**Note: arm64v8 images are NOT available at the moment and will follow later!**
-
 ## Usage
 Replace the variables with the respective values.
 
