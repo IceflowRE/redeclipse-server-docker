@@ -1,5 +1,2 @@
 # ignores everything
 **
-# include following to the Dockerfile
-!LICENSE.md
-!README.md
