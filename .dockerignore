@@ -1,7 +1,5 @@
-.git/
-scripts/
-.gitignore
-.travis.yml
-docker-compose.yml.template
-LICENSE.md
-README.md
+# ignores everything
+**
+# include following to the Dockerfile
+!LICENSE.md
+!README.md
