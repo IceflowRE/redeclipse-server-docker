@@ -51,4 +51,5 @@ RUN apk add --no-cache --virtual deps git ca-certificates \
 
 USER redeclipse
 
-CMD cd /redeclipse && ./bin/amd64/redeclipse_server_linux -h/re-server-config/home -p/re-server-config/package -o/re-server-config/sauer -g/home/redeclipse/re-log
+WORKDIR /redeclipse
+ENTRYPOINT ["./bin/amd64/redeclipse_server_linux", "-h/re-server-config/home", "-p/re-server-config/package", "-o/re-server-config/sauer", "-g/home/redeclipse/re-log"]
