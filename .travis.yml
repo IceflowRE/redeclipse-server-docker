@@ -6,8 +6,8 @@ services:
   - docker
 
 env:
-  - BRANCH="stable"
-  - BRANCH="master"
+  - BRANCH=stable
+  - BRANCH=master
 
 cache:
   directories:
