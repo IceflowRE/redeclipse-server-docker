@@ -1,6 +1,8 @@
 # Red Eclipse Server Docker
 [![maintained](https://img.shields.io/badge/maintained-yes-brightgreen.svg)][2]
 [![DockerHub](https://img.shields.io/badge/Docker_Hub--FF69A4.svg?style=social)][3]
+[![stable](https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=stable&label=stable)][1]
+[![master](https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=master&label=master)][1]
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ---
 
@@ -15,10 +17,10 @@ Pull them with `docker pull iceflower/red-eclipse_devel_server_test:<tag>`.
 
 |       Tag      | Server type | Architecture |        Build       |
 |:--------------:|:-----------:|:------------:|:------------------:|
-|     master     | development |     amd64    |  [![master][6]][1] |
-| arm64v8-master | development |    arm64v8   | [![nobuild][4]][2] |
 |     stable     |    stable   |     amd64    |  [![stable][5]][1] |
 | arm64v8-stable |    stable   |    arm64v8   | [![nobuild][4]][2] |
+|     master     | development |     amd64    |  [![master][6]][1] |
+| arm64v8-master | development |    arm64v8   | [![nobuild][4]][2] |
 
 **Note: arm64v8 images are NOT available at the moment and will follow later!**
 
@@ -61,8 +63,8 @@ https://github.com/IceflowRE/re-server_docker_test
     - iceflower@gmx.de
 
 ### External Tools
-- Travis Matrix Build Badges *by* Brandon Fish ([bjfish](https://github.com/bjfish))
-    - https://github.com/bjfish/travis-matrix-badges
+- badge-matrix *by* Brian Beck ([exogen](https://github.com/exogen))
+    - https://github.com/exogen/badge-matrix
     - MIT License
 
 ## License
@@ -80,5 +82,5 @@ You should have received a copy of the GNU General Public License along with thi
 [2]: https://github.com/IceflowRE/re-server_docker_test
 [3]: https://hub.docker.com/r/iceflower/red-eclipse_devel_server_test
 [4]: https://img.shields.io/badge/build-inaccessible-lightgrey.svg
-[5]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/re-server_docker_test/branches/master/1
-[6]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/re-server_docker_test/branches/master/2
+[5]: https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=stable&label=build
+[6]: https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=master&label=build
