@@ -26,6 +26,7 @@ The `amd64` images are build with [Travis CI][1]. The `arm64v8` images are build
 ## Usage
 Replace the variables with the respective values.
 
+  - `name` a container name, under which it will run
   - `<serverport>` the serverport specified inside the `servinit.cfg` from your server
   - `<serverport + 1>` the serverport + 1  
   ***you can link host directories inside the docker container, if dont want to link a directory just leave off the specific `-v` parameter.***
@@ -36,14 +37,30 @@ Replace the variables with the respective values.
   - `<tag>` an available image tag
 
 ### Command line
-- Pull latest docker image from Docker Hub.  
+- Pull latest docker image from Docker Hub  
 `docker pull iceflower/red-eclipse_devel_server_test:<tag>`
 
-- Run it.  
-`docker run -p <serverport>:<serverport>/udp -p <serverport + 1>:<serverport + 1>/udp -v <re home dir>:/re-server-config/home -v <re package dir>:/re-server-config/package -v <sauerbraten maps dir>:/re-server-config/sauer -v <log dir>:/home/redeclipse/re-log iceflower/red-eclipse_devel_server_test:<tag>`
+- Create container  
+`docker create -p <serverport>:<serverport>/udp -p <serverport + 1>:<serverport + 1>/udp -v <re home dir>:/re-server-config/home -v <re package dir>:/re-server-config/package -v <sauerbraten maps dir>:/re-server-config/sauer -v <log dir>:/home/redeclipse/re-log --name <name> iceflower/red-eclipse_devel_server_test:<tag>`
+
+- Start container  
+`docker start <name>`
+
+- Shutdown  
+TODO.
 
 #### Example
-`docker run -p 28803:28803/udp -p 28804:28804/udp -v /home/iceflower/redeclipse-config/devel_home:/re-server-config/home -v /home/iceflower/redeclipse-config/package:/re-server-config/package -v /home/iceflower/redeclipse-config/sauerbraten:/re-server-config/sauer -v /home/iceflower/redeclipse-config/logs/devel_log:/home/redeclipse/re-log iceflower/red-eclipse_devel_server_test`
+- Pull latest docker image from Docker Hub  
+`docker pull iceflower/red-eclipse_devel_server_test:master`
+
+- Create docker  
+`docker run -p 28803:28803/udp -p 28804:28804/udp -v /home/iceflower/redeclipse-config/devel_home:/re-server-config/home -v /home/iceflower/redeclipse-config/package:/re-server-config/package -v /home/iceflower/redeclipse-config/sauerbraten:/re-server-config/sauer -v /home/iceflower/redeclipse-config/logs/devel_log:/home/redeclipse/re-log --name re-dev-server iceflower/red-eclipse_devel_server_test`
+
+- Start container  
+`docker start re-dev-server`
+
+- Shutdown  
+`TODO.`
 
 ### Docker Compose
 TODO.
