@@ -12,8 +12,9 @@ Currently the Docker images are build against the latest commits and will be che
 ---  
 
 ## Images
-Latest images are available at [Docker Hub][3].
-Pull them with `docker pull iceflower/red-eclipse_devel_server_test:<tag>`.
+Latest images are available at [Docker Hub][3].  
+Pull them with `docker pull iceflower/red-eclipse_devel_server_test:<tag>`.  
+The `amd64` images are build with [Travis CI][1]. The `arm64v8` images are build on an own server.
 
 |       Tag      | Server type | Architecture |        Build       |
 |:--------------:|:-----------:|:------------:|:------------------:|
