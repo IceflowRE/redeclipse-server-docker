@@ -31,8 +31,8 @@ RUN apk update \
     \
     && mkdir -p /redeclipse/config \
     && mv /temp/config/ /redeclipse/ \
-    && mkdir -p /redeclipse/bin/amd64 \
-    && mv /temp/bin/amd64/redeclipse_server_linux /redeclipse/bin/amd64/redeclipse_server_linux \
+    && mkdir -p /redeclipse/bin/native \
+    && mv /temp/build/redeclipse_server_linux /redeclipse/bin/native/redeclipse_server_linux \
     \
     && apk update \
     && apk del build-deps \
@@ -52,4 +52,4 @@ RUN apk add --no-cache --virtual deps git ca-certificates \
 USER redeclipse
 
 WORKDIR /redeclipse
-ENTRYPOINT ["./bin/amd64/redeclipse_server_linux", "-h/re-server-config/home", "-p/re-server-config/package", "-o/re-server-config/sauer", "-g/home/redeclipse/re-log"]
+ENTRYPOINT ["./bin/native/redeclipse_server_linux", "-h/re-server-config/home", "-p/re-server-config/package", "-o/re-server-config/sauer", "-g/home/redeclipse/re-log"]
