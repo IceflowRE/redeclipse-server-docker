@@ -37,10 +37,28 @@ Replace the variables with the respective values.
   - `<tag>` an available image tag
 
 ### Docker Compose (recommend)
-TODO.
+- Create own Docker Compose file, as base you can use [docker-compose.yml.template](./docker-compose.yml.template)  
+  - *Create a copy with name `docker-compose.yml`*
+  - *Change the <var> inside the file, to their respective values*
+
+- Start/ Restart container  
+`docker-compose up -d <name>`
+
+- Shutdown and wait a maximum of 10 seconds before forcing  
+`docker-compose stop <name>`
+
+#### Multiple Server
+Copy and paste the whole section below the point `services` and change the values. Then start it with the new other name.
 
 #### Example
-TODO.
+- Create own Docker Compose file, as base you can use [docker-compose.yml.template](./docker-compose.yml.template)  
+[docker-compose.yml.example](./docker-compose.yml.example)
+
+- Start/ Restart container  
+`docker-compose up -d re-dev-server`
+
+- Shutdown and wait a maximum of 10 minutes before forcing  
+`docker-compose stop --time=600 re-dev-server`
 
 ### Command line
 - Pull latest docker image from Docker Hub  
@@ -49,14 +67,14 @@ TODO.
 - Create container  
 `docker create -p <serverport>:<serverport>/udp -p <serverport + 1>:<serverport + 1>/udp -v <re home dir>:/re-server-config/home -v <re package dir>:/re-server-config/package -v <sauerbraten maps dir>:/re-server-config/sauer -v <log dir>:/home/redeclipse/re-log --name <name> iceflower/red-eclipse_devel_server_test:<tag>`
 
-- (Remove container)  
-(`docker rm <name>`)
-
 - Start container  
 `docker start <name>`
 
 - Shutdown and wait a maximum of 10 seconds before forcing  
 `docker stop <name>`
+
+#### Multiple Server
+Create a container, with changed values and another name and start it.
 
 #### Example
 - Pull latest docker image from Docker Hub  
@@ -67,9 +85,6 @@ TODO.
 
 - Start container  
 `docker start re-dev-server`
-
-- (Remove container)  
-(`docker rm re-dev-server`)
 
 - Shutdown and wait a maximum of 10 minutes before forcing  
 `docker stop --time=600 re-dev-server`
