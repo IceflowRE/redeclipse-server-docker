@@ -13,7 +13,7 @@ Currently the Docker images are build against the latest commits and will be che
 
 ## Images
 Latest images are available at [Docker Hub][3].  
-Pull them with `docker pull iceflower/red-eclipse_devel_server_test:<tag>`.  
+Pull them with `docker pull iceflower/redeclipse-server:<tag>`.  
 The `amd64` images are build with [Travis CI][1]. The `arm64v8` images are build on an own server.
 
 |       Tag      | Server type | Architecture |        Build       |
@@ -62,10 +62,10 @@ Copy and paste the whole section below the point `services` and change the value
 
 ### Command line
 - Pull latest docker image from Docker Hub  
-`docker pull iceflower/red-eclipse_devel_server_test:<tag>`
+`docker pull iceflower/redeclipse-server:<tag>`
 
 - Create container  
-`docker create -p <serverport>:<serverport>/udp -p <serverport + 1>:<serverport + 1>/udp -v <re home dir>:/re-server-config/home -v <re package dir>:/re-server-config/package -v <sauerbraten maps dir>:/re-server-config/sauer -v <log dir>:/home/redeclipse/re-log --name <name> iceflower/red-eclipse_devel_server_test:<tag>`
+`docker create -p <serverport>:<serverport>/udp -p <serverport + 1>:<serverport + 1>/udp -v <re home dir>:/re-server-config/home -v <re package dir>:/re-server-config/package -v <sauerbraten maps dir>:/re-server-config/sauer -v <log dir>:/home/redeclipse/re-log --name <name> iceflower/redeclipse-server:<tag>`
 
 - Start container  
 `docker start <name>`
@@ -78,10 +78,10 @@ Create a container, with changed values and another name and start it.
 
 #### Example
 - Pull latest docker image from Docker Hub  
-`docker pull iceflower/red-eclipse_devel_server_test:master`
+`docker pull iceflower/redeclipse-server:master`
 
 - Create container  
-`docker create -p 28801:28801/udp -p 28802:28802/udp -v /home/iceflower/redeclipse-config/devel_home:/re-server-config/home -v /home/iceflower/redeclipse-config/package:/re-server-config/package -v /home/iceflower/redeclipse-config/sauerbraten:/re-server-config/sauer -v /home/iceflower/redeclipse-config/logs/devel_log:/home/redeclipse/re-log --name re-dev-server iceflower/red-eclipse_devel_server_test`
+`docker create -p 28801:28801/udp -p 28802:28802/udp -v /home/iceflower/redeclipse-config/devel_home:/re-server-config/home -v /home/iceflower/redeclipse-config/package:/re-server-config/package -v /home/iceflower/redeclipse-config/sauerbraten:/re-server-config/sauer -v /home/iceflower/redeclipse-config/logs/devel_log:/home/redeclipse/re-log --name re-dev-server iceflower/redeclipse-server`
 
 - Start container  
 `docker start re-dev-server`
