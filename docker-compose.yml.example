@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
     re-dev-server:
-        image: iceflower/red-eclipse_devel_server_test:master
+        image: iceflower/redeclipse-server:master
         ports:
             - "28801:28801/udp"
             - "28802:28802/udp"
