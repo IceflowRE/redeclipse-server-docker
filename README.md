@@ -26,7 +26,7 @@ The `amd64` images are build with [Travis CI][1]. The `arm64v8` images are build
 ## Usage
 Replace the variables with the respective values.
 
-  - `name` a container name, under which it will run
+  - `<name>` a container name, under which it will run
   - `<serverport>` the serverport specified inside the `servinit.cfg` from your server
   - `<serverport + 1>` the serverport + 1  
   ***you can link host directories inside the docker container, if dont want to link a directory just leave off the specific `-v` parameter.***
