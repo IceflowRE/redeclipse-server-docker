@@ -117,7 +117,7 @@ You should have received a copy of the GNU General Public License along with thi
 
 [1]: https://travis-ci.org/IceflowRE/re-server_docker_test
 [2]: https://github.com/IceflowRE/re-server_docker_test
-[3]: https://hub.docker.com/r/iceflower/red-eclipse_devel_server_test
+[3]: https://hub.docker.com/r/iceflower/redeclipse-server
 [4]: https://img.shields.io/badge/build-inaccessible-lightgrey.svg
 [5]: https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=stable&label=build
 [6]: https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=master&label=build
