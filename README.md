@@ -12,7 +12,7 @@ Currently the Docker images are build against the latest commits and will be che
 ---  
 
 ## Images
-Latest images are available at [Docker Hub][3].  
+Latest images are available at [Docker Hub][3] and have an image size around *127 MB*.  
 Pull them with `docker pull iceflower/redeclipse-server:<tag>`.  
 The `amd64` images are build with [Travis CI][1]. The `arm64v8` images are build on an own server.
 
