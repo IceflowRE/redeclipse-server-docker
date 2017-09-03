@@ -19,7 +19,7 @@ docker pull "$preimage"alpine
 
 # load saved base image sha and get latest image sha
 savedBaseImgSha="$(cat ~/.re-docker/sha/docker/$prefix$BRANCH-alpine.sha)"
-baseImgSha="$(docker image ls --digests --format '{{.Digest}}' alpine)"
+baseImgSha="$(docker image ls --digests --format '{{.Digest}}' $preimage\alpine)"
 if [ "$baseImgSha" == "" ]; then
     echo "Cant get latest docker sha."
     exit 1
