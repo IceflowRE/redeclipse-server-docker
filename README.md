@@ -1,27 +1,27 @@
 # Red Eclipse Server Docker
-[![maintained](https://img.shields.io/badge/maintained-yes-brightgreen.svg)][2]
-[![DockerHub](https://img.shields.io/badge/Docker_Hub--FF69A4.svg?style=social)][3]
-[![stable](https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=stable&label=stable)][1]
-[![master](https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=master&label=master)][1]
+[![maintained](https://img.shields.io/badge/maintained-yes-brightgreen.svg)][github]
+[![DockerHub](https://img.shields.io/badge/Docker_Hub--FF69A4.svg?style=social)][docker hub]
+[![stable](https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=stable&label=stable)][travis ci]
+[![master](https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=master&label=master)][travis ci]
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ---
 
-This provides a Dockerfile for an easy handling and maintaining of a [Red Eclipse](https://redeclipse.net/) Server.
+This provides the source for an easy handling and maintaining Docker image of a [Red Eclipse](https://redeclipse.net/) Server.
 Currently the Docker images are build against the latest commits and will be checked for updates once a day.
 
----  
+---
 
 ## Images
-Latest images are available at [Docker Hub][3] and have an image size around *127 MB*.  
+Latest images are available at [Docker Hub][docker hub].  
 Pull them with `docker pull iceflower/redeclipse-server:<tag>`.  
-The `amd64` images are build with [Travis CI][1]. The `arm64v8` images are build on an own server.
+The `amd64` images are build with [Travis CI][travis ci]. The `arm64v8` images are build on an own server.
 
-|       Tag      | Server type | Architecture |        Build       |
-|:--------------:|:-----------:|:------------:|:------------------:|
-|     stable     |    stable   |     amd64    |  [![stable][5]][1] |
-| arm64v8-stable |    stable   |    arm64v8   | [![nobuild][4]][2] |
-|     master     | development |     amd64    |  [![master][6]][1] |
-| arm64v8-master | development |    arm64v8   | [![nobuild][4]][2] |
+|       Tag      | Server type | Architecture |              Build              |                  Size / Layers                |
+|:--------------:|:-----------:|:------------:|:-------------------------------:|:---------------------------------------------:|
+|     stable     |    stable   |     amd64    | [![][travis stable]][travis ci] |     [![][mbadge stable]][mbadge stable l]     |
+| arm64v8-stable |    stable   |    arm64v8   |     [![][no build]][github]     | [![][mbadge arm stable]][mbadge arm stable l] |
+|     master     | development |     amd64    | [![][travis master]][travis ci] |     [![][mbadge master]][mbadge master l]     |
+| arm64v8-master | development |    arm64v8   |     [![][no build]][github]     | [![][mbadge arm master]][mbadge arm master l] |
 
 ## Usage
 Replace the variables with the respective values.
@@ -39,7 +39,7 @@ Replace the variables with the respective values.
 ### Docker Compose (recommend)
 - Create own Docker Compose file, as base you can use [docker-compose.yml.template](./docker-compose.yml.template)  
   - *Create a copy with name `docker-compose.yml`*
-  - *Change the <var> inside the file, to their respective values*
+  - *Change the `<variable>` inside the file, to their respective values*
 
 - Start/ Restart container  
 `docker-compose up -d <name>`
@@ -115,9 +115,17 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/gpl.html>.
 
-[1]: https://travis-ci.org/IceflowRE/re-server_docker_test
-[2]: https://github.com/IceflowRE/re-server_docker_test
-[3]: https://hub.docker.com/r/iceflower/redeclipse-server
-[4]: https://img.shields.io/badge/build-inaccessible-lightgrey.svg
-[5]: https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=stable&label=build
-[6]: https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=master&label=build
+[travis ci]: https://travis-ci.org/IceflowRE/re-server_docker_test
+[github]: https://github.com/IceflowRE/re-server_docker_test
+[docker hub]: https://hub.docker.com/r/iceflower/redeclipse-server
+[no build]: https://img.shields.io/badge/build-inaccessible-lightgrey.svg
+[travis stable]: https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=stable&label=build
+[travis master]: https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=master&label=build
+[mbadge stable]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:stable.svg
+[mbadge stable l]: https://microbadger.com/images/iceflower/redeclipse-server:stable
+[mbadge master]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:master.svg
+[mbadge master l]: https://microbadger.com/images/iceflower/redeclipse-server:master
+[mbadge arm stable]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:arm64v8-stable.svg
+[mbadge arm stable l]: https://microbadger.com/images/iceflower/redeclipse-server:arm64v8-stable
+[mbadge arm master]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:arm64v8-master.svg
+[mbadge arm master l]: https://microbadger.com/images/iceflower/redeclipse-server:arm64v8-master
