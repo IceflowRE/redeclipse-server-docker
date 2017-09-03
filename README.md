@@ -39,7 +39,7 @@ Replace the variables with the respective values.
 ### Docker Compose (recommend)
 - Create own Docker Compose file, as base you can use [docker-compose.yml.template](./docker-compose.yml.template)  
   - *Create a copy with name `docker-compose.yml`*
-  - *Change the `<variable>` inside the file, to their respective values*
+  - *Change all the `<variable>` inside the file, to their respective values*
 
 - Start/ Restart container  
 `docker-compose up -d <name>`
