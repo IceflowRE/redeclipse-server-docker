@@ -31,7 +31,7 @@ echo "img: $savedBaseImgSha | $baseImgSha"
 # update only if a new commit exists or the base image was updated
 if [ "$savedSha" != "$sha" ] || [ "$savedBaseImgSha" != "$baseImgSha" ]; then
     echo "Build $prefix$BRANCH"
-    branch="$BRANCH" prefix="$prefix" preimage="$preimage" ./scripts/build-docker.sh
+    recommit="$sha" branch="$BRANCH" prefix="$prefix" preimage="$preimage" ./scripts/build-docker.sh
     if [ $? -ne 0 ]; then # dont save sha if something failed
         exit 1
     fi

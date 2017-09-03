@@ -5,6 +5,8 @@ FROM "$PREIMAGE"alpine
 
 # redeclipse branch
 ARG BRANCH
+# redeclipse commit
+ARG RECOMMIT
 
 # informations
 LABEL author="Iceflower S"
@@ -12,6 +14,7 @@ LABEL maintainer="Iceflower S"
 LABEL email="iceflower@gmx.de"
 LABEL version="1.0"
 LABEL description="Red Eclipse Server - $BRANCH"
+LABEL re-commit="$RECOMMIT"
 
 # Add server user and set permissions
 RUN adduser -S -D redeclipse \
