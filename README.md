@@ -41,6 +41,9 @@ Replace the variables with the respective values.
   - *Create a copy with name `docker-compose.yml`*
   - *Change all the `<variable>` inside the file, to their respective values*
 
+- Pull latest docker image from Docker Hub for all defined services  
+`docker-compose pull`
+
 - Start/ Restart container  
 `docker-compose up -d <name>`
 
@@ -53,6 +56,9 @@ Copy and paste the whole section below the point `services` and change the value
 #### Example
 - Create own Docker Compose file, as base you can use [docker-compose.yml.template](./docker-compose.yml.template)  
 [docker-compose.yml.example](./docker-compose.yml.example)
+
+- Pull latest docker image from Docker Hub for all defined services  
+`docker-compose pull`
 
 - Start/ Restart container  
 `docker-compose up -d re-dev-server`
