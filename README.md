@@ -1,8 +1,8 @@
 # Red Eclipse Server Docker
 [![maintained](https://img.shields.io/badge/maintained-yes-brightgreen.svg)][github]
 [![DockerHub](https://img.shields.io/badge/Docker_Hub--FF69A4.svg?style=social)][docker hub]
-[![stable](https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=stable&label=stable)][travis ci]
-[![master](https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=master&label=master)][travis ci]
+[![stable](https://badges.herokuapp.com/travis/IceflowRE/redeclipse-server-docker?env=BRANCH=stable&label=stable)][travis ci]
+[![master](https://badges.herokuapp.com/travis/IceflowRE/redeclipse-server-docker?env=BRANCH=master&label=master)][travis ci]
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ---
 
@@ -92,7 +92,7 @@ Create a container, with changed values and another name and start it.
 ---
 
 ## Web
-https://github.com/IceflowRE/re-server_docker_test
+https://github.com/IceflowRE/redeclipse-server-docker
 
 ## Credits
 - Developer
@@ -115,12 +115,12 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/gpl.html>.
 
-[travis ci]: https://travis-ci.org/IceflowRE/re-server_docker_test
-[github]: https://github.com/IceflowRE/re-server_docker_test
+[travis ci]: https://travis-ci.org/IceflowRE/redeclipse-server-docker
+[github]: https://github.com/IceflowRE/redeclipse-server-docker
 [docker hub]: https://hub.docker.com/r/iceflower/redeclipse-server
 [no build]: https://img.shields.io/badge/build-inaccessible-lightgrey.svg
-[travis stable]: https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=stable&label=build
-[travis master]: https://badges.herokuapp.com/travis/IceflowRE/re-server_docker_test?env=BRANCH=master&label=build
+[travis stable]: https://badges.herokuapp.com/travis/IceflowRE/redeclipse-server-docker?env=BRANCH=stable&label=build
+[travis master]: https://badges.herokuapp.com/travis/IceflowRE/redeclipse-server-docker?env=BRANCH=master&label=build
 [mbadge stable]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:stable.svg
 [mbadge stable l]: https://microbadger.com/images/iceflower/redeclipse-server:stable
 [mbadge master]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:master.svg
