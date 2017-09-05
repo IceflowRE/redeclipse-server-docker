@@ -46,10 +46,12 @@ if [ "$savedReSha" != "$reSha" ] || [ "$savedBaseImgSha" != "$baseImgSha" ] || [
         exit 1
     fi
     # save latest shas
-    echo "Save sha $reSha as $prefix$BRANCH"
+    echo "Save re sha $reSha as $prefix$BRANCH"
     echo "$reSha" > ~/.re-docker/sha/re/"$prefix$BRANCH".sha
     echo "Save base image sha $baseImgSha as $prefix$BRANCH-alpine"
     echo "$baseImgSha" > ~/.re-docker/sha/docker/"$prefix$BRANCH"-alpine.sha
+    echo "Save dockerfile sha $dockerSha as Dockerfile_$BRANCH"
+    echo "$baseImgSha" > ~/.re-docker/sha/dockerfile/"Dockerfile_$BRANCH".sha
 else
     echo "Skip $prefix$BRANCH"
 fi
