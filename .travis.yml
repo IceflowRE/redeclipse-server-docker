@@ -20,7 +20,8 @@ install:
 before_script:
   - docker login -u=iceflower -p="$DOCKER_PASSWORD"
   - mkdir -p ~/.re-docker/sha/re/
-  - mkdir -p ~/.re-docker/sha/docker/
+  - mkdir -p ~/.re-docker/sha/baseImg/
+  - mkdir -p ~/.re-docker/sha/dockerfile/
 
 script:
   - bash scripts/update.sh

@@ -6,7 +6,8 @@ echo $(date +%Y-%m-%d=%H:%M:%S)
 
 docker login -u=iceflower -p="$(cat ./dockerpassword.txt)"
 mkdir -p ~/.re-docker/sha/re/
-mkdir -p ~/.re-docker/sha/docker/
+mkdir -p ~/.re-docker/sha/baseImg/
+mkdir -p ~/.re-docker/sha/dockerfile/
 
 prefixes=("arm64v8")
 branches=("stable" "master")

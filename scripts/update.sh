@@ -19,7 +19,7 @@ fi
 docker pull "$preimage"alpine
 
 # load saved base image sha and get latest image sha
-savedBaseImgSha="$(cat ~/.re-docker/sha/docker/$prefix$BRANCH-alpine.sha)"
+savedBaseImgSha="$(cat ~/.re-docker/sha/baseImg/$prefix$BRANCH-alpine.sha)"
 baseImgSha="$(docker image ls --digests --format '{{.Digest}}' $preimage\alpine)"
 if [ "$baseImgSha" == "" ]; then
     echo "Cant get latest base image sha."
@@ -49,7 +49,7 @@ if [ "$savedReSha" != "$reSha" ] || [ "$savedBaseImgSha" != "$baseImgSha" ] || [
     echo "Save re sha $reSha as $prefix$BRANCH"
     echo "$reSha" > ~/.re-docker/sha/re/"$prefix$BRANCH".sha
     echo "Save base image sha $baseImgSha as $prefix$BRANCH-alpine"
-    echo "$baseImgSha" > ~/.re-docker/sha/docker/"$prefix$BRANCH"-alpine.sha
+    echo "$baseImgSha" > ~/.re-docker/sha/baseImg/"$prefix$BRANCH"-alpine.sha
     echo "Save dockerfile sha $dockerSha as Dockerfile_$BRANCH"
     echo "$baseImgSha" > ~/.re-docker/sha/dockerfile/"Dockerfile_$BRANCH".sha
 else
