@@ -44,10 +44,10 @@ Replace the variables with the respective values.
 - Pull latest docker image from Docker Hub for all defined services  
 `docker-compose pull`
 
-- Start/ Restart container  
+- Start/ Restart container (for all specified services, dont write any name)  
 `docker-compose up -d <name>`
 
-- Shutdown and wait a maximum of 10 seconds before forcing  
+- Shutdown and wait a maximum of 10 seconds before forcing (for all specified services, dont write any name)  
 `docker-compose stop <name>`
 
 #### Multiple Server
