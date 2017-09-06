@@ -9,12 +9,12 @@ ARG BRANCH
 ARG RECOMMIT
 
 # informations
-LABEL author="Iceflower S"
-LABEL maintainer="Iceflower S"
-LABEL email="iceflower@gmx.de"
-LABEL version="1.0"
-LABEL description="Red Eclipse Server - $BRANCH"
-LABEL re-commit="$RECOMMIT"
+LABEL author="Iceflower S" \
+      maintainer="Iceflower S" \
+      email="iceflower@gmx.de" \
+      version="1.0" \
+      description="Red Eclipse Server - $BRANCH" \
+      re-commit="$RECOMMIT"
 
 # Add server user and set permissions
 RUN adduser -S -D redeclipse \
