@@ -2,6 +2,11 @@ sudo: required
 
 language: cpp
 
+branches:
+  only:
+  - master
+  - experimental
+
 services:
   - docker
 
