@@ -17,6 +17,3 @@ services:
             - type: bind
               source: <sauerbraten dir>
               target: /re-server-config/sauer
-            - type: bind
-              source: <log dir>
-              target: /home/redeclipse/re-log

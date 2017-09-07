@@ -27,14 +27,14 @@ The `amd64` images are build with [Travis CI][travis ci]. The `arm64v8` images a
 Replace the variables with the respective values.
 
   - `<name>` a container name, under which it will run
+  - `<tag>` an available image tag
   - `<serverport>` the serverport specified inside the `servinit.cfg` from your server
   - `<serverport + 1>` the serverport + 1  
   ***you can link host directories inside the docker container, if dont want to link a directory just leave off the specific `-v` parameter.***
   - `<re home dir>` RE home directory on your host system, **must linked**
   - `<re package dir>` package directory, mostly maps, on your host system
   - `<sauerbraten dir>` sauerbraten directory on your host system
-  - `<log dir>` log directory on your host system
-  - `<tag>` an available image tag
+  - `<log file>` log file on your host system
 
 ### Docker Compose (recommend)
 - Create own Docker Compose file, as base you can use [docker-compose.yml.template](./docker-compose.yml.template)  
@@ -45,7 +45,7 @@ Replace the variables with the respective values.
 `docker-compose pull`
 
 - Start/ Restart container (for all specified services, dont write any name)  
-`docker-compose up -d <name>`
+`docker-compose up -d <name> >> <log file>`
 
 - Shutdown and wait a maximum of 10 seconds before forcing (for all specified services, dont write any name)  
 `docker-compose stop <name>`
@@ -61,7 +61,7 @@ Copy and paste the whole section below the point `services` and change the value
 `docker-compose pull`
 
 - Start/ Restart container  
-`docker-compose up -d re-dev-server`
+`docker-compose up -d re-dev-server >> /home/iceflower/re-server.log`
 
 - Shutdown and wait a maximum of 10 minutes before forcing  
 `docker-compose stop --time=600 re-dev-server`
@@ -71,10 +71,10 @@ Copy and paste the whole section below the point `services` and change the value
 `docker pull iceflower/redeclipse-server:<tag>`
 
 - Create container  
-`docker create -p <serverport>:<serverport>/udp -p <serverport + 1>:<serverport + 1>/udp -v <re home dir>:/re-server-config/home -v <re package dir>:/re-server-config/package -v <sauerbraten maps dir>:/re-server-config/sauer -v <log dir>:/home/redeclipse/re-log --name <name> iceflower/redeclipse-server:<tag>`
+`docker create -p <serverport>:<serverport>/udp -p <serverport + 1>:<serverport + 1>/udp -v <re home dir>:/re-server-config/home -v <re package dir>:/re-server-config/package -v <sauerbraten maps dir>:/re-server-config/sauer --name <name> iceflower/redeclipse-server:<tag>`
 
 - Start container  
-`docker start <name>`
+`docker start <name> >> <log file>`
 
 - Shutdown and wait a maximum of 10 seconds before forcing  
 `docker stop <name>`
@@ -87,10 +87,10 @@ Create a container, with changed values and another name and start it.
 `docker pull iceflower/redeclipse-server:master`
 
 - Create container  
-`docker create -p 28801:28801/udp -p 28802:28802/udp -v /home/iceflower/redeclipse-config/devel_home:/re-server-config/home -v /home/iceflower/redeclipse-config/package:/re-server-config/package -v /home/iceflower/redeclipse-config/sauerbraten:/re-server-config/sauer -v /home/iceflower/redeclipse-config/logs/devel_log:/home/redeclipse/re-log --name re-dev-server iceflower/redeclipse-server`
+`docker create -p 28801:28801/udp -p 28802:28802/udp -v /home/iceflower/redeclipse-config/devel_home:/re-server-config/home -v /home/iceflower/redeclipse-config/package:/re-server-config/package -v /home/iceflower/redeclipse-config/sauerbraten:/re-server-config/sauer --name re-dev-server iceflower/redeclipse-server:master`
 
 - Start container  
-`docker start re-dev-server`
+`docker start re-dev-server >> /home/iceflower/re-server.log`
 
 - Shutdown and wait a maximum of 10 minutes before forcing  
 `docker stop --time=600 re-dev-server`

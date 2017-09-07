@@ -17,6 +17,3 @@ services:
             - type: bind
               source: /home/iceflower/redeclipse-config/sauerbraten
               target: /re-server-config/sauer
-            - type: bind
-              source: /home/iceflower/redeclipse-config/logs/devel_log
-              target: /home/redeclipse/re-log
