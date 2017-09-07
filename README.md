@@ -71,7 +71,16 @@ Copy and paste the whole section below the point `services` and change the value
 `docker pull iceflower/redeclipse-server:<tag>`
 
 - Create container  
-`docker create -p <serverport>:<serverport>/udp -p <serverport + 1>:<serverport + 1>/udp -v <re home dir>:/re-server-config/home -v <re package dir>:/re-server-config/package -v <sauerbraten maps dir>:/re-server-config/sauer --name <name> iceflower/redeclipse-server:<tag>`
+```
+docker create \
+-p <serverport>:<serverport>/udp \
+-p <serverport + 1>:<serverport + 1>/udp \
+--mount type=bind,source="<re home dir>",target=/re-server-config/home \
+--mount type=bind,source="<re package dir>",target=/re-server-config/package \
+--mount type=bind,source="<sauerbraten dir>",target=/re-server-config/sauer \
+--name <name> \
+iceflower/redeclipse-server:<tag>
+```
 
 - Start container  
 `docker start <name> >> <log file>`
@@ -87,7 +96,16 @@ Create a container, with changed values and another name and start it.
 `docker pull iceflower/redeclipse-server:master`
 
 - Create container  
-`docker create -p 28801:28801/udp -p 28802:28802/udp -v /home/iceflower/redeclipse-config/devel_home:/re-server-config/home -v /home/iceflower/redeclipse-config/package:/re-server-config/package -v /home/iceflower/redeclipse-config/sauerbraten:/re-server-config/sauer --name re-dev-server iceflower/redeclipse-server:master`
+```
+docker create \
+-p <serverport>:<serverport>/udp \
+-p <serverport + 1>:<serverport + 1>/udp \
+--mount type=bind,source="/home/iceflower/redeclipse-config/devel_home",target=/re-server-config/home \
+--mount type=bind,source="/home/iceflower/redeclipse-config/package",target=/re-server-config/package \
+--mount type=bind,source="/home/iceflower/redeclipse-config/sauerbraten",target=/re-server-config/sauer \
+--name re-dev-server \
+iceflower/redeclipse-server:master
+```
 
 - Start container  
 `docker start re-dev-server >> /home/iceflower/re-server.log`
