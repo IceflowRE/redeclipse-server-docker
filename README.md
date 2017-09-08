@@ -45,7 +45,7 @@ Replace the variables with the respective values.
 `docker-compose pull`
 
 - Start/ Restart container (for all specified services, dont write any name)  
-`docker-compose up -d <name> >> <log file>`
+`docker-compose up <name> >> <log file> &`
 
 - Shutdown and wait a maximum of 10 seconds before forcing (for all specified services, dont write any name)  
 `docker-compose stop <name>`
@@ -61,7 +61,7 @@ Copy and paste the whole section below the point `services` and change the value
 `docker-compose pull`
 
 - Start/ Restart container  
-`docker-compose up -d re-dev-server >> /home/iceflower/re-server.log`
+`docker-compose up re-dev-server >> /home/iceflower/re-server.log &`
 
 - Shutdown and wait a maximum of 10 minutes before forcing  
 `docker-compose stop --time=600 re-dev-server`
