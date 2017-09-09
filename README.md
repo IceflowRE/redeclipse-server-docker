@@ -100,9 +100,9 @@ Create a container, with changed values and another name and start it.
 docker create \
 -p <serverport>:<serverport>/udp \
 -p <serverport + 1>:<serverport + 1>/udp \
---mount type=bind,source="/home/iceflower/redeclipse-config/devel_home",target=/re-server-config/home \
---mount type=bind,source="/home/iceflower/redeclipse-config/package",target=/re-server-config/package \
---mount type=bind,source="/home/iceflower/redeclipse-config/sauerbraten",target=/re-server-config/sauer \
+-v /home/iceflower/redeclipse-config/devel_home:/re-server-config/home:ro \
+-v /home/iceflower/redeclipse-config/package:/re-server-config/package:ro \
+-v /home/iceflower/redeclipse-config/sauerbraten:/re-server-config/sauer:ro \
 --name re-dev-server \
 iceflower/redeclipse-server:master
 ```
