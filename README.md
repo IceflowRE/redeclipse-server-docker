@@ -32,7 +32,7 @@ Replace the variables with the respective values.
   - `<serverport + 1>` the serverport + 1  
   ***you can link host directories inside the docker container, if dont want to link a directory just leave off the specific `-v` parameter.***
   - `<re home dir>` RE home directory on your host system, **must linked**
-  - `<re package dir>` package directory, mostly maps, on your host system
+  - `<re package dir>` package directory, inside you can place a maps directory, on your host system
   - `<sauerbraten dir>` sauerbraten directory on your host system
   - `<log file>` log file on your host system
 
