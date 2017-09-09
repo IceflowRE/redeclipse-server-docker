@@ -75,9 +75,9 @@ Copy and paste the whole section below the point `services` and change the value
 docker create \
 -p <serverport>:<serverport>/udp \
 -p <serverport + 1>:<serverport + 1>/udp \
---mount type=bind,source="<re home dir>",target=/re-server-config/home \
---mount type=bind,source="<re package dir>",target=/re-server-config/package \
---mount type=bind,source="<sauerbraten dir>",target=/re-server-config/sauer \
+--mount type=volume,source="<re home dir>",target=/re-server-config/home,readonly=true \
+--mount type=volume,source="<re package dir>",target=/re-server-config/package,readonly=true \
+--mount type=volume,source="<sauerbraten dir>",target=/re-server-config/sauer,readonly=true \
 --name <name> \
 iceflower/redeclipse-server:<tag>
 ```
@@ -100,9 +100,9 @@ Create a container, with changed values and another name and start it.
 docker create \
 -p <serverport>:<serverport>/udp \
 -p <serverport + 1>:<serverport + 1>/udp \
---mount type=bind,source="/home/iceflower/redeclipse-config/devel_home",target=/re-server-config/home \
---mount type=bind,source="/home/iceflower/redeclipse-config/package",target=/re-server-config/package \
---mount type=bind,source="/home/iceflower/redeclipse-config/sauerbraten",target=/re-server-config/sauer \
+--mount type=volume,source="/home/iceflower/redeclipse-config/devel_home",target=/re-server-config/home,readonly=true \
+--mount type=volume,source="/home/iceflower/redeclipse-config/package",target=/re-server-config/package,readonly=true \
+--mount type=volume,source="/home/iceflower/redeclipse-config/sauerbraten",target=/re-server-config/sauer,readonly=true \
 --name re-dev-server \
 iceflower/redeclipse-server:master
 ```

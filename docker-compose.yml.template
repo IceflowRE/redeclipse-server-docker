@@ -8,12 +8,15 @@ services:
             - "<serverport + 1>:<serverport + 1>/udp"
         restart: unless-stopped
         volumes:
-            - type: bind
+            - type: volume
               source: <re home dir>
               target: /re-server-config/home
-            - type: bind
+              readonly: true
+            - type: volume
               source: <re package dir>
               target: /re-server-config/package
-            - type: bind
+              readonly: true
+            - type: volume
               source: <sauerbraten dir>
               target: /re-server-config/sauer
+              readonly: true
