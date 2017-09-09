@@ -8,12 +8,15 @@ services:
             - "28802:28802/udp"
         restart: unless-stopped
         volumes:
-            - type: bind
+            - type: volume
               source: /home/iceflower/redeclipse-config/devel_home
               target: /re-server-config/home
-            - type: bind
+              readonly: true
+            - type: volume
               source: /home/iceflower/redeclipse-config/package
               target: /re-server-config/package
-            - type: bind
+              readonly: true
+            - type: volume
               source: /home/iceflower/redeclipse-config/sauerbraten
               target: /re-server-config/sauer
+              readonly: true
