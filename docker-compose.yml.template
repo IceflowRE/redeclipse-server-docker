@@ -1,7 +1,7 @@
 # published under the MIT License
 # https://opensource.org/licenses/mit-license.php
 
-version: '3.3'
+version: '3.5'
 
 services:
     <name>:
@@ -11,15 +11,15 @@ services:
             - "<serverport + 1>:<serverport + 1>/udp"
         restart: unless-stopped
         volumes:
-            - type: volume
+            - type: bind
               source: <re home dir>
               target: /re-server-config/home
-              readonly: true
-            - type: volume
+              read_only: true
+            - type: bind
               source: <re package dir>
               target: /re-server-config/package
-              readonly: true
-            - type: volume
+              read_only: true
+            - type: bind
               source: <sauerbraten dir>
               target: /re-server-config/sauer
-              readonly: true
+              read_only: true
