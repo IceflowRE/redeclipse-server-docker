@@ -44,7 +44,7 @@ Replace the variables with the respective values.
 `docker-compose pull`
 
 - Start/ Restart container (for all specified services, dont write any name)  
-`docker-compose up -d <name>`
+`docker-compose -p re-server up -d <name>`
 
 - Shutdown and wait a maximum of 10 seconds before forcing (for all specified services, dont write any name)  
 `docker-compose stop <name>`
@@ -60,7 +60,7 @@ Copy and paste the whole section below the point `services` and change the value
 `docker-compose pull`
 
 - Start/ Restart container  
-`docker-compose up -d master`
+`docker-compose -p re-server up -d master`
 
 - Shutdown and wait a maximum of 10 minutes before forcing  
 `docker-compose stop --time=600 master`
