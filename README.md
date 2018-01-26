@@ -34,7 +34,6 @@ Replace the variables with the respective values.
   - `<re home dir>` RE home directory on your host system, **must linked**
   - `<re package dir>` package directory, inside you can place a maps directory, on your host system
   - `<sauerbraten dir>` sauerbraten directory on your host system
-  - `<log file>` log file on your host system
 
 ### Docker Compose (recommend)
 - Create own Docker Compose file, as base you can use [docker-compose.yml.template](./docker-compose.yml.template)  
@@ -45,7 +44,7 @@ Replace the variables with the respective values.
 `docker-compose pull`
 
 - Start/ Restart container (for all specified services, dont write any name)  
-`docker-compose up <name> >> <log file> &`
+`docker-compose up -d <name>`
 
 - Shutdown and wait a maximum of 10 seconds before forcing (for all specified services, dont write any name)  
 `docker-compose stop <name>`
@@ -61,10 +60,10 @@ Copy and paste the whole section below the point `services` and change the value
 `docker-compose pull`
 
 - Start/ Restart container  
-`docker-compose up re-dev-server >> /home/iceflower/re-server.log &`
+`docker-compose up -d master`
 
 - Shutdown and wait a maximum of 10 minutes before forcing  
-`docker-compose stop --time=600 re-dev-server`
+`docker-compose stop --time=600 master`
 
 ### Command line
 - Pull latest docker image from Docker Hub  
@@ -83,7 +82,7 @@ iceflower/redeclipse-server:<tag>
 ```
 
 - Start container  
-`docker start <name> >> <log file>`
+`docker start <name>`
 
 - Shutdown and wait a maximum of 10 seconds before forcing  
 `docker stop <name>`
@@ -103,15 +102,15 @@ docker create \
 --mount type=bind,source="/home/iceflower/redeclipse-config/devel_home",target=/re-server-config/home,readonly=true \
 --mount type=bind,source="/home/iceflower/redeclipse-config/package",target=/re-server-config/package,readonly=true \
 --mount type=bind,source="/home/iceflower/redeclipse-config/sauerbraten",target=/re-server-config/sauer,readonly=true \
---name re-dev-server \
+--name re-server-master \
 iceflower/redeclipse-server:master
 ```
 
 - Start container  
-`docker start re-dev-server >> /home/iceflower/re-server.log`
+`docker start re-server-master`
 
 - Shutdown and wait a maximum of 10 minutes before forcing  
-`docker stop --time=600 re-dev-server`
+`docker stop --time=600 re-server-master`
 
 ---
 
