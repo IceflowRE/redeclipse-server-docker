@@ -4,7 +4,7 @@
 version: '3.5'
 
 services:
-    re-dev-server:
+    master:
         image: iceflower/redeclipse-server:master
         ports:
             - "28801:28801/udp"
@@ -23,3 +23,7 @@ services:
               source: /home/iceflower/redeclipse-config/sauerbraten
               target: /re-server-config/sauer
               read_only: true
+        logging:
+            options:
+                max-size: "2000k"
+                max-file: "10"

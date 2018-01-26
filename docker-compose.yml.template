@@ -23,3 +23,7 @@ services:
               source: <sauerbraten dir>
               target: /re-server-config/sauer
               read_only: true
+        logging:
+            options:
+                max-size: "2000k"
+                max-file: "10"
