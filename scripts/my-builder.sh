@@ -4,7 +4,7 @@
 
 echo $(date +%Y-%m-%d=%H:%M:%S)
 
-docker login -u=iceflower -p="$(cat ./dockerpassword.txt)"
+cat ./dockerpassword.txt | docker login -u=iceflower --password-stdin
 mkdir -p ~/.re-docker/sha/re/
 mkdir -p ~/.re-docker/sha/baseImg/
 mkdir -p ~/.re-docker/sha/dockerfile/
@@ -23,3 +23,4 @@ for prefix in "${prefixes[@]}"; do
         BRANCH="$branch" prefix="$prefix" preimage="$preimage" ./scripts/update.sh
     done
 done
+docker logout

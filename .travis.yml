@@ -23,10 +23,13 @@ install:
   - sudo apt-get -y install docker-ce
 
 before_script:
-  - docker login -u=iceflower -p="$DOCKER_PASSWORD"
+  - echo $DOCKER_PASSWORD | docker login -u=iceflower --password-stdin
   - mkdir -p ~/.re-docker/sha/re/
   - mkdir -p ~/.re-docker/sha/baseImg/
   - mkdir -p ~/.re-docker/sha/dockerfile/
 
 script:
   - bash scripts/update.sh
+
+after_script:
+  - docker logout
