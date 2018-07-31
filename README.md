@@ -13,21 +13,21 @@ Currently the Docker images are build against the latest commits and will be che
 
 ## Images
 Latest images are available at [Docker Hub][docker hub].  
-Pull them with `docker pull iceflower/redeclipse-server:<tag>`.  
+Pull them with `docker pull iceflower/redeclipse-server:<tag>`. Use as tag `master` or `stable`, the correct architexture will be choosen.  
 The `amd64` images are build with [Travis CI][travis ci]. The `arm64v8` images are build on an own server.
 
 |       Tag      | Server type | Architecture |              Build              |                  Size / Layers                |
 |:--------------:|:-----------:|:------------:|:-------------------------------:|:---------------------------------------------:|
-|     stable     |    stable   |     amd64    | [![][travis stable]][travis ci] |     [![][mbadge stable]][mbadge stable l]     |
+|  amd64-stable  |    stable   |     amd64    | [![][travis stable]][travis ci] |     [![][mbadge stable]][mbadge stable l]     |
 | arm64v8-stable |    stable   |    arm64v8   |     [![][no build]][github]     | [![][mbadge arm stable]][mbadge arm stable l] |
-|     master     | development |     amd64    | [![][travis master]][travis ci] |     [![][mbadge master]][mbadge master l]     |
+|  amd64-master  | development |     amd64    | [![][travis master]][travis ci] |     [![][mbadge master]][mbadge master l]     |
 | arm64v8-master | development |    arm64v8   |     [![][no build]][github]     | [![][mbadge arm master]][mbadge arm master l] |
 
 ## Usage
 Replace the variables with the respective values.
 
   - `<name>` a container name, under which it will run
-  - `<tag>` an available image tag
+  - `<tag>` an available image tag (either `master` or `stable`)
   - `<serverport>` the serverport specified inside the `servinit.cfg` from your server
   - `<serverport + 1>` the serverport + 1  
   ***you can link host directories inside the docker container, if dont want to link a directory just leave off the specific `-v` parameter.***
@@ -156,10 +156,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 [no build]: https://img.shields.io/badge/build-inaccessible-lightgrey.svg
 [travis stable]: https://badges.herokuapp.com/travis/IceflowRE/redeclipse-server-docker?env=BRANCH=stable&label=build
 [travis master]: https://badges.herokuapp.com/travis/IceflowRE/redeclipse-server-docker?env=BRANCH=master&label=build
-[mbadge stable]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:stable.svg
-[mbadge stable l]: https://microbadger.com/images/iceflower/redeclipse-server:stable
-[mbadge master]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:master.svg
-[mbadge master l]: https://microbadger.com/images/iceflower/redeclipse-server:master
+[mbadge stable]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:amd64-stable.svg
+[mbadge stable l]: https://microbadger.com/images/iceflower/redeclipse-server:amd64-stable
+[mbadge master]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:amd64-master.svg
+[mbadge master l]: https://microbadger.com/images/iceflower/redeclipse-server:amd64-master
 [mbadge arm stable]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:arm64v8-stable.svg
 [mbadge arm stable l]: https://microbadger.com/images/iceflower/redeclipse-server:arm64v8-stable
 [mbadge arm master]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:arm64v8-master.svg

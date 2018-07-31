@@ -1,7 +1,5 @@
-# dynamical variable for other architectures, like arm64v8
-ARG PREIMAGE
 # Set the base image
-FROM "$PREIMAGE"alpine
+FROM alpine
 
 # redeclipse branch
 ARG BRANCH

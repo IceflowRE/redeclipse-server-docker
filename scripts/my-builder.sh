@@ -9,18 +9,11 @@ mkdir -p ~/.re-docker/sha/re/
 mkdir -p ~/.re-docker/sha/baseImg/
 mkdir -p ~/.re-docker/sha/dockerfile/
 
-prefixes=("arm64v8")
+arch="$1"
 branches=("stable" "master")
 
-# loops through all combinations of prefixes and branches and triggers and update check
-for prefix in "${prefixes[@]}"; do
-    # if prefix is not empty add - after prefix and / for the base image
-    if [ $prefix ]; then
-        preimage="$prefix/"
-        prefix="$prefix-"
-    fi
-    for branch in "${branches[@]}"; do
-        BRANCH="$branch" prefix="$prefix" preimage="$preimage" ./scripts/update.sh
-    done
+# loops through all branches and update
+for branch in "${branches[@]}"; do
+	BRANCH="$branch" arch="$arch" ./scripts/update.sh
 done
 docker logout

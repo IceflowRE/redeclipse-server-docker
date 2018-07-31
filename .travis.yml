@@ -10,9 +10,16 @@ branches:
 services:
   - docker
 
-env:
-  - BRANCH=stable
-  - BRANCH=master
+matrix:
+  include:
+  - name: "master"
+    env:
+      - arch=amd64
+      - BRANCH=master
+  - name: "stable"
+    env:
+      - arch=amd64
+      - BRANCH=stable
 
 cache:
   directories:
