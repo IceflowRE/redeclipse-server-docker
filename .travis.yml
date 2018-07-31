@@ -35,7 +35,7 @@ before_script:
   - mkdir -p ~/.re-docker/sha/baseImg/
   - mkdir -p ~/.re-docker/sha/dockerfile/
   - mkdir -p ~/.docker/
-  - echo "{\"experimental\": \"enabled\"}" >> ~/.docker/config.json
+  - echo "{\"experimental\": \"enabled\"}" > $HOME/.docker/config.json
 
 script:
   - bash scripts/update.sh
