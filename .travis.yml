@@ -28,17 +28,17 @@ cache:
 install:
   - sudo apt-get update
   - sudo apt-get -y install docker-ce
+  - mkdir -p ~/.docker/
+  - bash ./ci/enable-experimental-docker.sh
 
 before_script:
   - echo $DOCKER_PASSWORD | docker login -u=iceflower --password-stdin
   - mkdir -p ~/.re-docker/sha/re/
   - mkdir -p ~/.re-docker/sha/baseImg/
   - mkdir -p ~/.re-docker/sha/dockerfile/
-  - mkdir -p ~/.docker/
-  - echo "{\"experimental\": \"enabled\"}" > $HOME/.docker/config.json
 
 script:
-  - bash scripts/update.sh
+  - bash scripts/update.sh 
 
 after_script:
   - docker logout
