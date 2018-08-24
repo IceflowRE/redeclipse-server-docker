@@ -150,7 +150,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-[travis ci]: https://travis-ci.org/IceflowRE/redeclipse-server-docker
+[travis ci]: https://travis-ci.com/IceflowRE/redeclipse-server-docker
 [github]: https://github.com/IceflowRE/redeclipse-server-docker
 [docker hub]: https://hub.docker.com/r/iceflower/redeclipse-server
 [no build]: https://img.shields.io/badge/build-inaccessible-lightgrey.svg
