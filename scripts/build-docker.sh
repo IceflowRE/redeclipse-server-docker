@@ -17,7 +17,9 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-./scripts/push-manifest.sh
+docker manifest create iceflower/redeclipse-server:$branch iceflower/redeclipse-server:amd64-$branch iceflower/redeclipse-server:arm64v8-$branch
+docker manifest annotate iceflower/redeclipse-server:$branch iceflower/redeclipse-server:arm64v8-$branch --variant armv8
+docker manifest push --purge iceflower/redeclipse-server:$branch
 if [ $? -ne 0 ]; then
     exit 1
 fi
