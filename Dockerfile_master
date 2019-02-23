@@ -27,7 +27,7 @@ RUN apk update \
     \
     && mkdir /temp/build \
     && cd /temp/build \
-    && cmake ../src -DBUILD_CLIENT=0 -DWANT_STEAM=0 \
+    && cmake ../src -DBUILD_CLIENT=0 -DWANT_STEAM=0 -DWANT_DISCORD=0 \
     && make clean install -j"$(nproc)" \
     \
     && mkdir -p /redeclipse/config \
