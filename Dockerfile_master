@@ -23,7 +23,7 @@ RUN adduser -S -D redeclipse \
 RUN apk update \
     && apk add --no-cache --virtual build-deps gcc g++ zlib-dev git ca-certificates freetype-dev coreutils cmake make \
     && apk add --no-cache libstdc++ \
-    && git clone --depth 1 -b "$BRANCH" https://github.com/red-eclipse/base /temp \
+    && git clone --depth 1 -b "$BRANCH" https://github.com/redeclipse/base /temp \
     \
     && mkdir /temp/build \
     && cd /temp/build \
@@ -41,7 +41,7 @@ RUN apk update \
 
 # Add defaults maps and server config folder
 RUN apk add --no-cache --virtual deps git ca-certificates \
-    && git clone --depth 1 -b master https://github.com/red-eclipse/maps.git /redeclipse/data/maps \
+    && git clone --depth 1 -b master https://github.com/redeclipse/maps.git /redeclipse/data/maps \
     && rm -rf /redeclipse/data/maps/.git \
     && mkdir -p /re-server-config/home \
     && mkdir -p /re-server-config/package \

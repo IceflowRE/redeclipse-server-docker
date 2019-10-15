@@ -9,7 +9,7 @@
 
 # load latest branch commit sha and get latest from remote
 savedReSha="$(cat ~/.re-docker/sha/re/$arch-$BRANCH.sha)"
-reSha="$(git ls-remote --heads https://github.com/red-eclipse/base.git $BRANCH | awk '{ print $1 }')"
+reSha="$(git ls-remote --heads https://github.com/redeclipse/base.git $BRANCH | awk '{ print $1 }')"
 if [ "$reSha" == "" ]; then
     echo "Cant get latest git commit sha."
     exit 1
