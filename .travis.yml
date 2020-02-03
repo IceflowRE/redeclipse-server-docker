@@ -1,44 +1,60 @@
-sudo: required
+language: python
+python:
+  - "3.8"
+os: linux
+dist: bionic
 
-language: cpp
+addons:
+  apt:
+    update: true
+
+services:
+  - docker
 
 branches:
   only:
   - master
   - experimental
 
-services:
-  - docker
-
-matrix:
+jobs:
   include:
   - name: "master"
     env:
-      - arch=amd64
+      - DOCKERFILE=Dockerfile_master
+      - ARCH=amd64
       - BRANCH=master
+      - USER=iceflower
   - name: "stable"
     env:
-      - arch=amd64
+      - DOCKERFILE=Dockerfile_stable
+      - ARCH=amd64
       - BRANCH=stable
+      - USER=iceflower
+  - name: "stable-re2"
+    env:
+      - DOCKERFILE=Dockerfile_master
+      - ARCH=amd64
+      - BRANCH=stable-re2
+      - USER=iceflower
 
 cache:
   directories:
-    - ~/.re-docker
+    - ~/.rsd-updater/
 
 install:
-  - sudo apt-get update
   - sudo apt-get -y install docker-ce
   - mkdir -p ~/.docker/
   - bash ./ci/enable-experimental-docker.sh
+  - pip install .
 
 before_script:
-  - echo $DOCKER_PASSWORD | docker login -u iceflower --password-stdin
-  - mkdir -p ~/.re-docker/sha/re/
-  - mkdir -p ~/.re-docker/sha/baseImg/
-  - mkdir -p ~/.re-docker/sha/dockerfile/
+  - mkdir -p ~/.rsd-updater/
+  - cp .dockerignore ~/.rsd-updater/
+  - cp Dockerfile_stable ~/.rsd-updater/
+  - cp Dockerfile_master ~/.rsd-updater/
 
 script:
-  - bash scripts/update.sh
+  - rsd-updater ~/.rsd-updater/ --dockerfile $DOCKERFILE --branch $BRANCH --arch $ARCH --user $USER --password $DOCKER_PASSWORD
 
 after_script:
   - docker logout

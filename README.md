@@ -7,6 +7,7 @@
 ---
 
 This provides the source for an easy handling and maintaining Docker image of a [Red Eclipse](https://redeclipse.net/) Server.  
+Additional with an python console application which can be run automatically to update it.  
 Currently the Docker images are build against the latest commits and will be checked for updates once a day.
 
 ---

@@ -1,3 +1,4 @@
 sha/
-dockerpassword.txt
+hash-storage.json
+config.json
 docker-compose.yml

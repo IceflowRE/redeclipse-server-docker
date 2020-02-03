@@ -1,1 +1,1 @@
-0 3 * * * cd /home/iceflower/re-docker/ && git pull && ./scripts/my-builder.sh arm8v64 > /home/iceflower/cron.log 2>&1
+0 3 * * * /home/iceflower/.re-updater/update-server.sh > /home/iceflower/cron.log 2>&1
