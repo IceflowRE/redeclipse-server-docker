@@ -1,1 +1,1 @@
-0 3 * * * /home/iceflower/.re-updater/update-server.sh > /home/iceflower/cron.log 2>&1
+0 3 * * * /home/iceflower/.rsd-updater/update-server.sh > /home/iceflower/cron.log 2>&1
