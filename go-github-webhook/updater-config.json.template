@@ -1,0 +1,26 @@
+{
+    "docker": {
+        "user": "iceflower",
+        "password": "My Password is strong."
+    },
+    "build": [
+        {
+            "branch": "stable",
+            "arch": "arm8v64",
+            "os": "linux",
+            "dockerfile": "Dockerfile_stable"
+        },
+        {
+            "branch": "stable-re2",
+            "arch": "arm8v64",
+            "os": "linux",
+            "dockerfile": "Dockerfile_master"
+        },
+        {
+            "branch": "master",
+            "arch": "arm8v64",
+            "os": "linux",
+            "dockerfile": "Dockerfile_master"
+        }
+    ]
+}

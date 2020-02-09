@@ -1,6 +1,6 @@
-language: python
-python:
-  - "3.8"
+language: go
+go:
+  - "1.13"
 os: linux
 dist: bionic
 
@@ -13,29 +13,29 @@ services:
 
 branches:
   only:
-  - master
-  - experimental
+    - master
+    - experimental
 
 jobs:
   include:
-  - name: "master"
-    env:
-      - DOCKERFILE=Dockerfile_master
-      - ARCH=amd64
-      - BRANCH=master
-      - USER=iceflower
-  - name: "stable"
-    env:
-      - DOCKERFILE=Dockerfile_stable
-      - ARCH=amd64
-      - BRANCH=stable
-      - USER=iceflower
-  - name: "stable-re2"
-    env:
-      - DOCKERFILE=Dockerfile_master
-      - ARCH=amd64
-      - BRANCH=stable-re2
-      - USER=iceflower
+    - name: "master"
+      env:
+        - DOCKERFILE=Dockerfile_master
+        - ARCH=amd64
+        - BRANCH=master
+        - USER=iceflower
+    - name: "stable"
+      env:
+        - DOCKERFILE=Dockerfile_stable
+        - ARCH=amd64
+        - BRANCH=stable
+        - USER=iceflower
+    - name: "stable-re2"
+      env:
+        - DOCKERFILE=Dockerfile_master
+        - ARCH=amd64
+        - BRANCH=stable-re2
+        - USER=iceflower
 
 cache:
   directories:
@@ -45,16 +45,18 @@ install:
   - sudo apt-get -y install docker-ce
   - mkdir -p ~/.docker/
   - bash ./ci/enable-experimental-docker.sh
-  - pip install .
+  - cd go-github-webhook
+  - go build -x -o updater ./cmd/updater/
 
 before_script:
   - mkdir -p ~/.rsd-updater/
   - cp .dockerignore ~/.rsd-updater/
   - cp Dockerfile_stable ~/.rsd-updater/
   - cp Dockerfile_master ~/.rsd-updater/
+  - cp ./go-github-webhook/updater ~/.rsd-updater/
 
 script:
-  - rsd-updater ~/.rsd-updater/ --dockerfile $DOCKERFILE --branch $BRANCH --arch $ARCH --user $USER --password $DOCKER_PASSWORD
+  - ~/.rsd-updater/updater --dockerfile $DOCKERFILE --branch $BRANCH --arch $ARCH --user $USER --password $DOCKER_PASSWORD ./
 
 after_script:
   - docker logout

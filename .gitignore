@@ -1,4 +1,3 @@
-sha/
-hash-storage.json
-config.json
-docker-compose.yml
+*hash-storage.json
+*config.json
+*docker-compose.yml

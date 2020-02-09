@@ -69,54 +69,15 @@ Copy and paste the whole section below the point `services` and change the value
 - Shutdown and wait a maximum of 10 minutes before forcing  
 `docker-compose stop --time=600 master`
 
-### Command line
-- Pull latest docker image from Docker Hub  
-`docker pull iceflower/redeclipse-server:<tag>`
+## Updater and Webhook listener
 
-- Create container  
+Build with
+
+```shell
+cd go-github-webhook
+go build -x -o updater ./cmd/updater/
+go build -x -o server ./cmd/server/
 ```
-docker create \
--p <serverport>:<serverport>/udp \
--p <serverport + 1>:<serverport + 1>/udp \
---mount type=bind,source="<re home dir>",target=/re-server-config/home,readonly=true \
---mount type=bind,source="<re package dir>",target=/re-server-config/package,readonly=true \
---mount type=bind,source="<sauerbraten dir>",target=/re-server-config/sauer,readonly=true \
---name <name> \
-iceflower/redeclipse-server:<tag>
-```
-
-- Start container  
-`docker start <name>`
-
-- Shutdown and wait a maximum of 10 seconds before forcing  
-`docker stop <name>`
-
-#### Multiple Server
-Create a container, with changed values and another name and start it.
-
-#### Example
-- Pull latest docker image from Docker Hub  
-`docker pull iceflower/redeclipse-server:master`
-
-- Create container  
-```
-docker create \
--p <serverport>:<serverport>/udp \
--p <serverport + 1>:<serverport + 1>/udp \
---mount type=bind,source="/home/iceflower/redeclipse-config/devel_home",target=/re-server-config/home,readonly=true \
---mount type=bind,source="/home/iceflower/redeclipse-config/package",target=/re-server-config/package,readonly=true \
---mount type=bind,source="/home/iceflower/redeclipse-config/sauerbraten",target=/re-server-config/sauer,readonly=true \
---name re-server-master \
-iceflower/redeclipse-server:master
-```
-
-- Start container  
-`docker start re-server-master`
-
-- Shutdown and wait a maximum of 10 minutes before forcing  
-`docker stop --time=600 re-server-master`
-
----
 
 ## Web
 https://github.com/IceflowRE/redeclipse-server-docker
