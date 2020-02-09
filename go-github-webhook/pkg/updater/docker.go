@@ -33,7 +33,7 @@ func dockerLogout() bool {
 }
 
 func dockerBuild(workDir string, dockerfile string, branch string, arch string, reCommit string) bool {
-	repo := "iceflower/test"
+	repo := "iceflower/redeclipse-server"
 
 	success := runCmd("docker", []string{"build", "--build-arg", "BRANCH=" + branch, "--build-arg", "RECOMMIT=" + reCommit, "-t", repo + ":" + arch + "-" + branch, "-f", dockerfile, workDir}, nil)
 	if !success {
