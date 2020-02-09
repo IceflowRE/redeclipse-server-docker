@@ -47,6 +47,7 @@ install:
   - bash ./ci/enable-experimental-docker.sh
   - cd go-github-webhook
   - go build -x -o updater ./cmd/updater/
+  - cd ..
 
 before_script:
   - mkdir -p ~/.rsd-updater/
