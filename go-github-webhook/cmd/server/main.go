@@ -34,8 +34,6 @@ func main() {
 	if config == nil {
 		return
 	}
-	buildCtx.DryRun = true
-
 	server := &http.Server{
 		Handler:      serverPkg.CreateRouter(config, updaterConfig, hashStorage, buildCtx),
 		Addr:         ":" + strconv.Itoa(*config.Port),
