@@ -19,14 +19,14 @@ branches:
     - experimental
 
 before_cache:
-  - rm ~/.rsd-updater/$TRAVIS_JOB_NAME/Dockerfile_master
-  - rm ~/.rsd-updater/$TRAVIS_JOB_NAME/Dockerfile_stable
-  - rm ~/.rsd-updater/$TRAVIS_JOB_NAME/.dockerignore
-  - rm ~/.rsd-updater/$TRAVIS_JOB_NAME/updater
+  - rm ~/.rsd-updater/Dockerfile_master
+  - rm ~/.rsd-updater/Dockerfile_stable
+  - rm ~/.rsd-updater/.dockerignore
+  - rm ~/.rsd-updater/updater
 
 cache:
   directories:
-    - ~/.rsd-updater/$TRAVIS_JOB_NAME/
+    - ~/.rsd-updater/
 
 env:
   global:
@@ -104,14 +104,14 @@ before_script:
   - cd ./go-github-webhook
   - go build -x -o updater ./cmd/updater/
   - cd ..
-  - mkdir -p ~/.rsd-updater/$TRAVIS_JOB_NAME
-  - cp Dockerfile_stable ~/.rsd-updater/$TRAVIS_JOB_NAME/
-  - cp Dockerfile_master ~/.rsd-updater/$TRAVIS_JOB_NAME/
-  - cp .dockerignore ~/.rsd-updater/$TRAVIS_JOB_NAME/
-  - cp ./go-github-webhook/updater ~/.rsd-updater/$TRAVIS_JOB_NAME/
+  - mkdir -p ~/.rsd-updater
+  - cp Dockerfile_stable ~/.rsd-updater/
+  - cp Dockerfile_master ~/.rsd-updater/
+  - cp .dockerignore ~/.rsd-updater/
+  - cp ./go-github-webhook/updater ~/.rsd-updater/
 
 script:
-  - ~/.rsd-updater/$TRAVIS_JOB_NAME/updater --dockerfile $DOCKERFILE --ref $TRAVIS_JOB_NAME --arch $ARCH --repo $REPO --user $USER --password $DOCKER_PASSWORD ./
+  - ~/.rsd-updater/updater --dockerfile $DOCKERFILE --ref $TRAVIS_JOB_NAME --arch $ARCH --repo $REPO --user $USER --password $DOCKER_PASSWORD ./
 
 after_script:
   - docker logout
