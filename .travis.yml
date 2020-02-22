@@ -99,7 +99,7 @@ before_script:
 
 script:
   - cd ~/.rsd-updater/$TRAVIS_JOB_NAME/
-  - updater --dockerfile $DOCKERFILE --ref $TRAVIS_JOB_NAME --arch $ARCH --repo $REPO --user $USER --password $DOCKER_PASSWORD ./
+  - ./updater --dockerfile $DOCKERFILE --ref $TRAVIS_JOB_NAME --arch $ARCH --repo $REPO --user $USER --password $DOCKER_PASSWORD ./
 
 after_script:
   - docker logout
