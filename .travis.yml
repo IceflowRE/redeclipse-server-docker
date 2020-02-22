@@ -59,18 +59,6 @@ jobs:
       env:
         - DOCKERFILE=Dockerfile_stable
     -
-      name: "refs/tags/v1.5.0"
-      env:
-        - DOCKERFILE=Dockerfile_stable
-    -
-      name: "refs/tags/v1.5.1"
-      env:
-        - DOCKERFILE=Dockerfile_stable
-    -
-      name: "refs/tags/v1.5.2"
-      env:
-        - DOCKERFILE=Dockerfile_stable
-    -
       name: "refs/tags/v1.5.3"
       env:
         - DOCKERFILE=Dockerfile_stable
@@ -94,6 +82,19 @@ jobs:
       name: "refs/tags/v2.0.0"
       env:
         - DOCKERFILE=Dockerfile_master
+  allow_failures:
+    - stage: "update"
+      name: "refs/tags/v1.5.0"
+      env:
+        - DOCKERFILE=Dockerfile_stable
+    -
+      name: "refs/tags/v1.5.1"
+      env:
+        - DOCKERFILE=Dockerfile_stable
+    -
+      name: "refs/tags/v1.5.2"
+      env:
+        - DOCKERFILE=Dockerfile_stable
 
 install:
   - mkdir -p ~/.docker/
