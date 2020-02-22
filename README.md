@@ -1,8 +1,8 @@
 # Red Eclipse Server Docker
 [![maintained](https://img.shields.io/badge/maintained-yes-brightgreen.svg)][github]
 [![DockerHub](https://img.shields.io/badge/Docker_Hub--FF69A4.svg?style=social)][docker hub]
-[![master](https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?env=BRANCH=master&label=master)][travis ci]
-[![stable](https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?env=BRANCH=stable&label=stable)][travis ci]
+[![master](https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?tag=refs/heads/master&label=master)][travis ci]
+[![stable](https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?tag=refs/heads/stable&label=stable)][travis ci]
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ---
 
@@ -118,8 +118,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 [github]: https://github.com/IceflowRE/redeclipse-server-docker
 [docker hub]: https://hub.docker.com/r/iceflower/redeclipse-server
 [no build]: https://img.shields.io/badge/build-inaccessible-lightgrey.svg
-[travis stable]: https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?env=BRANCH=stable&label=build
-[travis master]: https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?env=BRANCH=master&label=build
+[travis stable]: https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?tag=refs/heads/stable&label=build
+[travis master]: https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?tag=refs/heads/master&label=build
 [mbadge stable]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:amd64-stable.svg
 [mbadge stable l]: https://microbadger.com/images/iceflower/redeclipse-server:amd64-stable
 [mbadge master]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:amd64-master.svg

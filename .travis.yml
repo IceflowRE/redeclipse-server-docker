@@ -82,19 +82,6 @@ jobs:
       name: "refs/tags/v2.0.0"
       env:
         - DOCKERFILE=Dockerfile_master
-  allow_failures:
-    - stage: "update"
-      name: "refs/tags/v1.5.0"
-      env:
-        - DOCKERFILE=Dockerfile_stable
-    -
-      name: "refs/tags/v1.5.1"
-      env:
-        - DOCKERFILE=Dockerfile_stable
-    -
-      name: "refs/tags/v1.5.2"
-      env:
-        - DOCKERFILE=Dockerfile_stable
 
 install:
   - mkdir -p ~/.docker/
@@ -111,7 +98,8 @@ before_script:
   - cp ./go-github-webhook/updater ~/.rsd-updater/$TRAVIS_JOB_NAME/
 
 script:
-  - ~/.rsd-updater/$TRAVIS_JOB_NAME/updater --dockerfile $DOCKERFILE --ref $TRAVIS_JOB_NAME --arch $ARCH --repo $REPO --user $USER --password $DOCKER_PASSWORD ./
+  - cd ~/.rsd-updater/$TRAVIS_JOB_NAME/
+  - updater --dockerfile $DOCKERFILE --ref $TRAVIS_JOB_NAME --arch $ARCH --repo $REPO --user $USER --password $DOCKER_PASSWORD ./
 
 after_script:
   - docker logout
