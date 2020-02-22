@@ -2,6 +2,7 @@ package updater
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 )
@@ -22,7 +23,7 @@ func CheckPaths(workDir string, hashStorageFile string, configFile string) (bool
 	return workDirExist, hashStoreFileExist, configFileExist
 }
 
-func GetConfigs(workDir string, configFile string, user string, password string, branch string, arch string, dockerFile string, useDryRun bool) (*AppConfig, *HashStorage, *BuildContext) {
+func GetConfigs(workDir string, configFile string, repo string, user string, password string, ref string, arch string, dockerFile string, useDryRun bool) (*AppConfig, *HashStorage, *BuildContext) {
 	if configFile != "" {
 		configFile = filepath.Join(workDir, configFile)
 	}
@@ -44,20 +45,19 @@ func GetConfigs(workDir string, configFile string, user string, password string,
 	if configFile != "" {
 		var err error
 		if config, err = parseConfig(configFile); err != nil {
+			log.Println(err.Error())
 			return nil, nil, nil
 		}
 	} else {
-		if dockerFile == "" {
-			dockerFile = "Dockerfile_" + branch
-		}
 		config = &AppConfig{
 			Docker: &dockerConfig{
+				Repo:     repo,
 				User:     user,
 				Password: password,
 			},
 			Build: []*buildConfig{
 				{
-					Branch:     branch,
+					Ref:     ref,
 					Arch:       arch,
 					Os:         "linux",
 					Dockerfile: dockerFile,
@@ -65,9 +65,20 @@ func GetConfigs(workDir string, configFile string, user string, password string,
 			},
 		}
 	}
+	// if specified override config values
+	if repo != "" {
+		config.Docker.Repo = repo
+	}
+	if user != "" {
+		config.Docker.User = user
+	}
+	if password != "" {
+		config.Docker.Password = password
+	}
+
 	for _, build := range config.Build {
 		if build.Dockerfile == "" {
-			build.Dockerfile = "Dockerfile_" + build.Branch
+			build.Dockerfile = "Dockerfile_" + build.Ref
 		}
 		build.Dockerfile = filepath.Join(workDir, build.Dockerfile)
 		if !fileExists(build.Dockerfile) {
@@ -76,15 +87,13 @@ func GetConfigs(workDir string, configFile string, user string, password string,
 		}
 	}
 
-	var hashStorage *HashStorage
+	hashStorage := NewHashStorage()
 	if hashStorageFileExist {
 		var err error
 		if hashStorage, err = loadHashStorage(hashStorageFile); err != nil {
 			fmt.Println(err.Error())
 			return nil, nil, nil
 		}
-	} else {
-		hashStorage = &HashStorage{}
 	}
 	return config, hashStorage, &BuildContext{
 		WorkDir:         workDir,

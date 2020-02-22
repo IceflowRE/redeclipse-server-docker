@@ -32,20 +32,22 @@ func dockerLogout() bool {
 	return runCmd("docker", []string{"logout"}, nil)
 }
 
-func dockerBuild(workDir string, dockerfile string, branch string, arch string, reCommit string) bool {
-	repo := "iceflower/redeclipse-server"
+func dockerBuild(workDir string, repo string, dockerfile string, ref string, arch string, reCommit string) bool {
+	dockerTag := ref[strings.LastIndex(ref, "/")+1:]
+	dockerName := repo + ":" + dockerTag
+	dockerArchName := repo + ":" + arch + "-" + dockerTag
 
-	success := runCmd("docker", []string{"build", "--build-arg", "BRANCH=" + branch, "--build-arg", "RECOMMIT=" + reCommit, "-t", repo + ":" + arch + "-" + branch, "-f", dockerfile, workDir}, nil)
+
+	success := runCmd("docker", []string{"build", "--build-arg", "TAG=" + dockerTag, "--build-arg", "RECOMMIT=" + reCommit, "-t", dockerArchName, "-f", dockerfile, workDir}, nil)
 	if !success {
 		return false
 	}
-	success = runCmd("docker", []string{"push", repo + ":" + arch + "-" + branch}, nil)
+	success = runCmd("docker", []string{"push", dockerArchName}, nil)
 	if !success {
 		return false
 	}
-	repoBranch := repo + ":" + branch
-	runCmd("docker", []string{"manifest", "create", repoBranch, repo + ":amd64-" + branch, repo + ":arm64-" + branch}, nil)
-	runCmd("docker", []string{"manifest", "annotate", repoBranch, repo + ":arm64-" + branch, "--variant", "v8"}, nil)
-	runCmd("docker", []string{"manifest", "push", "--purge", repoBranch}, nil)
+	runCmd("docker", []string{"manifest", "create", dockerName, repo + ":amd64-" + dockerTag, repo + ":arm64-" + dockerTag}, nil)
+	runCmd("docker", []string{"manifest", "annotate", dockerName, repo + ":arm64-" + dockerTag, "--variant", "v8"}, nil)
+	runCmd("docker", []string{"manifest", "push", "--purge", dockerName}, nil)
 	return true
 }

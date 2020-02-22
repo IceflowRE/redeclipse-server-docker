@@ -12,12 +12,13 @@ type AppConfig struct {
 }
 
 type dockerConfig struct {
+	Repo     string `json:"repo"`
 	User     string `json:"user"`
 	Password string `json:"password"`
 }
 
 type buildConfig struct {
-	Branch     string `json:"branch"`
+	Ref        string `json:"ref"`
 	Arch       string `json:"arch"`
 	Os         string `json:"os"`
 	Dockerfile string `json:"dockerfile"`
@@ -27,6 +28,8 @@ func (config AppConfig) check() error {
 	switch {
 	case config.Docker == nil:
 		return errors.New("config: 'docker' is missing")
+	case config.Docker.Repo == "":
+		return errors.New("config: 'docker > repo' is empty")
 	case config.Docker.User == "":
 		return errors.New("config: 'docker > user' is empty")
 	case config.Docker.Password == "":
@@ -38,12 +41,14 @@ func (config AppConfig) check() error {
 	}
 	for idx, build := range config.Build {
 		switch {
-		case build.Branch == "":
-			return errors.New("config: 'build[" + string(idx) + "] > branch' is empty")
+		case build.Ref == "":
+			return errors.New("config: 'build[" + string(idx) + "] > ref' is empty")
 		case build.Arch == "":
 			return errors.New("config: 'build[" + string(idx) + "] > arch' is empty")
 		case build.Os == "":
 			return errors.New("config: 'build[" + string(idx) + "] > os' is empty")
+		case build.Dockerfile == "":
+			return errors.New("config: 'build[" + string(idx) + "] > dockerfile' is empty")
 		}
 	}
 	return nil
@@ -62,12 +67,6 @@ func parseConfig(file string) (*AppConfig, error) {
 	err = config.check()
 	if err != nil {
 		return nil, err
-	}
-	// set default values
-	for _, build := range config.Build {
-		if build.Dockerfile == "" {
-			build.Dockerfile = "Dockerfile_" + build.Branch
-		}
 	}
 	return &config, nil
 }

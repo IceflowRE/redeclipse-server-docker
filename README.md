@@ -2,7 +2,6 @@
 [![maintained](https://img.shields.io/badge/maintained-yes-brightgreen.svg)][github]
 [![DockerHub](https://img.shields.io/badge/Docker_Hub--FF69A4.svg?style=social)][docker hub]
 [![master](https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?env=BRANCH=master&label=master)][travis ci]
-[![stable-re2](https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?env=BRANCH=stable-re2&label=stable-re2)][travis ci]
 [![stable](https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?env=BRANCH=stable&label=stable)][travis ci]
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ---
@@ -15,17 +14,15 @@ Currently the Docker images are build against the latest commits and will be che
 
 ## Images
 Latest images are available at [Docker Hub][docker hub].  
-Pull them with `docker pull iceflower/redeclipse-server:<tag>`. Use as tag `master`, `stable-re2` or `stable`, the correct architexture will be choosen.  
+Pull them with `docker pull iceflower/redeclipse-server:<tag>`. Use as tag `master` or `stable` (which are the latest commits of the branch) or use a specific version. The correct architecture will be chosen.  
 The `amd64` images are build with [Travis CI][travis ci]. The `arm64v8` images are build on an own server.
 
-|        Tag       |  RE Version | Architecture |                Build                |                      Size / Layers                    |
-|:----------------:|:-----------:|:------------:|:-----------------------------------:|:-----------------------------------------------------:|
-|   amd64-stable   |      1.6    |     amd64    |   [![][travis stable]][travis ci]   |         [![][mbadge stable]][mbadge stable l]         |
-|   arm64-stable   |      1.6    |     arm64    |       [![][no build]][github]       |     [![][mbadge arm stable]][mbadge arm stable l]     |
-| amd64-stable-re2 |    \>=2.0   |     amd64    | [![][travis stable-re2]][travis ci] |     [![][mbadge stable-re2]][mbadge stable-re2 l]     |
-| arm64-stable-re2 |    \>=2.0   |     arm64    |       [![][no build]][github]       | [![][mbadge arm stable-re2]][mbadge arm stable-re2 l] |
-|   amd64-master   | development |     amd64    |  [![][travis master]][travis ci]    |         [![][mbadge master]][mbadge master l]         |
-|   arm64-master   | development |     arm64    |       [![][no build]][github]       |     [![][mbadge arm master]][mbadge arm master l]     |
+|      Tag     |  RE Version | Architecture |               Build              |                  Size / Layers                |
+|:------------:|:-----------:|:------------:|:--------------------------------:|:---------------------------------------------:|
+| amd64-stable |      1.6    |     amd64    |  [![][travis stable]][travis ci] |     [![][mbadge stable]][mbadge stable l]     |
+| arm64-stable |      1.6    |     arm64    |      [![][no build]][github]     | [![][mbadge arm stable]][mbadge arm stable l] |
+| amd64-master | development |     amd64    | [![][travis master]][travis ci]  |     [![][mbadge master]][mbadge master l]     |
+| arm64-master | development |     arm64    |      [![][no build]][github]     | [![][mbadge arm master]][mbadge arm master l] |
 
 ## Usage
 Replace the variables with the respective values.
@@ -79,6 +76,8 @@ go build -x -o updater ./cmd/updater/
 go build -x -o server ./cmd/server/
 ```
 
+For more options see `--help`.
+
 ## Web
 https://github.com/IceflowRE/redeclipse-server-docker
 
@@ -120,17 +119,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 [docker hub]: https://hub.docker.com/r/iceflower/redeclipse-server
 [no build]: https://img.shields.io/badge/build-inaccessible-lightgrey.svg
 [travis stable]: https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?env=BRANCH=stable&label=build
-[travis stable-re2]: https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?env=BRANCH=stable-re2&label=build
 [travis master]: https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?env=BRANCH=master&label=build
 [mbadge stable]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:amd64-stable.svg
 [mbadge stable l]: https://microbadger.com/images/iceflower/redeclipse-server:amd64-stable
-[mbadge stable-re2]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:amd64-stable-re2.svg
-[mbadge stable-re2 l]: https://microbadger.com/images/iceflower/redeclipse-server:amd64-stable-re2
 [mbadge master]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:amd64-master.svg
 [mbadge master l]: https://microbadger.com/images/iceflower/redeclipse-server:amd64-master
 [mbadge arm stable]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:arm64-stable.svg
 [mbadge arm stable l]: https://microbadger.com/images/iceflower/redeclipse-server:arm64-stable
-[mbadge arm stable-re2]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:arm64-stable-re2.svg
-[mbadge arm stable-re2 l]: https://microbadger.com/images/iceflower/redeclipse-server:arm64-stable-re2
 [mbadge arm master]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:arm64-master.svg
 [mbadge arm master l]: https://microbadger.com/images/iceflower/redeclipse-server:arm64-master

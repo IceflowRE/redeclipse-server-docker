@@ -11,5 +11,7 @@ func main() {
 	if config == nil {
 		os.Exit(1)
 	}
-	updater.BuildLoop(config, storage, buildCtx)
+	if !updater.BuildLoop(config, storage, buildCtx) {
+		os.Exit(2)
+	}
 }

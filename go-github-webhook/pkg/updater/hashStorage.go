@@ -10,10 +10,10 @@ type HashStorage struct {
 }
 
 type hashContainer struct {
-	Branch string `json:"branch"`
+	Ref    string `json:"ref"`
 	Arch   string `json:"arch"`
 	Os     string `json:"os"`
-	Hashes hash   `json:"hashes"`
+	Hashes *hash  `json:"hashes"`
 }
 
 type hash struct {
@@ -22,34 +22,37 @@ type hash struct {
 	ReCommit   string `json:"re-commit"`
 }
 
-// Returns empty hash if no entry was found
-func (storage *HashStorage) Get(branch string, arch string, os string) *hash {
+func NewHashStorage() *HashStorage {
+	return &HashStorage{
+		Collection: make([]hashContainer, 0),
+	}
+}
+
+// if not found it will create a new default value
+// never returns nil
+func (storage *HashStorage) Get(ref string, arch string, os string) *hash {
 	for _, hashC := range storage.Collection {
-		if hashC.Branch == branch && hashC.Arch == arch && hashC.Os == os {
-			return &hashC.Hashes
+		if hashC.Ref == ref && hashC.Arch == arch && hashC.Os == os {
+			return hashC.Hashes
 		}
 	}
-	return &hash{
+	newHash := &hash{
 		Alpine:     "",
 		Dockerfile: "",
 		ReCommit:   "",
 	}
-}
-
-func (storage *HashStorage) Update(branch string, arch string, os string, newHash *hash) {
-	curHash := storage.Get(branch, arch, os)
-	if curHash != nil {
-		curHash.Alpine = newHash.Alpine
-		curHash.Dockerfile = newHash.Dockerfile
-		curHash.ReCommit = newHash.ReCommit
-		return
-	}
 	storage.Collection = append(storage.Collection, hashContainer{
-		Branch: branch,
+		Ref:    ref,
 		Arch:   arch,
 		Os:     os,
-		Hashes: *newHash,
+		Hashes: newHash,
 	})
+	return newHash
+}
+
+func (storage *HashStorage) Update(ref string, arch string, os string, newHash *hash) {
+	curHash := storage.Get(ref, arch, os)
+	*curHash = *newHash
 }
 
 func saveHashStorage(filename string, storage *HashStorage) error {
@@ -62,10 +65,10 @@ func loadHashStorage(file string) (*HashStorage, error) {
 	if err != nil {
 		return nil, err
 	}
-	var storage HashStorage
-	err = json.Unmarshal(raw, &storage)
+	storage := NewHashStorage()
+	err = json.Unmarshal(raw, storage)
 	if err != nil {
 		return nil, err
 	}
-	return &storage, nil
+	return storage, nil
 }

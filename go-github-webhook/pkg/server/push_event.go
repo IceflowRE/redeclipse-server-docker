@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
-	"regexp"
 
 	"github.com/IceflowRE/redeclipse-server-docker/pkg/server/utils"
 	"github.com/IceflowRE/redeclipse-server-docker/pkg/updater"
@@ -30,8 +29,6 @@ func bindPushEvent(req *http.Request) (*github.PushEvent, *utils.ErrResp) {
 	return &obj, nil
 }
 
-var branchRx = regexp.MustCompile(`^refs/heads/(\w+)$`)
-
 func pushEvent(hrw http.ResponseWriter, req *http.Request, updaterConfig *updater.AppConfig, storage *updater.HashStorage, buildCtx *updater.BuildContext) {
 	payload, err := bindPushEvent(req)
 	if err != nil {
@@ -39,15 +36,14 @@ func pushEvent(hrw http.ResponseWriter, req *http.Request, updaterConfig *update
 		return
 	}
 	githubHeader := req.Context().Value("header").(*utils.GithubHeader)
-	branchMatch := branchRx.FindStringSubmatch(*payload.Ref)
 
-	if len(branchMatch) == 2 && update(updaterConfig, storage, buildCtx, branchMatch[1]) {
+	if update(updaterConfig, storage, buildCtx, *payload.Ref) {
 		utils.ResponseJSON(hrw, http.StatusCreated,
-			postResp{"Update started for '" + branchMatch[1] + "'", githubHeader.Guid},
+			postResp{"Update started for '" + *payload.Ref + "'", githubHeader.Guid},
 		)
 	} else {
 		utils.ResponseJSON(hrw, http.StatusOK,
-			postResp{"Payload was not for an accepted branch, aborting.", githubHeader.Guid},
+			postResp{"Payload was not for an accepted reference, aborting.", githubHeader.Guid},
 		)
 	}
 }

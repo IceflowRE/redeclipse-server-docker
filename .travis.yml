@@ -7,6 +7,8 @@ dist: bionic
 addons:
   apt:
     update: true
+    packages:
+      - docker-ce
 
 services:
   - docker
@@ -16,48 +18,99 @@ branches:
     - master
     - experimental
 
-jobs:
-  include:
-    - name: "master"
-      env:
-        - DOCKERFILE=Dockerfile_master
-        - ARCH=amd64
-        - BRANCH=master
-        - USER=iceflower
-    - name: "stable"
-      env:
-        - DOCKERFILE=Dockerfile_stable
-        - ARCH=amd64
-        - BRANCH=stable
-        - USER=iceflower
-    - name: "stable-re2"
-      env:
-        - DOCKERFILE=Dockerfile_master
-        - ARCH=amd64
-        - BRANCH=stable-re2
-        - USER=iceflower
+before_cache:
+  - rm ~/.rsd-updater/$TRAVIS_JOB_NAME/Dockerfile_master
+  - rm ~/.rsd-updater/$TRAVIS_JOB_NAME/Dockerfile_stable
+  - rm ~/.rsd-updater/$TRAVIS_JOB_NAME/.dockerignore
+  - rm ~/.rsd-updater/$TRAVIS_JOB_NAME/updater
 
 cache:
   directories:
     - ~/.rsd-updater/
 
+env:
+  global:
+    - REPO=iceflower/redeclipse-server
+    - USER=iceflower
+    - ARCH=amd64
+
+jobs:
+  include:
+    - stage: "build"
+      name: "updater"
+      before_script: skip
+      script:
+        - cd go-github-webhook
+        - go build -x -o updater ./cmd/updater/
+      after_script: skip
+    -
+      script:
+        - cd go-github-webhook
+        - go build -x -o server ./cmd/server/
+      name: "server"
+      before_script: skip
+      after_script: skip
+    - stage: "update"
+      name: "refs/heads/master"
+      env:
+        - DOCKERFILE=Dockerfile_master
+    -
+      name: "refs/heads/stable"
+      env:
+        - DOCKERFILE=Dockerfile_stable
+    -
+      name: "refs/tags/v1.5.0"
+      env:
+        - DOCKERFILE=Dockerfile_stable
+    -
+      name: "refs/tags/v1.5.1"
+      env:
+        - DOCKERFILE=Dockerfile_stable
+    -
+      name: "refs/tags/v1.5.2"
+      env:
+        - DOCKERFILE=Dockerfile_stable
+    -
+      name: "refs/tags/v1.5.3"
+      env:
+        - DOCKERFILE=Dockerfile_stable
+    -
+      name: "refs/tags/v1.5.5"
+      env:
+        - DOCKERFILE=Dockerfile_stable
+    -
+      name: "refs/tags/v1.5.6"
+      env:
+        - DOCKERFILE=Dockerfile_stable
+    -
+      name: "refs/tags/v1.5.8"
+      env:
+        - DOCKERFILE=Dockerfile_stable
+    -
+      name: "refs/tags/v1.6.0"
+      env:
+        - DOCKERFILE=Dockerfile_stable
+    -
+      name: "refs/tags/v2.0.0"
+      env:
+        - DOCKERFILE=Dockerfile_master
+
 install:
-  - sudo apt-get -y install docker-ce
   - mkdir -p ~/.docker/
   - bash ./ci/enable-experimental-docker.sh
-  - cd go-github-webhook
-  - go build -x -o updater ./cmd/updater/
-  - cd ..
 
 before_script:
-  - mkdir -p ~/.rsd-updater/
-  - cp .dockerignore ~/.rsd-updater/
-  - cp Dockerfile_stable ~/.rsd-updater/
-  - cp Dockerfile_master ~/.rsd-updater/
-  - cp ./go-github-webhook/updater ~/.rsd-updater/
+  - cd ./go-github-webhook
+  - go build -x -o updater ./cmd/updater/
+  - cd ..
+  - mkdir -p ~/.rsd-updater/$TRAVIS_JOB_NAME
+  - cp Dockerfile_stable ~/.rsd-updater/$TRAVIS_JOB_NAME/
+  - cp Dockerfile_master ~/.rsd-updater/$TRAVIS_JOB_NAME/
+  - cp .dockerignore ~/.rsd-updater/$TRAVIS_JOB_NAME/
+  - cp ./go-github-webhook/updater ~/.rsd-updater/$TRAVIS_JOB_NAME/
 
 script:
-  - ~/.rsd-updater/updater --dockerfile $DOCKERFILE --branch $BRANCH --arch $ARCH --user $USER --password $DOCKER_PASSWORD ./
+  - ~/.rsd-updater/$TRAVIS_JOB_NAME/updater --dockerfile $DOCKERFILE --ref $TRAVIS_JOB_NAME --arch $ARCH --repo $REPO --user $USER --password $DOCKER_PASSWORD ./
 
 after_script:
   - docker logout

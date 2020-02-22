@@ -1,7 +1,7 @@
 {
     "collection": [
         {
-            "branch": "stable-re2",
+            "ref": "master",
             "arch": "arm64",
             "os": "linux",
             "hashes": {

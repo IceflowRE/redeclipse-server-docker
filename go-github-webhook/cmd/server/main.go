@@ -32,7 +32,7 @@ func WaitingForClose(server *http.Server) {
 func main() {
 	config, updaterConfig, hashStorage, buildCtx := serverPkg.EntryPoint()
 	if config == nil {
-		return
+		os.Exit(1)
 	}
 	server := &http.Server{
 		Handler:      serverPkg.CreateRouter(config, updaterConfig, hashStorage, buildCtx),

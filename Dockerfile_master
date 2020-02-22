@@ -1,8 +1,8 @@
 # Set the base image
 FROM alpine
 
-# redeclipse branch
-ARG BRANCH
+# redeclipse tag
+ARG TAG
 # redeclipse commit
 ARG RECOMMIT
 
@@ -10,8 +10,7 @@ ARG RECOMMIT
 LABEL author="Iceflower S" \
       maintainer="Iceflower S" \
       email="iceflower@gmx.de" \
-      version="1.0" \
-      description="Red Eclipse Server - $BRANCH" \
+      description="Red Eclipse Server - $TAG" \
       re-commit="$RECOMMIT"
 
 # Add server user and set permissions
@@ -23,33 +22,33 @@ RUN adduser -S -D redeclipse \
 RUN apk update \
     && apk add --no-cache --virtual build-deps gcc g++ zlib-dev git ca-certificates freetype-dev coreutils cmake make \
     && apk add --no-cache libstdc++ \
-    && git clone --depth 1 -b "$BRANCH" https://github.com/redeclipse/base /temp \
+    && git clone --depth 1 -b "$TAG" https://github.com/redeclipse/base /temp \
     \
     && mkdir /temp/build \
     && cd /temp/build \
     && cmake ../src -DBUILD_CLIENT=0 -DWANT_STEAM=0 -DWANT_DISCORD=0 \
     && make clean install -j"$(nproc)" \
+    && mkdir -p /redeclipse/bin/native \
+    && mv /temp/build/redeclipse_server_linux /redeclipse/bin/native/ \
     \
     && mkdir -p /redeclipse/config \
     && mv /temp/config/ /redeclipse/ \
-    && mkdir -p /redeclipse/bin/native \
-    && mv /temp/build/redeclipse_server_linux /redeclipse/bin/native/redeclipse_server_linux \
+    \
+    && cd /temp \
+    && git submodule update --init ./data/maps/ \
+    && rm -rf ./data/maps/.git/ \
+    && mkdir -p /redeclipse/data/maps \
+    && mv /temp/data/maps/* /redeclipse/data/maps/ \
     \
     && apk update \
     && apk del build-deps \
-    && rm -rf /temp
+    && rm -rf /temp/
 
-# Add defaults maps and server config folder
-RUN apk add --no-cache --virtual deps git ca-certificates \
-    && git clone --depth 1 -b master https://github.com/redeclipse/maps.git /redeclipse/data/maps \
-    && rm -rf /redeclipse/data/maps/.git \
-    && mkdir -p /re-server-config/home \
-    && mkdir -p /re-server-config/package \
-    && mkdir -p /re-server-config/sauer \
-    && apk update \
-    && apk del deps
+# Add folder
+RUN mkdir -p /re-server-config/home \
+    && mkdir -p /re-server-config/package
 
 USER redeclipse
 
 WORKDIR /redeclipse
-ENTRYPOINT ["./bin/native/redeclipse_server_linux", "-h/re-server-config/home/", "-p/re-server-config/package/", "-o/re-server-config/sauer/"]
+ENTRYPOINT ["./bin/native/redeclipse_server_linux", "-h/re-server-config/home/", "-p/re-server-config/package/"]

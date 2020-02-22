@@ -31,7 +31,7 @@ func EntryPoint() (*utils.AppConfig, *updater.AppConfig, *updater.HashStorage, *
 		return nil, nil, nil, nil
 	}
 
-	updaterConfig, hashStorage, buildCtx := updater.GetConfigs(workDir, *config.UpdaterConfig, "", "", "", "", "", false)
+	updaterConfig, hashStorage, buildCtx := updater.GetConfigs(workDir, *config.UpdaterConfig, "", "", "", "", "", "", false)
 	if updaterConfig == nil {
 		return nil, nil, nil, nil
 	}

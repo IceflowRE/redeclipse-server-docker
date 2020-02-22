@@ -64,20 +64,24 @@ func getAlpineHash(arch string, os string) *string {
 	return nil
 }
 
-func getCommitHash(branch string) *string {
-	out, err := exec.Command("git", "ls-remote", "https://github.com/redeclipse/base.git", "refs/heads/"+branch).Output()
+func getCommitHash(ref string) *string {
+	out, err := exec.Command("git", "ls-remote", "https://github.com/redeclipse/base.git", ref).Output()
 	if err != nil {
 		fmt.Println(err.Error())
 		return nil
 	}
-	res := "sha256:" + string(bytes.Split(out, []byte("\t"))[0])
-	return &res
+	hash := string(bytes.Split(out, []byte("\t"))[0])
+	if hash == "" {
+		fmt.Println("reference '" + ref + "' not found.")
+		return nil
+	}
+	return &hash
 }
 
-func getNewHashes(dockerfile string, branch string, arch string, os string) *hash {
-	reCommit := getCommitHash(branch)
+func getNewHashes(dockerfile string, ref string, arch string, os string) *hash {
+	reCommit := getCommitHash(ref)
 	if reCommit == nil {
-		fmt.Println("failed to get newest git commit hash")
+		fmt.Println("failed to get git commit hash")
 		return nil
 	}
 	dockerHash := getFileHash(dockerfile)
