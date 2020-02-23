@@ -21,7 +21,7 @@ func BuildStep(config *AppConfig, storage *HashStorage, buildCtx *BuildContext, 
 	fmt.Println("Current:", "alpine:", curHash.Alpine, "- dockerfile:", curHash.Dockerfile, "- recommit:", curHash.ReCommit)
 	fmt.Println("New:    ", "alpine:", newHash.Alpine, "- dockerfile:", newHash.Dockerfile, "- recommit:", newHash.ReCommit)
 
-	if curHash == newHash {
+	if *curHash == *newHash {
 		fmt.Println("No update required.")
 		return true
 	}
