@@ -99,7 +99,9 @@ before_script:
 
 script:
   - cd ~/.rsd-updater/$TRAVIS_JOB_NAME/
+  - cat hash-storage.json
   - ./updater --dockerfile $DOCKERFILE --ref $TRAVIS_JOB_NAME --arch $ARCH --repo $REPO --user $USER --password $DOCKER_PASSWORD ./
+  - cat hash-storage.json
 
 after_script:
   - docker logout
