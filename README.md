@@ -1,28 +1,29 @@
 # Red Eclipse Server Docker
 [![maintained](https://img.shields.io/badge/maintained-yes-brightgreen.svg)][github]
 [![DockerHub](https://img.shields.io/badge/Docker_Hub--FF69A4.svg?style=social)][docker hub]
-[![master](https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?tag=refs/heads/master&label=master)][travis ci]
-[![stable](https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?tag=refs/heads/stable&label=stable)][travis ci]
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ---
 
 This provides the source for an easy handling and maintaining Docker image of a [Red Eclipse](https://redeclipse.net/) Server.  
-Additional with an python console application which can be run automatically to update the images.  
+Additional with an Go console application which can be run automatically to update the images.  
 Currently the Docker images are build against the latest commits and will be checked for updates once a day.
 
 ---
 
 ## Images
 Latest images are available at [Docker Hub][docker hub].  
-Pull them with `docker pull iceflower/redeclipse-server:<tag>`. Use as tag `master` or `stable` (which are the latest commits of the branch) or use a specific version. The correct architecture will be chosen.  
-The `amd64` images are build with [Travis CI][travis ci]. The `arm64v8` images are build on an own server.
+Pull them with `docker pull iceflower/redeclipse-server:<tag>`.
+All images are available for `amd64` and `arm64/v8`, `amd64` images are build with [Travis CI][travis ci], `arm64/v8` images are build on an own server.
 
-|      Tag     |  RE Version | Architecture |               Build              |                  Size / Layers                |
-|:------------:|:-----------:|:------------:|:--------------------------------:|:---------------------------------------------:|
-| amd64-stable |      1.6    |     amd64    |  [![][travis stable]][travis ci] |     [![][mbadge stable]][mbadge stable l]     |
-| arm64-stable |      1.6    |     arm64    |      [![][no build]][github]     | [![][mbadge arm stable]][mbadge arm stable l] |
-| amd64-master | development |     amd64    | [![][travis master]][travis ci]  |     [![][mbadge master]][mbadge master l]     |
-| arm64-master | development |     arm64    |      [![][no build]][github]     | [![][mbadge arm master]][mbadge arm master l] |
+|   Tag  |   RE Version  |            amd64            |          arm64          |
+|:------:|:-------------:|:---------------------------:|:-----------------------:|
+| master | master branch |  [![][travis 3]][travis ci] | [![][no build]][github] |
+| stable | stable branch |  [![][travis 4]][travis ci] | [![][no build]][github] |
+| v2.0.0 |     2.0.0     | [![][travis 10]][travis ci] | [![][no build]][github] |
+| v1.6.0 |     1.6.0     |  [![][travis 9]][travis ci] | [![][no build]][github] |
+| v1.5.8 |     1.5.8     |  [![][travis 8]][travis ci] | [![][no build]][github] |
+| v1.5.6 |     1.5.6     |  [![][travis 7]][travis ci] | [![][no build]][github] |
+| v1.5.5 |     1.5.5     |  [![][travis 6]][travis ci] | [![][no build]][github] |
+| v1.5.3 |     1.5.3     |  [![][travis 5]][travis ci] | [![][no build]][github] |
 
 ## Usage
 Replace the variables with the respective values.
@@ -78,6 +79,9 @@ go build -x -o server ./cmd/server/
 
 For more options see `--help`.
 
+The updater can be used to update the docker images.  
+The server listens for webhooks from the redeclipse/base repository and updates the images on every new commit.
+
 ## Web
 https://github.com/IceflowRE/redeclipse-server-docker
 
@@ -86,12 +90,26 @@ https://github.com/IceflowRE/redeclipse-server-docker
   - Iceflower S
     - iceflower@gmx.de
 
-### External Tools
-- badge-matrix *by* Brian Beck ([exogen](https://github.com/exogen))
-    - https://github.com/exogen/badge-matrix
-    - MIT License
-
 ## License
+The Red Eclipse server files are using [THE RED ECLIPSE LICENSE](https://github.com/redeclipse/base/blob/master/doc/license.txt).
+
+---
+docker-compose files:
+
+**The MIT License**
+
+Copyright 2017 - now Iceflower S
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+Anything else:
+
 ![Image of GPLv3](http://www.gnu.org/graphics/gplv3-127x51.png)
 
 Copyright 2017 - now © Iceflower S
@@ -102,29 +120,16 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/gpl.html>.
 
----
-
-**The MIT License** *(only for the docker-compose files)*
-
-Copyright 2017 - now Iceflower S
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 [travis ci]: https://travis-ci.com/IceflowRE/redeclipse-server-docker
 [github]: https://github.com/IceflowRE/redeclipse-server-docker
 [docker hub]: https://hub.docker.com/r/iceflower/redeclipse-server
 [no build]: https://img.shields.io/badge/build-inaccessible-lightgrey.svg
-[travis stable]: https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?tag=refs/heads/stable&label=build
-[travis master]: https://badges.herokuapp.com/travis.com/IceflowRE/redeclipse-server-docker?tag=refs/heads/master&label=build
-[mbadge stable]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:amd64-stable.svg
-[mbadge stable l]: https://microbadger.com/images/iceflower/redeclipse-server:amd64-stable
-[mbadge master]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:amd64-master.svg
-[mbadge master l]: https://microbadger.com/images/iceflower/redeclipse-server:amd64-master
-[mbadge arm stable]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:arm64-stable.svg
-[mbadge arm stable l]: https://microbadger.com/images/iceflower/redeclipse-server:arm64-stable
-[mbadge arm master]: https://images.microbadger.com/badges/image/iceflower/redeclipse-server:arm64-master.svg
-[mbadge arm master l]: https://microbadger.com/images/iceflower/redeclipse-server:arm64-master
+[travis 3]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/redeclipse-server-docker/branches/master/3?use_travis_com=true
+[travis 4]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/redeclipse-server-docker/branches/master/4?use_travis_com=true
+[travis 5]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/redeclipse-server-docker/branches/master/5?use_travis_com=true
+[travis 6]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/redeclipse-server-docker/branches/master/6?use_travis_com=true
+[travis 7]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/redeclipse-server-docker/branches/master/7?use_travis_com=true
+[travis 8]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/redeclipse-server-docker/branches/master/8?use_travis_com=true
+[travis 9]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/redeclipse-server-docker/branches/master/9?use_travis_com=true
+[travis 10]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/redeclipse-server-docker/branches/master/10?use_travis_com=true
