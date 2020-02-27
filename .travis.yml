@@ -26,7 +26,15 @@ before_cache:
 
 cache:
   directories:
-    - ~/.rsd-updater/
+    - ~/.rsd-updater/refs/heads/master
+    - ~/.rsd-updater/refs/heads/stable
+    - ~/.rsd-updater/refs/tags/v1.5.3
+    - ~/.rsd-updater/refs/tags/v1.5.5
+    - ~/.rsd-updater/refs/tags/v1.5.6
+    - ~/.rsd-updater/refs/tags/v1.5.8
+    - ~/.rsd-updater/refs/tags/v1.6.0
+    - ~/.rsd-updater/refs/tags/v2.0.0
+    - ~/.rsd-updater/refs/tags/v2.0.1
 
 env:
   global:
