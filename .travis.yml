@@ -37,13 +37,13 @@ jobs:
   include:
     - stage: "build"
       name: "updater"
-      before_script: skip
+      before_script:
+        - mkdir -p ~/.rsd-updater/
       script:
         - cd go-github-webhook
         - go build -x -o updater ./cmd/updater/
+        - cp ./updater ~/.rsd-updater/
       after_script: skip
-      before_cache:
-        - cp ./go-github-webhook/updater ~/.rsd-updater/
     -
       script:
         - cd go-github-webhook
