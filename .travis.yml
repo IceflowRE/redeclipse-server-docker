@@ -41,7 +41,8 @@ jobs:
       script:
         - cd go-github-webhook
         - go build -x -o updater ./cmd/updater/
-      after_script:
+      after_script: skip
+      before_cache:
         - cp ./go-github-webhook/updater ~/.rsd-updater/
     -
       script:
