@@ -18,15 +18,6 @@ branches:
     - master
     - experimental
 
-before_cache:
-  - rm ~/.rsd-updater/Dockerfile_master
-  - rm ~/.rsd-updater/Dockerfile_stable
-  - rm ~/.rsd-updater/.dockerignore
-
-cache:
-  directories:
-    - ~/.rsd-updater/
-
 env:
   global:
     - REPO=iceflower/redeclipse-server
@@ -38,12 +29,14 @@ jobs:
     - stage: "build"
       name: "updater"
       before_script:
-        - mkdir -p ~/.rsd-updater/
+        - mkdir -p ~/aws-cache/
       script:
         - cd go-github-webhook
         - go build -x -o updater ./cmd/updater/
-        - cp ./updater ~/.rsd-updater/
+        - cp ./updater ~/aws-cache/
       after_script: skip
+      after_success:
+        - aws s3 sync s3://iceflower-redeclipse-server-docker/$TRAVIS_BUILD_NUMBER ~/aws-cache/
     -
       script:
         - cd go-github-webhook
@@ -83,16 +76,38 @@ jobs:
       name: "refs/tags/v2.0.0"
       env:
         - DOCKERFILE=Dockerfile_master
+    -
+      name: "clean aws"
+      before_script: skip
+      script: skip
+      after_script: skip
+      after_success:
+        - aws s3 rm --recursive s3://iceflower-redeclipse-server-docker/$TRAVIS_BUILD_NUMBER
+
+before_install:
+  - mkdir -p ~/aws-cache/
+  - aws s3 sync s3://iceflower-redeclipse-server-docker/$TRAVIS_BUILD_NUMBER ~/aws-cache/
 
 install:
   - mkdir -p ~/.docker/
   - bash ./ci/enable-experimental-docker.sh
+
+before_cache:
+  - rm ~/.rsd-updater/Dockerfile_master
+  - rm ~/.rsd-updater/Dockerfile_stable
+  - rm ~/.rsd-updater/.dockerignore
+  - rm ~/.rsd-updater/updater
+
+cache:
+  directories:
+    - ~/.rsd-updater/
 
 before_script:
   - mkdir -p ~/.rsd-updater/
   - cp Dockerfile_stable ~/.rsd-updater/
   - cp Dockerfile_master ~/.rsd-updater/
   - cp .dockerignore ~/.rsd-updater/
+  - cp ~/aws-cache/updater ~/.rsd-updater/
 
 script:
   - cd ~/.rsd-updater/
