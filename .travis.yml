@@ -28,25 +28,19 @@ jobs:
   include:
     - stage: "build"
       name: "updater"
+      before_script: skip
       script:
         - cd go-github-webhook
         - go build -x -o updater ./cmd/updater/
       after_script: skip
     -
+      name: "server"
+      before_script: skip
       script:
         - cd go-github-webhook
         - go build -x -o server ./cmd/server/
-      name: "server"
-      before_script: skip
       after_script: skip
     - stage: "update"
-      name: "build updater"
-      script:
-        - cd go-github-webhook
-        - go build -x -o updater ./cmd/updater/
-        - cp ./updater ~/.rsd-updater/
-      after_script: skip
-    -
       name: "refs/heads/master"
       env:
         - DOCKERFILE=Dockerfile_master
@@ -99,6 +93,9 @@ before_script:
   - cp .dockerignore ~/.rsd-updater/
 
 script:
+  - cd go-github-webhook
+  - go build -x -o updater ./cmd/updater/
+  - cp ./updater ~/.rsd-updater/
   - cd ~/.rsd-updater/
   - ./updater --dockerfile $DOCKERFILE --ref $TRAVIS_JOB_NAME --arch $ARCH --repo $REPO --user $USER --password $DOCKER_PASSWORD ./
 
