@@ -9,7 +9,7 @@ import (
 
 /*
 value must be a VALUE NOT a pointer
- */
+*/
 func ResponseJSON(hrw http.ResponseWriter, status int, value interface{}) {
 	buf := &bytes.Buffer{}
 	enc := json.NewEncoder(buf)
@@ -24,7 +24,7 @@ func ResponseJSON(hrw http.ResponseWriter, status int, value interface{}) {
 
 /*
 Sends the json data in content.
- */
+*/
 func SendJSON(hrw http.ResponseWriter, status int, content *[]byte) {
 	hrw.Header().Set("Content-Type", "application/json; charset=utf-8")
 	hrw.WriteHeader(status)

@@ -30,12 +30,12 @@ func WaitingForClose(server *http.Server) {
 }
 
 func main() {
-	config, updaterConfig, hashStorage, buildCtx := serverPkg.EntryPoint()
+	config, updaterConfig, hashStorage, workDir := serverPkg.EntryPoint()
 	if config == nil {
 		os.Exit(1)
 	}
 	server := &http.Server{
-		Handler:      serverPkg.CreateRouter(config, updaterConfig, hashStorage, buildCtx),
+		Handler:      serverPkg.CreateRouter(config, updaterConfig, hashStorage, workDir),
 		Addr:         ":" + strconv.Itoa(*config.Port),
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,

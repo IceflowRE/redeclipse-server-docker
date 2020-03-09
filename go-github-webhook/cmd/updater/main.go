@@ -7,11 +7,11 @@ import (
 )
 
 func main() {
-	config, storage, buildCtx := updater.EntryPoint()
+	config, storage, workDir := updater.EntryPoint()
 	if config == nil {
 		os.Exit(1)
 	}
-	if !updater.BuildLoop(config, storage, buildCtx) {
+	if !updater.BuildLoop(config, storage, workDir) {
 		os.Exit(2)
 	}
 }

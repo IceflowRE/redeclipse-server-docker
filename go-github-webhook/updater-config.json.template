@@ -4,6 +4,11 @@
         "user": "iceflower",
         "password": "My Password is strong."
     },
+    "hashApi": {
+        "url": "localhost:28813",
+        "apiKey": "testkey"
+    },
+    "dryRun": false,
     "build": [
         {
             "ref": "refs/heads/stable",

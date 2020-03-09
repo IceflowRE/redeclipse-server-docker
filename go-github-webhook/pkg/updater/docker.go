@@ -37,7 +37,6 @@ func dockerBuild(workDir string, repo string, dockerfile string, ref string, arc
 	dockerName := repo + ":" + dockerTag
 	dockerArchName := repo + ":" + arch + "-" + dockerTag
 
-
 	success := runCmd("docker", []string{"build", "--build-arg", "TAG=" + dockerTag, "--build-arg", "RECOMMIT=" + reCommit, "-t", dockerArchName, "-f", dockerfile, workDir}, nil)
 	if !success {
 		return false

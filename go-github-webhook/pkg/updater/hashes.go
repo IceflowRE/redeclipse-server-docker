@@ -5,12 +5,14 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
+	"fmt"
 	"io"
 	"io/ioutil"
-	"fmt"
 	"net/http"
 	"os"
 	"os/exec"
+
+	"github.com/IceflowRE/redeclipse-server-docker/pkg/structs"
 )
 
 func getFileHash(filename string) *string {
@@ -78,7 +80,7 @@ func getCommitHash(ref string) *string {
 	return &hash
 }
 
-func getNewHashes(dockerfile string, ref string, arch string, os string) *hash {
+func getNewHashes(dockerfile string, ref string, arch string, os string) *structs.Hash {
 	reCommit := getCommitHash(ref)
 	if reCommit == nil {
 		fmt.Println("failed to get git commit hash")
@@ -94,7 +96,7 @@ func getNewHashes(dockerfile string, ref string, arch string, os string) *hash {
 		fmt.Println("alpine hash failed")
 		return nil
 	}
-	return &hash{
+	return &structs.Hash{
 		Alpine:     *alpineHash,
 		Dockerfile: *dockerHash,
 		ReCommit:   *reCommit,

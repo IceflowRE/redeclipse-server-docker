@@ -2,32 +2,36 @@ package updater
 
 import (
 	"fmt"
+
+	"github.com/IceflowRE/redeclipse-server-docker/pkg/structs"
 )
 
-type BuildContext struct {
-	WorkDir         string
-	HashStorageFile string
-	DryRun          bool
-}
-
-func BuildStep(config *AppConfig, storage *HashStorage, buildCtx *BuildContext, build *buildConfig) bool {
+func Build(config *Config, storage *structs.HashStorage, build *BuildConfig, workDir string) bool {
 	fmt.Println("Update step: " + build.Ref + " - " + build.Arch + " - " + build.Os + " - " + build.Dockerfile)
-	curHash := storage.Get(build.Ref, build.Arch, build.Os)
+	curHash, err := storage.Get(build.Ref, build.Arch, build.Os)
+	if err != nil {
+		fmt.Println("failed to get current hashes:", err.Error())
+		return false
+	}
 	newHash := getNewHashes(build.Dockerfile, build.Ref, build.Arch, build.Os)
 	if newHash == nil {
 		fmt.Println("failed to get new hashes")
 		return false
 	}
-	fmt.Println("Current:", "alpine:", curHash.Alpine, "- dockerfile:", curHash.Dockerfile, "- recommit:", curHash.ReCommit)
-	fmt.Println("New:    ", "alpine:", newHash.Alpine, "- dockerfile:", newHash.Dockerfile, "- recommit:", newHash.ReCommit)
 
-	if *curHash == *newHash {
+	if curHash == nil {
+		fmt.Println("Current: alpine: - | dockerfile: - | recommit: -")
+	} else {
+		fmt.Println("Current:", "alpine:", curHash.Alpine, "| dockerfile:", curHash.Dockerfile, "| recommit:", curHash.ReCommit)
+	}
+	fmt.Println("New:    ", "alpine:", newHash.Alpine, "| dockerfile:", newHash.Dockerfile, "| recommit:", newHash.ReCommit)
+	if curHash != nil && *curHash == *newHash {
 		fmt.Println("No update required.")
 		return true
 	}
 	fmt.Println("Update required.")
 
-	if buildCtx.DryRun {
+	if config.DryRun {
 		fmt.Println("Dry run, stop here.")
 		return true
 	}
@@ -37,23 +41,26 @@ func BuildStep(config *AppConfig, storage *HashStorage, buildCtx *BuildContext, 
 		return false
 	}
 	defer dockerLogout()
-	if !dockerBuild(buildCtx.WorkDir, config.Docker.Repo, build.Dockerfile, build.Ref, build.Arch, newHash.ReCommit) {
+	if !dockerBuild(workDir, config.Docker.Repo, build.Dockerfile, build.Ref, build.Arch, newHash.ReCommit) {
 		return false
 	}
-	storage.Update(build.Ref, build.Arch, build.Os, newHash)
-	err := saveHashStorage(buildCtx.HashStorageFile, storage)
-	if err != nil {
-		fmt.Println("FAILED to save new hash values.")
+
+	if err = storage.Update(build.Ref, build.Arch, build.Os, newHash); err != nil {
+		fmt.Println("FAILED to save new hash values:", err.Error())
+		return false
+	}
+	if err = storage.SaveToFile(); err != nil {
+		fmt.Println("FAILED to save new hash values:", err.Error())
 		return false
 	}
 	fmt.Println("Saved new hash values.")
 	return true
 }
 
-func BuildLoop(config *AppConfig, storage *HashStorage, buildCtx *BuildContext) bool {
+func BuildLoop(config *Config, storage *structs.HashStorage, workDir string) bool {
 	success := true
 	for _, build := range config.Build {
-		if !BuildStep(config, storage, buildCtx, build) {
+		if !Build(config, storage, build, workDir) {
 			success = false
 		}
 	}

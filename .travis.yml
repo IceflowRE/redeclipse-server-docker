@@ -23,6 +23,7 @@ env:
     - REPO=iceflower/redeclipse-server
     - USER=iceflower
     - ARCH=amd64
+    - HASH_URL=https://api.iceflower.eu/webhook/github/redeclipse/base/hash
 
 jobs:
   include:
@@ -97,7 +98,7 @@ script:
   - go build -x -o updater ./cmd/updater/
   - cp ./updater ~/.rsd-updater/
   - cd ~/.rsd-updater/
-  - ./updater --dockerfile $DOCKERFILE --ref $TRAVIS_JOB_NAME --arch $ARCH --repo $REPO --user $USER --password $DOCKER_PASSWORD ./
+  - ./updater --dockerfile $DOCKERFILE --ref $TRAVIS_JOB_NAME --arch $ARCH --repo $REPO --user $USER --password $DOCKER_PASSWORD --hashUrl $HASH_URL --apiKey $HASH_API_KEY ./
 
 after_script:
   - docker logout
