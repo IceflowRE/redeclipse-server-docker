@@ -111,7 +111,7 @@ func EntryPoint() (config *Config, hashStorage *structs.HashStorage, workDir str
 	if hashStorage.IsLocal() {
 		fmt.Println("hash storage: local")
 	} else {
-		fmt.Println("ash storage:", config.HashApi.Url)
+		fmt.Println("hash storage:", config.HashApi.Url)
 	}
 	return config, hashStorage, workDir
 }
