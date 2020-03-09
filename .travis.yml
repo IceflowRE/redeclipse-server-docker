@@ -78,26 +78,10 @@ install:
   - mkdir -p ~/.docker/
   - bash ./ci/enable-experimental-docker.sh
 
-before_cache:
-  - rm ~/.rsd-updater/Dockerfile_master
-  - rm ~/.rsd-updater/Dockerfile_stable
-  - rm ~/.rsd-updater/.dockerignore
-
-cache:
-  directories:
-    - ~/.rsd-updater/
-
-before_script:
-  - mkdir -p ~/.rsd-updater/
-  - cp Dockerfile_stable ~/.rsd-updater/
-  - cp Dockerfile_master ~/.rsd-updater/
-  - cp .dockerignore ~/.rsd-updater/
-
 script:
   - cd go-github-webhook
-  - go build -x -o updater ./cmd/updater/
-  - cp ./updater ~/.rsd-updater/
-  - cd ~/.rsd-updater/
+  - go build -x -o ../updater ./cmd/updater/
+  - cd ../
   - ./updater --dockerfile $DOCKERFILE --ref $TRAVIS_JOB_NAME --arch $ARCH --repo $REPO --user $USER --password $DOCKER_PASSWORD --hashUrl $HASH_URL --apiKey $HASH_API_KEY ./
 
 after_script:
