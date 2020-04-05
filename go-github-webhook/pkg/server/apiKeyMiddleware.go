@@ -1,23 +1,25 @@
-package utils
+package server
 
 import (
 	"bytes"
 	"io/ioutil"
 	"net/http"
+
+	"github.com/IceflowRE/redeclipse-server-docker/pkg/server/utils"
 )
 
-func ApiKeyMiddleware(validKeys []string) func(http.Handler) http.Handler {
+func apiKeyMiddleware(validKeys []string) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(hrw http.ResponseWriter, req *http.Request) {
 			body, err := ioutil.ReadAll(req.Body)
-			if PrintError(err) {
-				SendErrorResponse(hrw, GenericErrorResp)
+			if utils.PrintError(err) {
+				utils.SendErrorResponse(hrw, utils.GenericErrorResp)
 				return
 			}
 
 			key, ok := req.Header["X-Iceflower-Apikey"]
 			if !ok {
-				SendErrorResponse(hrw, &ErrResp{400, "X-Iceflower-Apikey header is missing"})
+				utils.SendErrorResponse(hrw, &utils.ErrResp{400, "X-Iceflower-Apikey header is missing"})
 				return
 			}
 			isValid := false
@@ -28,7 +30,7 @@ func ApiKeyMiddleware(validKeys []string) func(http.Handler) http.Handler {
 				}
 			}
 			if !isValid {
-				SendErrorResponse(hrw, &ErrResp{401, "invalid api key"})
+				utils.SendErrorResponse(hrw, &utils.ErrResp{401, "invalid api key"})
 				return
 			}
 

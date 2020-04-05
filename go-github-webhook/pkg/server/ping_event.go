@@ -4,11 +4,9 @@ import (
 	"net/http"
 
 	"github.com/IceflowRE/redeclipse-server-docker/pkg/server/utils"
+	"github.com/google/go-github/v30/github"
 )
 
 func pingEvent(hrw http.ResponseWriter, req *http.Request) {
-	githubHeader := req.Context().Value("header").(*utils.GithubHeader)
-	utils.ResponseJSON(hrw, http.StatusOK,
-		postResp{"Ping accepted", githubHeader.Guid},
-	)
+	utils.ResponseJSON(hrw, http.StatusOK, postResp{"Ping accepted", github.DeliveryID(req)})
 }

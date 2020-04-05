@@ -20,9 +20,9 @@ func CreateRouter(appConfig *utils.Config, updaterConfig *updater.Config, storag
 	mRouter.Use(middleware.Timeout(20 * time.Second))
 
 	mRouter.Route("/", func(router chi.Router) {
-		router.With(utils.HeaderMiddle).With(utils.SignatureMiddle([]byte(*appConfig.WebhookSecret))).Post("/", EventHandler(updaterConfig, storage, workDir))
 		router.Get("/ping", PingGet)
-		router.With(utils.ApiKeyMiddleware(appConfig.ApiKeys)).Post("/hash", HashPost(storage))
+		router.With(githubMiddleware([]byte(*appConfig.WebhookSecret))).Post("/", EventHandler(updaterConfig, storage, workDir))
+		router.With(apiKeyMiddleware(appConfig.ApiKeys)).Post("/hash", HashPost(storage))
 	})
 	return mRouter
 }

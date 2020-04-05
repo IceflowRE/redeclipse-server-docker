@@ -6,6 +6,7 @@ import (
 	"github.com/IceflowRE/redeclipse-server-docker/pkg/server/utils"
 	"github.com/IceflowRE/redeclipse-server-docker/pkg/structs"
 	"github.com/IceflowRE/redeclipse-server-docker/pkg/updater"
+	"github.com/google/go-github/v30/github"
 )
 
 type postResp struct {
@@ -13,16 +14,17 @@ type postResp struct {
 	Guid    string `json:"guid"`
 }
 
+var supportedEvents = [...]string{"ping", "push"}
+
 func EventHandler(updaterConfig *updater.Config, storage *structs.HashStorage, workDir string) func(hrw http.ResponseWriter, req *http.Request) {
 	return func(hrw http.ResponseWriter, req *http.Request) {
-		githubHeader := req.Context().Value("header").(*utils.GithubHeader)
-		switch githubHeader.Event {
-		case "ping":
+		switch payload := req.Context().Value("header").(type) {
+		case *github.PingEvent:
 			pingEvent(hrw, req)
-		case "push":
-			pushEvent(hrw, req, updaterConfig, storage, workDir)
+		case *github.CreateEvent:
+			pushEvent(hrw, req, updaterConfig, storage, workDir, payload)
 		default:
-			utils.SendErrorResponse(hrw, &utils.ErrResp{Status: http.StatusOK, Message: "'" + githubHeader.Event + "' is not supported, aborting"})
+			utils.ResponseJSON(hrw, http.StatusOK, postResp{"'" + github.WebHookType(req) + "' is not supported,aborting", github.DeliveryID(req)})
 			return
 		}
 	}
