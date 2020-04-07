@@ -18,7 +18,7 @@ var supportedEvents = [...]string{"ping", "push"}
 
 func EventHandler(updaterConfig *updater.Config, storage *structs.HashStorage, workDir string) func(hrw http.ResponseWriter, req *http.Request) {
 	return func(hrw http.ResponseWriter, req *http.Request) {
-		switch payload := req.Context().Value("header").(type) {
+		switch payload := req.Context().Value("payload").(type) {
 		case *github.PingEvent:
 			pingEvent(hrw, req)
 		case *github.CreateEvent:
