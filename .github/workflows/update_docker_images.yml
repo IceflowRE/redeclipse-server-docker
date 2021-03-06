@@ -1,0 +1,75 @@
+on:
+  push:
+    branches:
+      - main
+
+name: Update Docker images
+jobs:
+  update:
+    name: ${{ matrix.config.ref }}
+    runs-on: ubuntu-latest
+    env:
+      RSD_REPO: iceflower/redeclipse-server
+      RSD_USER: iceflower
+      RSD_ARCH: amd64
+      RSD_HASH_URL: https://api.iceflower.eu/webhook/github/redeclipse/base/hash
+      RSD_DOCKER_ACCESS_TOKEN: ${{ secrets.RSD_DOCKER_ACCESS_TOKEN }}
+      RSD_HASH_API_KEY: ${{ secrets.RSD_HASH_API_KEY }}
+    strategy:
+      matrix:
+        config:
+          - {
+            ref: "refs/heads/master",
+            dockerfile: "Dockerfile_master"
+          }
+          - {
+            ref: "refs/heads/stable",
+            dockerfile: "Dockerfile_stable"
+          }
+          - {
+            ref: "refs/tags/v1.5.3",
+            dockerfile: "Dockerfile_stable"
+          }
+          - {
+            ref: "refs/tags/v1.5.5",
+            dockerfile: "Dockerfile_stable"
+          }
+          - {
+            ref: "refs/tags/v1.5.6",
+            dockerfile: "Dockerfile_stable"
+          }
+          - {
+            ref: "refs/tags/v1.5.8",
+            dockerfile: "Dockerfile_stable"
+          }
+          - {
+            ref: "refs/tags/v1.6.0",
+            dockerfile: "Dockerfile_stable"
+          }
+          - {
+            ref: "refs/tags/v2.0.0",
+            dockerfile: "Dockerfile_master"
+          }
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cache updater executable
+        id: cache-updater
+        uses: actions/cache@v2
+        with:
+          path: updater
+          key: ${{ runner.os }}-${{ hashFiles('updater') }}
+      - name: Install Go
+        if: steps.cache-updater.outputs.cache-hit != 'true'
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16.x
+      - name: Build
+        if: steps.cache-updater.outputs.cache-hit != 'true'
+        run: |
+          cd go-github-webhook
+          go build -x -o ../updater ./cmd/updater/
+          cd ../
+      - name: Update
+        run: |
+          ./updater --dockerfile "${{ matrix.config.dockerfile }}" --ref "${{ matrix.config.ref }}" --arch "$RSD_ARCH" --repo "$RSD_REPO" --user "$RSD_USER" --password "$RSD_DOCKER_ACCESS_TOKEN" --hashUrl "$RSD_HASH_URL" --apiKey "$RSD_HASH_API_KEY" ./

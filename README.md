@@ -1,6 +1,8 @@
 # Red Eclipse Server Docker
 [![maintained](https://img.shields.io/badge/maintained-yes-brightgreen.svg)][github]
+[![Build](https://github.com/IceflowRE/redeclipse-server-docker/actions/workflows/build.yml/badge.svg)](https://github.com/IceflowRE/redeclipse-server-docker/actions/workflows/build.yml)
 [![DockerHub](https://img.shields.io/badge/Docker_Hub--FF69A4.svg?style=social)][docker hub]
+
 ---
 
 This provides the source for an easy handling and maintaining Docker image of a [Red Eclipse](https://redeclipse.net/) Server.  
@@ -12,18 +14,23 @@ Currently the Docker images are build against the latest commits and will be che
 ## Images
 Latest images are available at [Docker Hub][docker hub].  
 Pull them with `docker pull iceflower/redeclipse-server:<tag>`.
-All images are available for `amd64` and `arm64/v8`, `amd64` images are build with [Travis CI][travis ci], `arm64/v8` images are build on an own server.
+All images are available for `amd64` and `arm64/v8`, `amd64` images are build with [GitHub Actions][github actions], `arm64/v8` images are build on an own server.
 
-|   Tag  |   RE Version  |            amd64            |          arm64          |
-|:------:|:-------------:|:---------------------------:|:-----------------------:|
-| master | master branch |  [![][travis 3]][travis ci] | [![][no build]][github] |
-| stable | stable branch |  [![][travis 4]][travis ci] | [![][no build]][github] |
-| v2.0.0 |     2.0.0     | [![][travis 10]][travis ci] | [![][no build]][github] |
-| v1.6.0 |     1.6.0     |  [![][travis 9]][travis ci] | [![][no build]][github] |
-| v1.5.8 |     1.5.8     |  [![][travis 8]][travis ci] | [![][no build]][github] |
-| v1.5.6 |     1.5.6     |  [![][travis 7]][travis ci] | [![][no build]][github] |
-| v1.5.5 |     1.5.5     |  [![][travis 6]][travis ci] | [![][no build]][github] |
-| v1.5.3 |     1.5.3     |  [![][travis 5]][travis ci] | [![][no build]][github] |
+| Arch  |     Status    |
+|:-----:|:-------------:|
+| amd64 | [![][github actions images]][github actions] |
+| arm64 | [![][no build]][github] |
+
+Available tags are
+
+- master
+- stable
+- v1.5.3
+- v1.5.5
+- v1.5.6
+- v1.5.8
+- v1.6.0
+- v2.0.0
 
 ## Usage
 Replace the variables with the respective values.
@@ -121,15 +128,8 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/gpl.html>.
 
 
-[travis ci]: https://travis-ci.com/IceflowRE/redeclipse-server-docker
+[github actions]: https://github.com/IceflowRE/redeclipse-server-docker/actions
+[github actions images]: https://img.shields.io/github/workflow/status/IceflowRE/redeclipse-server-docker/Update%20Docker%20images
 [github]: https://github.com/IceflowRE/redeclipse-server-docker
 [docker hub]: https://hub.docker.com/r/iceflower/redeclipse-server
 [no build]: https://img.shields.io/badge/build-inaccessible-lightgrey.svg
-[travis 3]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/redeclipse-server-docker/branches/master/3?use_travis_com=true
-[travis 4]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/redeclipse-server-docker/branches/master/4?use_travis_com=true
-[travis 5]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/redeclipse-server-docker/branches/master/5?use_travis_com=true
-[travis 6]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/redeclipse-server-docker/branches/master/6?use_travis_com=true
-[travis 7]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/redeclipse-server-docker/branches/master/7?use_travis_com=true
-[travis 8]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/redeclipse-server-docker/branches/master/8?use_travis_com=true
-[travis 9]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/redeclipse-server-docker/branches/master/9?use_travis_com=true
-[travis 10]: https://travis-matrix-badges.herokuapp.com/repos/IceflowRE/redeclipse-server-docker/branches/master/10?use_travis_com=true

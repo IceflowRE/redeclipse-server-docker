@@ -1,0 +1,22 @@
+on: [push, pull_request]
+name: Build
+jobs:
+  build:
+    name: ${{ matrix.os }} ${{ matrix.go-version }} ${{ matrix.tool }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        tool: [updater, server]
+        go-version: [1.15.x, 1.16.x]
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go-version }}
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        run: |
+          cd go-github-webhook
+          go build -x -o ${{ matrix.tool }} ./cmd/${{ matrix.tool }}/
