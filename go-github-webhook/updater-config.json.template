@@ -5,7 +5,7 @@
         "password": "My Password is strong."
     },
     "hashApi": {
-        "url": "localhost:28813",
+        "url": "localhost:42000",
         "apiKey": "testkey"
     },
     "dryRun": false,
