@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/IceflowRE/redeclipse-server-docker/pkg/server/utils"
-	"github.com/google/go-github/v30/github"
+	"github.com/google/go-github/v33/github"
 )
 
 func pingEvent(hrw http.ResponseWriter, req *http.Request) {

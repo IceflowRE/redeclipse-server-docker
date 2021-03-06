@@ -6,7 +6,7 @@ import (
 	"github.com/IceflowRE/redeclipse-server-docker/pkg/server/utils"
 	"github.com/IceflowRE/redeclipse-server-docker/pkg/structs"
 	"github.com/IceflowRE/redeclipse-server-docker/pkg/updater"
-	"github.com/google/go-github/v30/github"
+	"github.com/google/go-github/v33/github"
 )
 
 type postResp struct {
