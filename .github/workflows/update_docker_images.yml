@@ -67,7 +67,7 @@ jobs:
       - name: Build
         if: steps.cache-updater.outputs.cache-hit != 'true'
         run: |
-          cd go-github-webhook
+          cd go-docker-updater
           go build -x -o ../updater ./cmd/updater/
           cd ../
       - name: Update
