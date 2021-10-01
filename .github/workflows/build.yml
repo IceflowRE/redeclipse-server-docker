@@ -17,5 +17,5 @@ jobs:
         uses: actions/checkout@v2
       - name: Build
         run: |
-          cd go-github-webhook
+          cd go-docker-updater
           go build -x -o updater ./cmd/updater/
