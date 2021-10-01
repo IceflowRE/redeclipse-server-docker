@@ -1,6 +1,6 @@
 # Red Eclipse Server Docker
 [![maintained](https://img.shields.io/badge/maintained-yes-brightgreen.svg)][github]
-[![Build](https://github.com/IceflowRE/redeclipse-server-docker/actions/workflows/build.yml/badge.svg)](https://github.com/IceflowRE/redeclipse-server-docker/actions/workflows/build.yml)
+[![][github actions images]][github actions]
 [![DockerHub](https://img.shields.io/badge/Docker_Hub--FF69A4.svg?style=social)][docker hub]
 
 ---
@@ -23,14 +23,14 @@ All images are available for `amd64` and `arm64/v8`, `amd64` images are build wi
 
 Available tags are
 
-- master
-- stable
-- v1.5.3
-- v1.5.5
-- v1.5.6
-- v1.5.8
-- v1.6.0
-- v2.0.0
+- `master` - master branch
+- `stable` - stable branch
+- `v1.5.3`
+- `v1.5.5`
+- `v1.5.6`
+- `v1.5.8`
+- `v1.6.0`
+- `v2.0.0`
 
 ## Usage
 Replace the variables with the respective values.
@@ -109,7 +109,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 The Red Eclipse server files are using [THE RED ECLIPSE LICENSE](https://github.com/redeclipse/base/blob/master/doc/license.txt).
 
-[github actions]: https://github.com/IceflowRE/redeclipse-server-docker/actions
+[github actions]: https://github.com/IceflowRE/redeclipse-server-docker/actions/workflows/update_docker_images.yml
 [github actions images]: https://img.shields.io/github/workflow/status/IceflowRE/redeclipse-server-docker/Update%20Docker%20images
 [github]: https://github.com/IceflowRE/redeclipse-server-docker
 [docker hub]: https://hub.docker.com/r/iceflower/redeclipse-server
