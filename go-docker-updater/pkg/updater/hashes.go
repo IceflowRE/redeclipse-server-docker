@@ -6,14 +6,19 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"github.com/felicianotech/sonar/sonar/docker"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"os/exec"
-
-	"github.com/IceflowRE/redeclipse-server-docker/pkg/structs"
 )
+
+type Hash struct {
+	Alpine     string
+	Dockerfile string
+	ReCommit   string
+}
 
 func getFileHash(filename string) *string {
 	file, err := os.Open(filename)
@@ -80,7 +85,7 @@ func getCommitHash(ref string) *string {
 	return &hash
 }
 
-func getNewHashes(dockerfile string, ref string, arch string, os string) *structs.Hash {
+func GetNewHashes(dockerfile string, ref string, arch string, os string) *Hash {
 	reCommit := getCommitHash(ref)
 	if reCommit == nil {
 		fmt.Println("failed to get git commit hash")
@@ -96,9 +101,22 @@ func getNewHashes(dockerfile string, ref string, arch string, os string) *struct
 		fmt.Println("alpine hash failed")
 		return nil
 	}
-	return &structs.Hash{
+	return &Hash{
 		Alpine:     *alpineHash,
 		Dockerfile: *dockerHash,
 		ReCommit:   *reCommit,
 	}
+}
+
+func GetCurrentHashes(dockerRepo string, ref string) (*Hash, error) {
+	labels, err := docker.GetLabels(dockerRepo + ":" + DockerTagFromRef(ref))
+	if err != nil {
+		return nil, err
+	}
+
+	return &Hash{
+		ReCommit:   labels["re-commit"],
+		Alpine:     labels["alpine-sha"],
+		Dockerfile: labels["dockerfile-sha"],
+	}, nil
 }

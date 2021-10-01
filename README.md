@@ -74,20 +74,18 @@ Copy and paste the whole section below the point `services` and change the value
 - Shutdown and wait a maximum of 10 minutes before forcing  
 `docker-compose stop --time=600 master`
 
-## Updater and Webhook listener
+## Updater
 
 Build with
 
 ```shell
-cd go-github-webhook
+cd go-docker-updater
 go build -x -o updater ./cmd/updater/
-go build -x -o server ./cmd/server/
 ```
 
 For more options see `--help`.
 
 The updater can be used to update the docker images.  
-The server listens for webhooks from the redeclipse/base repository and updates the images on every new commit.
 
 ## Web
 https://github.com/IceflowRE/redeclipse-server-docker
@@ -98,14 +96,8 @@ https://github.com/IceflowRE/redeclipse-server-docker
     - iceflower@gmx.de
 
 ## License
-The Red Eclipse server files are using [THE RED ECLIPSE LICENSE](https://github.com/redeclipse/base/blob/master/doc/license.txt).
 
----
-docker-compose files:
-
-**The MIT License**
-
-Copyright 2017 - now Iceflower S
+Copyright 2017-preset Iceflower S
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -115,18 +107,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ---
 
-Anything else:
-
-![Image of GPLv3](http://www.gnu.org/graphics/gplv3-127x51.png)
-
-Copyright 2017 - now © Iceflower S
-
-This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/gpl.html>.
-
+The Red Eclipse server files are using [THE RED ECLIPSE LICENSE](https://github.com/redeclipse/base/blob/master/doc/license.txt).
 
 [github actions]: https://github.com/IceflowRE/redeclipse-server-docker/actions
 [github actions images]: https://img.shields.io/github/workflow/status/IceflowRE/redeclipse-server-docker/Update%20Docker%20images

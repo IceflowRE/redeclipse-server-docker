@@ -14,9 +14,7 @@ jobs:
       RSD_REPO: iceflower/redeclipse-server
       RSD_USER: iceflower
       RSD_ARCH: amd64
-      RSD_HASH_URL: https://api.iceflower.eu/webhook/github/redeclipse/base/hash
       RSD_DOCKER_ACCESS_TOKEN: ${{ secrets.RSD_DOCKER_ACCESS_TOKEN }}
-      RSD_HASH_API_KEY: ${{ secrets.RSD_HASH_API_KEY }}
     strategy:
       matrix:
         config:
@@ -74,4 +72,4 @@ jobs:
           cd ../
       - name: Update
         run: |
-          ./updater --dockerfile "${{ matrix.config.dockerfile }}" --ref "${{ matrix.config.ref }}" --arch "$RSD_ARCH" --repo "$RSD_REPO" --user "$RSD_USER" --password "$RSD_DOCKER_ACCESS_TOKEN" --hashUrl "$RSD_HASH_URL" --apiKey "$RSD_HASH_API_KEY" ./
+          ./updater --dockerfile "${{ matrix.config.dockerfile }}" --ref "${{ matrix.config.ref }}" --arch "$RSD_ARCH" --repo "$RSD_REPO" --user "$RSD_USER" --password "$RSD_DOCKER_ACCESS_TOKEN" ./

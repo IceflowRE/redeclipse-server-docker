@@ -1,7 +1,8 @@
-package structs
+package updater
 
 import (
 	"os"
+	"strings"
 )
 
 func FileExists(filename string) bool {
@@ -15,4 +16,8 @@ func FileExists(filename string) bool {
 func DirectoryExists(dir string) bool {
 	_, err := os.Stat(dir)
 	return !os.IsNotExist(err)
+}
+
+func DockerTagFromRef(ref string) string {
+	return ref[strings.LastIndex(ref, "/")+1:]
 }

@@ -3,15 +3,22 @@ FROM alpine
 
 # redeclipse tag
 ARG TAG
-# redeclipse commit
-ARG RECOMMIT
+# redeclipse commit sha
+ARG RE_COMMIT
+# alpine base sha
+ARG ALPINE_SHA
+# dockerfile sha
+ARG DOCKERFILE_SHA
 
-# informations
-LABEL author="Iceflower S" \
-      maintainer="Iceflower S" \
-      email="iceflower@gmx.de" \
-      description="Red Eclipse Server - $TAG" \
-      re-commit="$RECOMMIT"
+# information
+LABEL author="Iceflower S"
+LABEL maintainer="Iceflower S"
+LABEL email="iceflower@gmx.de"
+LABEL description="Red Eclipse Server - $TAG"
+LABEL re-tag="$TAG"
+LABEL re-commit="$RE_COMMIT"
+LABEL alpine-sha="$ALPINE_SHA"
+LABEL dockerfile-sha="$DOCKERFILE_SHA"
 
 # Add server user and set permissions
 RUN adduser -S -D redeclipse \

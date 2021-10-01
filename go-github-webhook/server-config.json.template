@@ -1,8 +1,0 @@
-{
-    "port": 42000,
-    "webhookSecret": "top secrect!!",
-    "updaterConfig": "updater-config.json",
-    "apiKeys": [
-        "testkey"
-    ]
-}

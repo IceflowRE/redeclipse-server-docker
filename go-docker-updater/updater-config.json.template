@@ -4,10 +4,6 @@
         "user": "iceflower",
         "password": "My Password is strong."
     },
-    "hashApi": {
-        "url": "localhost:42000",
-        "apiKey": "testkey"
-    },
     "dryRun": false,
     "build": [
         {

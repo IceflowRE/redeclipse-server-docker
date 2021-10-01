@@ -5,20 +5,12 @@ import (
 	"errors"
 	"io/ioutil"
 	"path/filepath"
-
-	"github.com/IceflowRE/redeclipse-server-docker/pkg/structs"
 )
 
 type Config struct {
 	Docker  *dockerConfig  `json:"docker"`
 	Build   []*BuildConfig `json:"build"`
-	HashApi *hashConfig    `json:"hashApi"`
 	DryRun  bool           `json:"dryRun"`
-}
-
-type hashConfig struct {
-	Url    string `json:"url"`
-	ApiKey string `json:"apiKey"`
 }
 
 type dockerConfig struct {
@@ -34,7 +26,7 @@ type BuildConfig struct {
 	Dockerfile string `json:"dockerfile"`
 }
 
-func newConfig(repo string, user string, password string, ref string, arch string, dockerfile string, hashUrl string, apiKey string, dryRun bool) *Config {
+func newConfig(repo string, user string, password string, ref string, arch string, dockerfile string, dryRun bool) *Config {
 	return &Config{
 		Docker: &dockerConfig{
 			Repo:     repo,
@@ -48,10 +40,6 @@ func newConfig(repo string, user string, password string, ref string, arch strin
 				Os:         "linux",
 				Dockerfile: dockerfile,
 			},
-		},
-		HashApi: &hashConfig{
-			Url:    hashUrl,
-			ApiKey: apiKey,
 		},
 		DryRun: dryRun,
 	}
@@ -71,12 +59,6 @@ func (config *Config) check() error {
 		return errors.New("config: 'build' is missing")
 	case len(config.Build) == 0:
 		return errors.New("config: 'build' is empty")
-	case config.HashApi != nil:
-		if config.HashApi.Url == "" {
-			return errors.New("config: 'hashApi > url' is empty")
-		} else if config.HashApi.ApiKey == "" {
-			return errors.New("config: 'hashApi > apiKey' is empty")
-		}
 	}
 	for idx, build := range config.Build {
 		switch {
@@ -96,7 +78,7 @@ func (config *Config) check() error {
 func (config *Config) CheckDockerfiles(workDir string) error {
 	for _, build := range config.Build {
 		build.Dockerfile = filepath.Join(workDir, build.Dockerfile)
-		if !structs.FileExists(build.Dockerfile) {
+		if !FileExists(build.Dockerfile) {
 			return errors.New("Dockerfile '" + build.Dockerfile + "' does not exist.")
 		}
 	}

@@ -1,17 +1,16 @@
 package main
 
 import (
-	"os"
-
 	"github.com/IceflowRE/redeclipse-server-docker/pkg/updater"
+	"os"
 )
 
 func main() {
-	config, storage, workDir := updater.EntryPoint()
+	config, workDir := updater.EntryPoint()
 	if config == nil {
 		os.Exit(1)
 	}
-	if !updater.BuildLoop(config, storage, workDir) {
+	if !updater.BuildLoop(config, workDir) {
 		os.Exit(2)
 	}
 }
