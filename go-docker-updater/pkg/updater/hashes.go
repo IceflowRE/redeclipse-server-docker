@@ -108,8 +108,8 @@ func GetNewHashes(dockerfile string, ref string, arch string, os string) *Hash {
 	}
 }
 
-func GetCurrentHashes(dockerRepo string, ref string) (*Hash, error) {
-	labels, err := docker.GetLabels(dockerRepo + ":" + DockerTagFromRef(ref))
+func GetCurrentHashes(dockerRepo string, ref string, arch string) (*Hash, error) {
+	labels, err := docker.GetLabels(dockerRepo + ":" + arch + "-" + DockerTagFromRef(ref))
 	if err != nil {
 		return nil, err
 	}

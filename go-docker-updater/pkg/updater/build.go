@@ -9,7 +9,7 @@ import (
 
 func Build(config *Config, build *BuildConfig, workDir string) bool {
 	fmt.Println("Update step: " + build.Ref + " - " + build.Arch + " - " + build.Os + " - " + build.Dockerfile)
-	curHash, err := GetCurrentHashes(config.Docker.Repo, build.Ref)
+	curHash, err := GetCurrentHashes(config.Docker.Repo, build.Ref, build.Arch)
 	if err != nil {
 		fmt.Println("failed to get current hashes")
 		return false
