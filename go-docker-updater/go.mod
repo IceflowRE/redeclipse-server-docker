@@ -1,5 +1,5 @@
 module github.com/IceflowRE/redeclipse-server-docker
 
-go 1.16
+go 1.18
 
-require github.com/felicianotech/sonar v0.14.1
+require github.com/felicianotech/sonar v0.18.0

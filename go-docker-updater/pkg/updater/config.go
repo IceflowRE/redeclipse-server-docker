@@ -3,7 +3,7 @@ package updater
 import (
 	"encoding/json"
 	"errors"
-	"io/ioutil"
+	"os"
 	"path/filepath"
 )
 
@@ -86,7 +86,7 @@ func (config *Config) CheckDockerfiles(workDir string) error {
 }
 
 func LoadConfig(file string) (*Config, error) {
-	raw, err := ioutil.ReadFile(file)
+	raw, err := os.ReadFile(file)
 	if err != nil {
 		return nil, err
 	}
