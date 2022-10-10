@@ -27,8 +27,8 @@ RUN adduser -S -D redeclipse \
 
 # Update application repository list, create build dir, build server, move server files, create other permanent files and clean up
 RUN apk update \
-    && echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && apk add --no-cache --virtual build-deps gcc g++ zlib-dev openal-soft-dev libsndfile-dev freealut-dev@testing git ca-certificates freetype-dev coreutils cmake make \
+    && apk add --no-cache --virtual build-deps2 -X https://dl-cdn.alpinelinux.org/alpine/edge/testing freealut-dev \
     && apk add --no-cache libstdc++ \
     && git clone --depth 1 -b "$TAG" https://github.com/redeclipse/base /temp \
     \
@@ -50,6 +50,7 @@ RUN apk update \
     \
     && apk update \
     && apk del build-deps \
+    && apk del build-deps2 \
     && rm -rf /temp/
 
 # Add folder
