@@ -6,6 +6,13 @@ version: '3.8'
 services:
     master:
         image: iceflower/redeclipse-server:master
+        build:
+            dockerfile: Dockerfile_master
+            args:
+                TAG: master
+                RE_COMMIT: ignore
+                ALPINE_SHA: ignore
+                DOCKERFILE_SHA: ignore
         ports:
             - "28801:28801/udp"
             - "28802:28802/udp"

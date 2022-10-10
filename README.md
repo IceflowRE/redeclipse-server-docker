@@ -12,14 +12,15 @@ Currently the Docker images are build against the latest commits and will be che
 ---
 
 ## Images
+
 Latest images are available at [Docker Hub][docker hub].  
 Pull them with `docker pull iceflower/redeclipse-server:<tag>`.
 All images are available for `amd64` and `arm64/v8`, `amd64` images are build with [GitHub Actions][github actions], `arm64/v8` images are build on an own server.
 
-| Arch  |     Status    |
-|:-----:|:-------------:|
+| Arch  |                   Status                     |
+|:-----:|:--------------------------------------------:|
 | amd64 | [![][github actions images]][github actions] |
-| arm64 | [![][no build]][github] |
+| arm64 |           [![][no build]][github]            |
 
 Available tags are
 
@@ -42,7 +43,19 @@ Replace the variables with the respective values.
   ***you can link host directories inside the docker container, if dont want to link a directory just leave off the specific `-v` parameter.***
   - `<re home dir>` RE home directory on your host system, **must linked**
   - `<re package dir>` package directory, inside you can place a maps directory, on your host system
-  - `<sauerbraten dir>` sauerbraten directory on your host system
+  - `<sauerbraten dir>` sauerbraten directory on your host system (only available for < v2.0.0)
+
+### Build image yourself
+
+Edit the build section in `docker-compose.yml` and use the correct dockerfile.
+
+| Version  |     Dockerfile      |
+|:--------:|:-------------------:|
+|  master  | `Dockerfile_master` |
+|  v2.0.0  | `Dockerfile_2_0_0`  |
+| < v2.0.0 | `Dockerfile_stable` |
+
+Then use `docker compose build`
 
 ### Docker Compose (recommend)
 - Create own Docker Compose file, as base you can use [docker-compose.yml.template](./docker-compose.yml.template)  
@@ -50,13 +63,13 @@ Replace the variables with the respective values.
   - *Change all the `<variable>` inside the file, to their respective values*
 
 - Pull latest docker image from Docker Hub for all defined services  
-`docker-compose pull`
+`docker compose pull`
 
 - Start/ Restart container (for all specified services, dont write any name)  
-`docker-compose -p re-server up -d <name>`
+`docker compose -p re-server up -d <name>`
 
 - Shutdown and wait a maximum of 10 seconds before forcing (for all specified services, dont write any name)  
-`docker-compose stop <name>`
+`docker compose stop <name>`
 
 #### Multiple Server
 Copy and paste the whole section below the point `services` and change the values. Then start it with the new other name.
@@ -66,13 +79,13 @@ Copy and paste the whole section below the point `services` and change the value
 [docker-compose.yml.example](./docker-compose.yml.example)
 
 - Pull latest docker image from Docker Hub for all defined services  
-`docker-compose pull`
+`docker compose pull`
 
 - Start/ Restart container  
-`docker-compose -p re-server up -d master`
+`docker compose -p re-server up -d master`
 
 - Shutdown and wait a maximum of 10 minutes before forcing  
-`docker-compose stop --time=600 master`
+`docker compose stop --time=600 master`
 
 ## Updater
 
