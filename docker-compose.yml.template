@@ -9,7 +9,7 @@ services:
         build:
             dockerfile: <dockerfile>
             args:
-                TAG: <tag>
+                TAG: <git reference>
                 RE_COMMIT: ignore
                 ALPINE_SHA: ignore
                 DOCKERFILE_SHA: ignore
