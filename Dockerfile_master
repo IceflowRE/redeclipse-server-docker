@@ -33,12 +33,9 @@ RUN echo "@edge-testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /
     && apk add --no-cache libstdc++ \
     && git clone --depth 1 -b "$TAG" https://github.com/redeclipse/base /temp \
     \
-    && mkdir /temp/build \
-    && cd /temp/build \
-    && cmake ../src -DBUILD_CLIENT=0 -DWANT_STEAM=0 -DWANT_DISCORD=0 \
-    && make clean install -j"$(nproc)" \
     && mkdir -p /redeclipse/bin/native \
-    && mv /temp/build/redeclipse_server_linux /redeclipse/bin/native/ \
+    && cd /temp \
+    && make INSTDIR="/redeclipse/bin/native/" CFLAGS="-m64 -O3 -fomit-frame-pointer -ffast-math -fno-finite-math-only" CXXFLAGS="-m64 -O3 -fomit-frame-pointer -ffast-math -fno-finite-math-only" LDFLAGS="-m64" -O -j 4 -C src install-server \
     \
     && mkdir -p /redeclipse/config \
     && mv /temp/config/ /redeclipse/ \
