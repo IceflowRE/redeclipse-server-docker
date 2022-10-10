@@ -48,7 +48,7 @@ jobs:
           }
           - {
             ref: "refs/tags/v2.0.0",
-            dockerfile: "Dockerfile_master"
+            dockerfile: "Dockerfile_2_0_0"
           }
     steps:
       - name: Checkout

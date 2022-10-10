@@ -64,7 +64,7 @@
             "ref": "refs/tags/v2.0.0",
             "arch": "amd64",
             "os": "linux",
-            "dockerfile": "Dockerfile_master"
+            "dockerfile": "Dockerfile_2_0_0"
         }
     ]
 }
