@@ -3,102 +3,153 @@
 [![maintained](https://img.shields.io/badge/maintained-yes-brightgreen.svg)][github]
 [![][github actions images]][github actions]
 [![DockerHub](https://img.shields.io/badge/Docker_Hub--FF69A4.svg?style=social)][docker hub]
+[![Github](https://img.shields.io/badge/Github--FF69A4.svg?style=social)][github]
 
 ---
 
 This provides the source for an easy handling and maintaining Docker image of a [Red Eclipse](https://redeclipse.net/)
 Server.  
-Additional with an Go console application which can be run automatically to update the images.  
+Additional with a Go console application which will update the DockerHub images.  
 Currently the Docker images are build against the latest commits and will be checked for updates once a day.
 
 ---
 
-## Images
+## Supported tags and respective `Dockerfile` links
 
-Latest images are available at [Docker Hub][docker hub].  
-Pull them with `docker pull iceflower/redeclipse-server:<tag>`.
-All images are available for `amd64` and `arm64/v8`, `amd64` images are build with [GitHub Actions][github actions]
-, `arm64/v8` images are build on an own server.
+- [`master`](https://github.com/IceflowRE/redeclipse-server-docker/blob/main/Dockerfile_master)
+- [`stable`](https://github.com/IceflowRE/redeclipse-server-docker/blob/main/Dockerfile_stable)
+- [`v1.5.3`](https://github.com/IceflowRE/redeclipse-server-docker/blob/main/Dockerfile_stable)
+- [`v1.5.5`](https://github.com/IceflowRE/redeclipse-server-docker/blob/main/Dockerfile_stable)
+- [`v1.5.6`](https://github.com/IceflowRE/redeclipse-server-docker/blob/main/Dockerfile_stable)
+- [`v1.5.8`](https://github.com/IceflowRE/redeclipse-server-docker/blob/main/Dockerfile_stable)
+- [`v1.6.0`](https://github.com/IceflowRE/redeclipse-server-docker/blob/main/Dockerfile_stable)
+- [`v2.0.0`](https://github.com/IceflowRE/redeclipse-server-docker/blob/main/Dockerfile_2_0_0)
 
-| Arch  |                    Status                    |
-|:-----:|:--------------------------------------------:|
-| amd64 | [![][github actions images]][github actions] |
-| arm64 |           [![][no build]][github]            |
+\* *`stable` does not mark the latest stable release, it tags the latest legacy version (v1.x.x)*
 
-Available tags are
+Available architectures are `amd64`.
 
-- `master` - master branch
-- `stable` - stable branch
-- `v1.5.3`
-- `v1.5.5`
-- `v1.5.6`
-- `v1.5.8`
-- `v1.6.0`
-- `v2.0.0`
+If your architecture is not available check if RE can be build on that architecture and follow [An image is not available for my architecture?!
+](#An image is not available for my architecture?!).
 
-## Usage
+## How to use this image
 
-Replace the variables with the respective values.
+We will use docker compose as it is the easiest way to manage the running container.
 
-- `<name>` a container name, under which it will run
-- `<tag>` an available image tag (either `master`, `stable-re2` or `stable`)
-- `<serverport>` the serverport specified inside the `servinit.cfg` from your server
-- `<serverport + 1>` the serverport + 1  
-  ***you can link host directories inside the docker container, if dont want to link a directory just leave off the
-  specific `-v` parameter.***
-- `<re home dir>` RE home directory on your host system, **must linked**
-- `<re package dir>` package directory, inside you can place a maps directory, on your host system
-- `<sauerbraten dir>` sauerbraten directory on your host system (only available for < v2.0.0)
+Create a Docker Compose file and name it `docker-compose.yml`, as a starting point you can use [docker-compose-template.yml](https://github.com/IceflowRE/redeclipse-server-docker/blob/main/docker-compose-template.yml)
 
-### Build image yourself
+Replace the `<variable>` including the brackets.
 
-Edit the build section in `docker-compose.yml` and use the correct `dockerfile` and `TAG` (replace the X.X.X with the
-version you want).
+```yml
+services:
+    # <service_name>: the name to access this later (e.g. `master`, `v2_0_0`)
+    <service_name>:
+        # <tag>: the image tag you want to use (e.g. `master`, `v2.0.0`)
+        image: iceflower/redeclipse-server:<tag>
+        ports:
+            # <serverport>: this port will be published and accessible from outside,
+            # the port number must match port defined in RE's `servinit.cfg`
+            - "<serverport>:<serverport>/udp"
+            # <serverport + 1>: the server port above plus one
+            - "<serverport + 1>:<serverport + 1>/udp"
+        restart: unless-stopped
+        volumes:
+            # <RE home dir>: path to the RE home/ config directory on your host system 
+            # (e.g. `/home/iceflower/re-master/home`)
+            - type: bind
+              source: <RE home dir>
+              target: /re-server-config/home
+              read_only: true
+            # <RE package dir>: path to the RE package directory on your host system, you can place custom maps there
+            # if you do not want this, just remove this section (e.g. `/home/iceflower/re-master/package`)
+            - type: bind
+              source: /home/iceflower/redeclipse-config/package
+              target: /re-server-config/package
+              read_only: true
+            # <sauerbraten dir>: path to a Sauerbraten directory/installation
+            # if you use a version higher or equal `v2.0.0` or `master` remove this section
+            # (e.g. `/home/iceflower/sauerbraten`)
+            - type: bind
+              source: <sauerbraten dir>
+              target: /re-server-config/sauer
+              read_only: true
+        logging:
+            options:
+                max-size: "2000k"
+                max-file: "10"
+```
 
-| Version  |     Dockerfile      |  Tag   |
-|:--------:|:-------------------:|:------:|
-|  master  | `Dockerfile_master` | master |
-|  stable  | `Dockerfile_stable` | stable |
-|  v2.0.0  | `Dockerfile_2_0_0`  | v2.0.0 |
-| < v2.0.0 | `Dockerfile_stable` | vX.X.X |
+To pull/start/stop a specific service add the service name to the end otherwise, it is applied to all.
 
-Then use `docker compose build`
-
-### Docker Compose (recommend)
-
-- Create own Docker Compose file, as base you can use [docker-compose.yml.template](./docker-compose.yml.template)
-    - *Create a copy with name `docker-compose.yml`*
-    - *Change all the `<variable>` inside the file, to their respective values*
-
-- Pull latest docker image from Docker Hub for all defined services  
-  `docker compose pull`
-
-- Start/ Restart container (for all specified services, dont write any name)  
-  `docker compose -p re-server up -d <name>`
-
-- Shutdown and wait a maximum of 10 seconds before forcing (for all specified services, dont write any name)  
-  `docker compose stop <name>`
-
-#### Multiple Server
-
-Copy and paste the whole section below the point `services` and change the values. Then start it with the new other
-name.
-
-#### Example
-
-- Create own Docker Compose file, as base you can use [docker-compose.yml.template](./docker-compose.yml.template)  
-  [docker-compose.yml.example](./docker-compose.yml.example)
-
-- Pull latest docker image from Docker Hub for all defined services  
+- Pull the latest docker image from Docker Hub for all defined services  
   `docker compose pull`
 
 - Start/ Restart container  
-  `docker compose -p re-server up -d master`
+  `docker compose up -d`
 
-- Shutdown and wait a maximum of 10 minutes before forcing  
-  `docker compose stop --time=600 master`
+- Shutdown and wait a maximum of 10 minutes before forcing it  
+  `docker compose stop --time=600`
 
-## Updater
+#### Multiple Server
+
+Copy and paste the whole service section above and change the values (service name, port, home directory, etc.)
+
+### An image is not available for my architecture?!
+
+Follow the table below to copy the required `Dockerfile` next to your `docker-compose.yml`. Have the chosen `Dockerfile` in mind.
+
+| Version  |     Dockerfile      |
+|:--------:|:-------------------:|
+|  master  | `Dockerfile_master` |
+|  stable  | `Dockerfile_stable` |
+| < v2.0.0 | `Dockerfile_stable` |
+|  v2.0.0  | `Dockerfile_2_0_0`  |
+
+Create a file named `.dockerignore` next to the `Dockerfile` with the content `**`.
+
+Edit your `docker-compose-yml` and replace the `image: ...` part in the service you want to build with
+
+```yml
+build:
+    # <dockerfile>: name of the dockerfile, usable for the chosen tag below
+    dockerfile: <dockerfile>
+    args:
+        # <tag>: can be any git reference (branch name, tag, SHA) (e.g. `master`, `v2.0.0`, ...)
+        TAG: <tag>
+        RE_COMMIT: ""
+        ALPINE_SHA: ""
+        DOCKERFILE_SHA: ""
+```
+
+Then use `docker compose build` to build the custom image.
+
+## Update server automatically
+
+Create a file with the name `update-server.sh` (make sure it has executable rights).
+You can place it right next to the `docker-compose.yml`.
+
+Adjust the directory path according where you place the file.
+
+```bash
+#!/bin/bash -e
+
+# EDIT NEXT LINE
+cd /home/iceflower/re/
+docker compose stop -t 600
+# docker compose build
+docker compose pull
+docker compose up -d
+```
+
+To update regularly you can create a cron job, how to do this exactly refer to a guide matching your OS.
+
+```cron
+0 3 * * * /home/iceflower/re/update-server.sh > /home/iceflower/re/cron.log 2>&1
+```
+
+This will update every day at 3:00.
+
+## DockerHub Image Updater
 
 Build with
 
@@ -109,7 +160,7 @@ go build -x -o updater ./cmd/updater/
 
 For more options see `--help`.
 
-The updater can be used to update the docker images.
+The updater is used to update the DockerHub images.
 
 ## Web
 
@@ -150,5 +201,3 @@ using [THE RED ECLIPSE LICENSE](https://github.com/redeclipse/base/blob/master/d
 [github]: https://github.com/IceflowRE/redeclipse-server-docker
 
 [docker hub]: https://hub.docker.com/r/iceflower/redeclipse-server
-
-[no build]: https://img.shields.io/badge/build-inaccessible-lightgrey.svg

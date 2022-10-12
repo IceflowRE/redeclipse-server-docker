@@ -1,0 +1,39 @@
+# published under the MIT License
+# https://opensource.org/licenses/mit-license.php
+
+services:
+    # <service_name>: the name to access this later (e.g. `master`, `v2_0_0`)
+    <service_name>:
+        # <tag>: the image tag you want to use (e.g. `master`, `v2.0.0`)
+        image: iceflower/redeclipse-server:<tag>
+        ports:
+            # <serverport>: this port will be published and accessible from outside,
+            # the port number must match port defined in RE's `servinit.cfg`
+            - "<serverport>:<serverport>/udp"
+            # <serverport + 1>: the server port above plus one
+            - "<serverport + 1>:<serverport + 1>/udp"
+        restart: unless-stopped
+        volumes:
+            # <RE home dir>: path to the RE home/ config directory on your host system
+            # (e.g. `/home/iceflower/re-master/home`)
+            - type: bind
+              source: <RE home dir>
+              target: /re-server-config/home
+              read_only: true
+            # <RE package dir>: path to the RE package directory on your host system, you can place custom maps there
+            # if you do not want this, just remove this section (e.g. `/home/iceflower/re-master/package`)
+            - type: bind
+              source: /home/iceflower/redeclipse-config/package
+              target: /re-server-config/package
+              read_only: true
+            # <sauerbraten dir>: path to a Sauerbraten directory/installation
+            # if you use a version higher or equal `v2.0.0` or `master` remove this section
+            # (e.g. `/home/iceflower/sauerbraten`)
+            - type: bind
+              source: <sauerbraten dir>
+              target: /re-server-config/sauer
+              read_only: true
+        logging:
+            options:
+                max-size: "2000k"
+                max-file: "10"
