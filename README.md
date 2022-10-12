@@ -29,8 +29,7 @@ Currently the Docker images are build against the latest commits and will be che
 
 Available architectures are `amd64`.
 
-If your architecture is not available check if RE can be build on that architecture and follow [An image is not available for my architecture?!
-](#An image is not available for my architecture?!).
+If your architecture is not available check if RE can be build on that architecture and follow [An image is not available for my architecture](#an-image-is-not-available-for-my-architecture).
 
 ## How to use this image
 
@@ -94,7 +93,9 @@ To pull/start/stop a specific service add the service name to the end otherwise,
 
 Copy and paste the whole service section above and change the values (service name, port, home directory, etc.)
 
-### An image is not available for my architecture?!
+### An image is not available for my architecture
+
+First check if Red Eclipse can be build on your architecture. If yes, continue.
 
 Follow the table below to copy the required `Dockerfile` next to your `docker-compose.yml`. Have the chosen `Dockerfile` in mind.
 
