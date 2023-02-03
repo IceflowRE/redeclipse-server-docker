@@ -197,7 +197,7 @@ using [THE RED ECLIPSE LICENSE](https://github.com/redeclipse/base/blob/master/d
 
 [github actions]: https://github.com/IceflowRE/redeclipse-server-docker/actions/workflows/update_docker_images.yml
 
-[github actions images]: https://img.shields.io/github/workflow/status/IceflowRE/redeclipse-server-docker/Update%20Docker%20images
+[github actions images]: https://img.shields.io/github/actions/workflow/status/IceflowRE/redeclipse-server-docker/update_docker_images.yml
 
 [github]: https://github.com/IceflowRE/redeclipse-server-docker
 
