@@ -5,6 +5,7 @@ import (
 	"errors"
 	"os"
 	"path/filepath"
+	"strconv"
 )
 
 type Config struct {
@@ -63,13 +64,13 @@ func (config *Config) check() error {
 	for idx, build := range config.Build {
 		switch {
 		case build.Ref == "":
-			return errors.New("config: 'build[" + string(idx) + "] > ref' is empty")
+			return errors.New("config: 'build[" + strconv.Itoa(idx) + "] > ref' is empty")
 		case build.Arch == "":
-			return errors.New("config: 'build[" + string(idx) + "] > arch' is empty")
+			return errors.New("config: 'build[" + strconv.Itoa(idx) + "] > arch' is empty")
 		case build.Os == "":
-			return errors.New("config: 'build[" + string(idx) + "] > os' is empty")
+			return errors.New("config: 'build[" + strconv.Itoa(idx) + "] > os' is empty")
 		case build.Dockerfile == "":
-			return errors.New("config: 'build[" + string(idx) + "] > dockerfile' is empty")
+			return errors.New("config: 'build[" + strconv.Itoa(idx) + "] > dockerfile' is empty")
 		}
 	}
 	return nil

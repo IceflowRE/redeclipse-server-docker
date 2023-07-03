@@ -20,8 +20,12 @@ func Build(config *Config, build *BuildConfig, workDir string) bool {
 		return false
 	}
 
-	fmt.Println("Current:", "alpine:", curHash.Alpine, "| dockerfile:", curHash.Dockerfile, "| re-commit:", curHash.ReCommit)
-	fmt.Println("New:    ", "alpine:", newHash.Alpine, "| dockerfile:", newHash.Dockerfile, "| re-commit:", newHash.ReCommit)
+	fmt.Printf(
+		"Current: alpine:%s | dockerfile: %s | re-commit: %s\n"+
+			"New:    : alpine:%s | dockerfile: %s | re-commit: %s\n",
+		curHash.Alpine, curHash.Dockerfile, curHash.ReCommit,
+		newHash.Alpine, newHash.Dockerfile, newHash.ReCommit,
+	)
 
 	if *curHash == *newHash {
 		fmt.Println("No update required.")
