@@ -8,9 +8,9 @@ import (
 )
 
 type Config struct {
-	Docker  *dockerConfig  `json:"docker"`
-	Build   []*BuildConfig `json:"build"`
-	DryRun  bool           `json:"dryRun"`
+	Docker *dockerConfig  `json:"docker"`
+	Build  []*BuildConfig `json:"build"`
+	DryRun bool           `json:"dryRun"`
 }
 
 type dockerConfig struct {

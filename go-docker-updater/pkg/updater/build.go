@@ -19,7 +19,7 @@ func Build(config *Config, build *BuildConfig, workDir string) bool {
 		fmt.Println("failed to get new hashes")
 		return false
 	}
-	
+
 	fmt.Println("Current:", "alpine:", curHash.Alpine, "| dockerfile:", curHash.Dockerfile, "| re-commit:", curHash.ReCommit)
 	fmt.Println("New:    ", "alpine:", newHash.Alpine, "| dockerfile:", newHash.Dockerfile, "| re-commit:", newHash.ReCommit)
 

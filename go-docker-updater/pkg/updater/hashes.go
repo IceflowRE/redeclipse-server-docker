@@ -6,12 +6,13 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/felicianotech/sonar/sonar/docker"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"os/exec"
+
+	"github.com/felicianotech/sonar/sonar/docker"
 )
 
 type Hash struct {
